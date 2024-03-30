@@ -1,0 +1,163 @@
+{
+    "name": "Training template",
+    "exerciseGroup": [
+        {
+            "name": "Warm up",
+            "restAtTheEnd": 60,
+            "exercise": [
+                {
+                    "name": "Skipping",
+                    "description": "Boxer step",
+                    "prepTime": [10],
+                    "duration": [180]
+                },
+                {
+                    "name": "Neck circles - right",
+                    "repetitions": [10]
+                },
+                {
+                    "name": "Neck circles- left",
+                    "repetitions": [10]
+                },
+                {
+                    "name": "Shoulder circles - forward",
+                    "repetitions": [10]
+                },
+                {
+                    "name": "Shoulder circles - backward",
+                    "repetitions": [10]
+                },
+                {
+                    "name": "Wrist rollings - forward",
+                    "description": "Hands together",
+                    "repetitions": [10]
+                },
+                {
+                    "name": "Wrist rollings - backward",
+                    "description": "Hands together",
+                    "repetitions": [10]
+                },
+                {
+                    "name": "Magnetic wrists - forward",
+                    "repetitions": [10]
+                },
+                {
+                    "name": "Magnetic wrists - backward",
+                    "repetitions": [10]
+                },
+                {
+                    "name": "Wrists waves - left",
+                    "repetitions": [10]
+                },
+                {
+                    "name": "Wrists waves - right",
+                    "repetitions": [10]
+                },
+                {
+                    "name": "Ape sequence",
+                    "description": "Ape reach and standing ape with arms out to the side",
+                    "repetitions": [5]
+                },
+                {
+                    "name": "Plank",
+                    "duration": [60]
+                },
+                {
+                    "name": "Side plank - right",
+                    "duration": [60]
+                },
+                {
+                    "name": "Side plank - left",
+                    "duration": [60]
+                },
+                {
+                    "name": "Reverse plank",
+                    "duration": [60]
+                }
+            ]
+        },
+        {
+            "name": "Skill work",
+            "restAtTheEnd": 60,
+            "exercise": [
+                {
+                    "name": "Handstand work",
+                    "duration": [600]
+                }
+            ]
+        },
+        {
+            "name": "Strength work",
+            "exerciseGroup": [
+                {
+                    "restInBetween": 90,
+                    "restAtTheEnd": 120,
+                    "exercise": [
+                        {
+                            "name": "German hang",
+                            "description": "Supinated grip on rings",
+                            "duration": [60, 60, 60],
+                            "prepTime": [15, 15, 15]
+                        },
+                        {
+                            "name": "Tuck L-Sit",
+                            "description": "On parallettes or dip bars",
+                            "duration": [20, 20, 20],
+                            "prepTime": [5, 5, 5]
+                        }
+                    ]
+                },
+                {
+                    "restInBetween": 90,
+                    "restAtTheEnd": 120,
+                    "exercise": [
+                        {
+                            "name": "Pull-ups",
+                            "description": "Eccentrics",
+                            "repetitions": [5, 5, 5],
+                            "tempo": {
+                                "eccentric": 5
+                            }
+                        },
+                        {
+                            "name": "Dips",
+                            "description": "Eccentrics on dip bars",
+                            "repetitions": [5, 5, 5],
+                            "tempo": {
+                                "eccentric": 5,
+                                "eccentricRest": 1,
+                                "concentric": -1,
+                                "concenricRest": 1
+                            }
+                        }
+                    ]
+                },
+                {
+                    "restInBetween": 90,
+                    "restAtTheEnd": 120,
+                    "exercises": [
+                        {
+                            "name": "Nordic leg curls",
+                            "description": "Eccentric only with push up support",
+                            "repetitions": [8, 8, 8],
+                            "tempo": {
+                                "eccentric": 3
+                            }
+                        },
+                        {
+                            "name": "Reverse nordic leg curls",
+                            "description": "With roll and box support",
+                            "repetitions": [8, 8, 8],
+                            "tempo": {
+                                "eccentric": 4,
+                                "eccentricRest": 0,
+                                "concentric": -1,
+                                "concenricRest": 0
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

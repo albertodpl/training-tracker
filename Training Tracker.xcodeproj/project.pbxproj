@@ -7,18 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D3F496462BB6D22A008FB68B /* Training_TrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F496452BB6D22A008FB68B /* Training_TrackerApp.swift */; };
-		D3F496482BB6D22A008FB68B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F496472BB6D22A008FB68B /* ContentView.swift */; };
+		D3F496482BB6D22A008FB68B /* TrainingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F496472BB6D22A008FB68B /* TrainingView.swift */; };
 		D3F4964A2BB6D23F008FB68B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3F496492BB6D23F008FB68B /* Assets.xcassets */; };
 		D3F4964D2BB6D23F008FB68B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3F4964C2BB6D23F008FB68B /* Preview Assets.xcassets */; };
+		D3F496542BB6D433008FB68B /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F496532BB6D433008FB68B /* TimerView.swift */; };
+		D3F496562BB6E4A1008FB68B /* TrainingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F496552BB6E4A1008FB68B /* TrainingApp.swift */; };
+		D3F496602BB7029E008FB68B /* workoutRoutine.json in Resources */ = {isa = PBXBuildFile; fileRef = D3F4965F2BB7029E008FB68B /* workoutRoutine.json */; };
+		D3F496622BB75B4B008FB68B /* Routine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F496612BB75B4B008FB68B /* Routine.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D3F496422BB6D22A008FB68B /* Training Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Training Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D3F496452BB6D22A008FB68B /* Training_TrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Training_TrackerApp.swift; sourceTree = "<group>"; };
-		D3F496472BB6D22A008FB68B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		D3F496472BB6D22A008FB68B /* TrainingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingView.swift; sourceTree = "<group>"; };
 		D3F496492BB6D23F008FB68B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D3F4964C2BB6D23F008FB68B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		D3F496532BB6D433008FB68B /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
+		D3F496552BB6E4A1008FB68B /* TrainingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingApp.swift; sourceTree = "<group>"; };
+		D3F4965F2BB7029E008FB68B /* workoutRoutine.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = workoutRoutine.json; sourceTree = "<group>"; };
+		D3F496612BB75B4B008FB68B /* Routine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routine.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,10 +57,13 @@
 		D3F496442BB6D22A008FB68B /* Training Tracker */ = {
 			isa = PBXGroup;
 			children = (
-				D3F496452BB6D22A008FB68B /* Training_TrackerApp.swift */,
-				D3F496472BB6D22A008FB68B /* ContentView.swift */,
+				D3F4965E2BB70214008FB68B /* Resources */,
+				D3F496592BB6E9B2008FB68B /* Model */,
+				D3F496472BB6D22A008FB68B /* TrainingView.swift */,
 				D3F496492BB6D23F008FB68B /* Assets.xcassets */,
 				D3F4964B2BB6D23F008FB68B /* Preview Content */,
+				D3F496532BB6D433008FB68B /* TimerView.swift */,
+				D3F496552BB6E4A1008FB68B /* TrainingApp.swift */,
 			);
 			path = "Training Tracker";
 			sourceTree = "<group>";
@@ -65,6 +74,22 @@
 				D3F4964C2BB6D23F008FB68B /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		D3F496592BB6E9B2008FB68B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D3F496612BB75B4B008FB68B /* Routine.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D3F4965E2BB70214008FB68B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D3F4965F2BB7029E008FB68B /* workoutRoutine.json */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,6 +150,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3F496602BB7029E008FB68B /* workoutRoutine.json in Resources */,
 				D3F4964D2BB6D23F008FB68B /* Preview Assets.xcassets in Resources */,
 				D3F4964A2BB6D23F008FB68B /* Assets.xcassets in Resources */,
 			);
@@ -137,8 +163,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D3F496482BB6D22A008FB68B /* ContentView.swift in Sources */,
-				D3F496462BB6D22A008FB68B /* Training_TrackerApp.swift in Sources */,
+				D3F496542BB6D433008FB68B /* TimerView.swift in Sources */,
+				D3F496562BB6E4A1008FB68B /* TrainingApp.swift in Sources */,
+				D3F496622BB75B4B008FB68B /* Routine.swift in Sources */,
+				D3F496482BB6D22A008FB68B /* TrainingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
