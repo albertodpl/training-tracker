@@ -18,7 +18,16 @@ class ModelData {
             }
             else {
                 print("== Exercise group: \(exerciseGroup.name ?? "'no exercise group name (1)'")")
-                print(processExerciseArray(exerciseGroup.exercise!))
+                var exerciseSequence = processExerciseArray(exerciseGroup.exercise!)
+                
+                var exerciseWithRestSequence = [String]()
+                for index in 0..<exerciseSequence.count-1 {
+                    exerciseWithRestSequence.append(exerciseSequence[index])
+                    exerciseWithRestSequence.append("\(exerciseGroup.restInBetween ?? 0)")
+                }
+                exerciseWithRestSequence.append(exerciseSequence[exerciseSequence.count-1])
+                exerciseWithRestSequence.append("\(exerciseGroup.restAtTheEnd ?? 0)")
+                print(exerciseWithRestSequence)
             }
         }
         else {
