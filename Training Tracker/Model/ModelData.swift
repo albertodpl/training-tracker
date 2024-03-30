@@ -18,9 +18,7 @@ class ModelData {
             }
             else {
                 print("== Exercise group: \(exerciseGroup.name ?? "'no exercise group name (1)'")")
-                for exercise in exerciseGroup.exercise! {
-                    print(exercise.name)
-                }
+                print(processExerciseArray(exerciseGroup.exercise!))
             }
         }
         else {
@@ -29,5 +27,24 @@ class ModelData {
                 dfsExerciseGroup(exerciseGroup)
             }
         }
+    }
+    
+    func processExerciseArray(_ exerciseList: [Exercise]) -> [String] {
+        var maxSetsCount = 0
+        var exercisesSequence = [String]()
+        
+        for exercise in exerciseList {
+            maxSetsCount = max(maxSetsCount, exercise.numberOfSets)
+        }
+        
+        for setIndex in 0..<maxSetsCount {
+            for exerciseIndex in 0..<exerciseList.count {
+                if setIndex < exerciseList[exerciseIndex].numberOfSets {
+                    exercisesSequence.append(exerciseList[exerciseIndex].name)
+                }
+            }
+        }
+        
+        return exercisesSequence
     }
 }

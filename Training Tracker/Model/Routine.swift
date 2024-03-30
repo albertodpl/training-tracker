@@ -18,6 +18,7 @@ struct ExerciseGroup: Codable {
 struct Exercise: Codable {
     var name: String
     var description: String?
+    var numberOfSets: Int
     var prepTime: [Int]?
     var duration: [Int]?
     var repetitions: [Int]?
