@@ -90,6 +90,7 @@
             "name": "Strength work",
             "exerciseGroup": [
                 {
+                    "name": "German hang and L-sit",
                     "restInBetween": 90,
                     "restAtTheEnd": 120,
                     "exercise": [
@@ -108,6 +109,7 @@
                     ]
                 },
                 {
+                    "name": "Pull-ups and dips",
                     "restInBetween": 90,
                     "restAtTheEnd": 120,
                     "exercise": [
@@ -133,9 +135,10 @@
                     ]
                 },
                 {
+                    "name": "Nordic legs",
                     "restInBetween": 90,
                     "restAtTheEnd": 120,
-                    "exercises": [
+                    "exercise": [
                         {
                             "name": "Nordic leg curls",
                             "description": "Eccentric only with push up support",

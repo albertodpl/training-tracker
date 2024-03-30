@@ -2,6 +2,8 @@ import SwiftUI
 
 @main
 struct TrainingApp: App {
+    @State private var modelData = ModelData()
+
     var body: some Scene {
         WindowGroup {
             let routine: Routine = load("workoutRoutine.json")
@@ -33,3 +35,4 @@ func load<T: Decodable>(_ filename: String) -> T {
         fatalError("Couldn't parse \(filename) as \(T.self):\n\(error)")
     }
 }
+
