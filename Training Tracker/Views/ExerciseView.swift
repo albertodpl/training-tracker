@@ -1,35 +1,39 @@
 import SwiftUI
 
 struct ExerciseView: View {
-    @Binding var currentStep: Step
-    @Binding var nextStep: Step?
+    @Binding var currentExercise: Step?
+    @Binding var nextExercise: Step?
     
     // TODO: Extract to View
-    private func currentExerciseRepsAndNameView(repetitions: Int?, stepName: String) -> some View {
+    private func currentExerciseRepsAndNameView(repetitions: Int?, exerciseName: String?) -> some View {
         if let repetitions = repetitions {
-            return Text("x\(repetitions) - \(stepName)")
+            return Text("x\(repetitions) - \(exerciseName ?? "")")
         }
         else {
-            return Text(stepName)
+            return Text(exerciseName ?? "")
         }
     }
     var body: some View {
         VStack {
             VStack {
-                currentExerciseRepsAndNameView(repetitions: currentStep.repetitions, stepName: currentStep.name)
+                currentExerciseRepsAndNameView(repetitions: currentExercise?.repetitions, exerciseName: currentExercise?.name)
                     .font(.title)
-                if let description = currentStep.description {
+                if let description = currentExercise?.description {
                     Text(description)
                         .font(.title2)
                     
                 }
             }
-            .padding(.bottom)
-            .opacity(currentStep.isRest ? 0 : 1)
-            if let nextStep = nextStep {
+            .padding([.top, .bottom])
+            .opacity(currentExercise?.stepType == .rest ? 0 : 1)
+            
+            Divider()
+            
+            if let nextStep = nextExercise {
                 Text("Next up: \(nextStep.name)")
                     .font(.title3)
                     .opacity(0.5)
+                    .padding([.top, .bottom])
             }
         }
     }
@@ -38,7 +42,7 @@ struct ExerciseView: View {
 }
 
 #Preview {
-    @State var currentStep = Step(name: "Current step", description: "Description of the current step", repetitions: 8)
-    @State var nextStep: Step? = Step(name: "Next step", description: "Description of the next step", repetitions: 5)
-    return ExerciseView(currentStep: $currentStep, nextStep: $nextStep)
+    @State var currentExercise: Step? = Step(name: "Current step", description: "Description of the current step", repetitions: 8)
+    @State var nextExercise: Step? = Step(name: "Next step", description: "Description of the next step", repetitions: 5)
+    return ExerciseView(currentExercise: $currentExercise, nextExercise: $nextExercise)
 }

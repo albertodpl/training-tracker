@@ -2,24 +2,50 @@ import SwiftUI
 
 struct TrainingView: View {
     @Binding var modelData: ModelData
-
+    
     var body: some View {
         VStack {
-            TimerView()
-//                .opacity(modelData.currentStep.isRest ? 1 : 0)
-
-//            Spacer()
+            switch modelData.currentStep.stepType {
+            case .rest:
+                TimerView()
+//                    .background(.green)
+            case .timedExercise:
+                TimerView()
+//                    .background(.orange)
+            case .repExercise:
+                TimerView()
+                    .opacity(0.3)
+            }
+            
+            //            Spacer()
             Divider()
 
-            ExerciseView(currentStep: $modelData.currentStep, nextStep: $modelData.nextExercise)
+            switch modelData.currentStep.stepType {
+            case .rest:
+                ExerciseView(currentExercise: $modelData.currentExercise, nextExercise: $modelData.nextExercise).opacity(0.3)
+            case .timedExercise:
+                ExerciseView(currentExercise: $modelData.currentExercise, nextExercise: $modelData.nextExercise)
+            case .repExercise:
+                ExerciseView(currentExercise: $modelData.currentExercise, nextExercise: $modelData.nextExercise)
+            }
+
             Divider()
             Spacer()
             
-            Button("Completed") {
+            Button {
                 modelData.next()
+            } label: {
+                HStack {
+                    Image(systemName: "checkmark.circle")
+                        .imageScale(.large)
+                        .foregroundColor(.primary)
+//                        .foregroundStyle(.foreground)
+                        .frame(width: 250, height: 50)
+                        .font(.largeTitle)
+                        .padding()
+                }
             }
             .buttonStyle(.borderedProminent)
-            .opacity(modelData.currentStep.isRest ? 0 : 1)
         }
         .padding()
     }

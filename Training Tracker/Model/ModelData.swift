@@ -4,7 +4,8 @@ import Foundation
 class ModelData {
     let jsonRoutine: JsonRoutine = load("workoutRoutine.json")
     var currentStepIndex = 0
-    var currentStep: Step = Step(name: "Initialization step, you should not see this")
+    var currentStep: Step = Step(name: "Initialization step; you should not see this")
+    var currentExercise: Step? = nil
     var nextExercise: Step? = nil
     var routineSteps = [Step]()
     
@@ -13,24 +14,37 @@ class ModelData {
             dfsExerciseGroup(exerciseGroup)
         }
         currentStep = routineSteps[0]
-        updateNextExercise()
+        updateCurrentAndNextExercise()
     }
     
     func next() {
         if currentStepIndex < routineSteps.count - 1 {
             currentStepIndex += 1
         }
-        else {
-            currentStepIndex = 0
+        else { // TODO: Communiate that you completed the training.
+            currentStepIndex = currentStepIndex
         }
         currentStep = routineSteps[currentStepIndex]
         
-        updateNextExercise()
+        // Add logic to manage different types of steps.
+        
+        updateCurrentAndNextExercise()
     }
     
-    private func updateNextExercise() {
-        var nextExerciseIndex = currentStepIndex + 1
-        while (nextExerciseIndex < routineSteps.count) && (routineSteps[nextExerciseIndex].isRest) {
+    private func updateCurrentAndNextExercise() {
+        var currentExerciseIndex = currentStepIndex
+        while (currentExerciseIndex < routineSteps.count) && (routineSteps[currentExerciseIndex].stepType == .rest) {
+            currentExerciseIndex += 1
+        }
+        
+        if currentExerciseIndex < routineSteps.count {
+            currentExercise = routineSteps[currentExerciseIndex]
+        } else {
+            currentExercise = nil
+        }
+        
+        var nextExerciseIndex = currentExerciseIndex + 1
+        while (nextExerciseIndex < routineSteps.count) && (routineSteps[nextExerciseIndex].stepType == .rest) {
             nextExerciseIndex += 1
         }
 
@@ -54,10 +68,18 @@ class ModelData {
                 var exerciseWithRestSequence = [Step]()
                 for index in 0..<exerciseSequence.count-1 {
                     exerciseWithRestSequence.append(exerciseSequence[index])
-                    exerciseWithRestSequence.append(Step(name: "Rest in between: \(exerciseGroup.restInBetween ?? 0)", isRest: true))
+                    if let restInBetween = exerciseGroup.restInBetween {
+                        if restInBetween > 0 {
+                            exerciseWithRestSequence.append(Step(name: "Rest in between: \(restInBetween)", stepType: StepType.rest))
+                        }
+                    }
                 }
                 exerciseWithRestSequence.append(exerciseSequence[exerciseSequence.count-1])
-                exerciseWithRestSequence.append(Step(name: "Rest at the end: \(exerciseGroup.restAtTheEnd ?? 0)", isRest: true))
+                if let restAtTheEnd = exerciseGroup.restAtTheEnd {
+                    if restAtTheEnd > 0 {
+                        exerciseWithRestSequence.append(Step(name: "Rest at the end: \(restAtTheEnd)", stepType: StepType.rest))
+                    }
+                }
                 print(exerciseWithRestSequence)
                 routineSteps += exerciseWithRestSequence
             }
@@ -81,8 +103,15 @@ class ModelData {
         for setIndex in 0..<maxSetsCount {
             for exerciseIndex in 0..<exerciseList.count {
                 if setIndex < exerciseList[exerciseIndex].numberOfSets {
-                    let step = Step(name: exerciseList[exerciseIndex].name, description: exerciseList[exerciseIndex].description)
-                    exercisesSequence.append(step)
+                    if let durations = exerciseList[exerciseIndex].durations {
+                        let step = Step(name: exerciseList[exerciseIndex].name, description: exerciseList[exerciseIndex].description, duration: durations[setIndex], stepType: .timedExercise)
+                        exercisesSequence.append(step)
+                    } else if let repetitions = exerciseList[exerciseIndex].repetitions {
+                        let step = Step(name: exerciseList[exerciseIndex].name, description: exerciseList[exerciseIndex].description, repetitions: repetitions[setIndex], stepType: .repExercise)
+                        exercisesSequence.append(step)
+                    } else { // TODO: handle the case where it is not repetitions and it is not timed (malformed JSON most likely)
+                        print("ERROR: no duration and no repetitions; the exercise is not defined.")
+                    }
                 }
             }
         }
@@ -94,13 +123,21 @@ class ModelData {
 struct Step {
     let name: String
     let description: String?
-    let isRest: Bool
     let repetitions: Int?
-    
-    init(name: String, description: String? = nil, isRest: Bool = false, repetitions: Int? = nil) {
+    let duration: Int?
+    let stepType: StepType
+
+    init(name: String, description: String? = nil, repetitions: Int? = nil, duration: Int? = nil, stepType: StepType = StepType.repExercise) {
         self.name = name
         self.description = description
-        self.isRest = isRest
         self.repetitions = repetitions
+        self.duration = duration
+        self.stepType = stepType
     }
+}
+
+enum StepType {
+    case rest
+    case repExercise
+    case timedExercise
 }
