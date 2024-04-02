@@ -2,12 +2,11 @@ import SwiftUI
 
 @main
 struct TrainingApp: App {
-    @State private var modelData = ModelData()
+    @State var modelData = ModelData()
 
     var body: some Scene {
         WindowGroup {
-            let routine: Routine = load("workoutRoutine.json")
-            TrainingView(routine: routine)
+            TrainingView(modelData: $modelData)
         }
     }
 }

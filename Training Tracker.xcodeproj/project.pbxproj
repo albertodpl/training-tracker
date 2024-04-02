@@ -10,11 +10,13 @@
 		D3F496482BB6D22A008FB68B /* TrainingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F496472BB6D22A008FB68B /* TrainingView.swift */; };
 		D3F4964A2BB6D23F008FB68B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3F496492BB6D23F008FB68B /* Assets.xcassets */; };
 		D3F4964D2BB6D23F008FB68B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3F4964C2BB6D23F008FB68B /* Preview Assets.xcassets */; };
-		D3F496542BB6D433008FB68B /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F496532BB6D433008FB68B /* TimerView.swift */; };
+		D3F496542BB6D433008FB68B /* TimerViewCopied.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F496532BB6D433008FB68B /* TimerViewCopied.swift */; };
 		D3F496562BB6E4A1008FB68B /* TrainingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F496552BB6E4A1008FB68B /* TrainingApp.swift */; };
 		D3F496602BB7029E008FB68B /* workoutRoutine.json in Resources */ = {isa = PBXBuildFile; fileRef = D3F4965F2BB7029E008FB68B /* workoutRoutine.json */; };
-		D3F496622BB75B4B008FB68B /* Routine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F496612BB75B4B008FB68B /* Routine.swift */; };
+		D3F496622BB75B4B008FB68B /* JsonSchemas.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F496612BB75B4B008FB68B /* JsonSchemas.swift */; };
 		D3F496642BB83EFF008FB68B /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F496632BB83EFF008FB68B /* ModelData.swift */; };
+		D3F4966F2BBC434F008FB68B /* ExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F4966E2BBC434F008FB68B /* ExerciseView.swift */; };
+		D3F496712BBC5E27008FB68B /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F496702BBC5E27008FB68B /* TimerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,11 +24,13 @@
 		D3F496472BB6D22A008FB68B /* TrainingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingView.swift; sourceTree = "<group>"; };
 		D3F496492BB6D23F008FB68B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D3F4964C2BB6D23F008FB68B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		D3F496532BB6D433008FB68B /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
+		D3F496532BB6D433008FB68B /* TimerViewCopied.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewCopied.swift; sourceTree = "<group>"; };
 		D3F496552BB6E4A1008FB68B /* TrainingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingApp.swift; sourceTree = "<group>"; };
 		D3F4965F2BB7029E008FB68B /* workoutRoutine.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = workoutRoutine.json; sourceTree = "<group>"; };
-		D3F496612BB75B4B008FB68B /* Routine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routine.swift; sourceTree = "<group>"; };
+		D3F496612BB75B4B008FB68B /* JsonSchemas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonSchemas.swift; sourceTree = "<group>"; };
 		D3F496632BB83EFF008FB68B /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
+		D3F4966E2BBC434F008FB68B /* ExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseView.swift; sourceTree = "<group>"; };
+		D3F496702BBC5E27008FB68B /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,12 +63,11 @@
 		D3F496442BB6D22A008FB68B /* Training Tracker */ = {
 			isa = PBXGroup;
 			children = (
+				D3F496652BB85410008FB68B /* Views */,
 				D3F4965E2BB70214008FB68B /* Resources */,
 				D3F496592BB6E9B2008FB68B /* Model */,
-				D3F496472BB6D22A008FB68B /* TrainingView.swift */,
 				D3F496492BB6D23F008FB68B /* Assets.xcassets */,
 				D3F4964B2BB6D23F008FB68B /* Preview Content */,
-				D3F496532BB6D433008FB68B /* TimerView.swift */,
 				D3F496552BB6E4A1008FB68B /* TrainingApp.swift */,
 			);
 			path = "Training Tracker";
@@ -81,7 +84,7 @@
 		D3F496592BB6E9B2008FB68B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D3F496612BB75B4B008FB68B /* Routine.swift */,
+				D3F496612BB75B4B008FB68B /* JsonSchemas.swift */,
 				D3F496632BB83EFF008FB68B /* ModelData.swift */,
 			);
 			path = Model;
@@ -93,6 +96,17 @@
 				D3F4965F2BB7029E008FB68B /* workoutRoutine.json */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		D3F496652BB85410008FB68B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D3F496532BB6D433008FB68B /* TimerViewCopied.swift */,
+				D3F496472BB6D22A008FB68B /* TrainingView.swift */,
+				D3F4966E2BBC434F008FB68B /* ExerciseView.swift */,
+				D3F496702BBC5E27008FB68B /* TimerView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -166,10 +180,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D3F496542BB6D433008FB68B /* TimerView.swift in Sources */,
+				D3F496542BB6D433008FB68B /* TimerViewCopied.swift in Sources */,
 				D3F496562BB6E4A1008FB68B /* TrainingApp.swift in Sources */,
 				D3F496642BB83EFF008FB68B /* ModelData.swift in Sources */,
-				D3F496622BB75B4B008FB68B /* Routine.swift in Sources */,
+				D3F496622BB75B4B008FB68B /* JsonSchemas.swift in Sources */,
+				D3F4966F2BBC434F008FB68B /* ExerciseView.swift in Sources */,
+				D3F496712BBC5E27008FB68B /* TimerView.swift in Sources */,
 				D3F496482BB6D22A008FB68B /* TrainingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
