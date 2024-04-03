@@ -1,10 +1,7 @@
 import SwiftUI
 
 struct TimerView: View {
-    @State private var timeRemaining: TimeInterval = 10
-    @State private var timer: Timer?
-    @State private var isRunning: Bool = false
-    private let delta: TimeInterval = 1/100
+    @Binding var timerModel: TimerModel
     
     var body: some View {
         VStack(alignment: .center) {
@@ -12,67 +9,38 @@ struct TimerView: View {
                 Circle()
                     .stroke(lineWidth: 10)
                     .opacity(0.3)
+                    .foregroundColor(.blue)
                 Circle()
-                    .trim(from: 0, to: CGFloat(timeRemaining / 10))
+                    .trim(from: CGFloat(timerModel.exerciseTimeRemainingInSeconds / (timerModel.prepTimeInSeconds + timerModel.exerciseTimeInSeconds)), to: CGFloat((timerModel.prepTimeRemainingInSeconds + timerModel.exerciseTimeRemainingInSeconds) / (timerModel.prepTimeInSeconds + timerModel.exerciseTimeInSeconds)))
                     .stroke(style: StrokeStyle(lineWidth: 10, lineCap: .round, lineJoin: .round))
                     .rotationEffect(.degrees(-90))
+                    .foregroundColor(.orange)
+                Circle()
+                    .trim(from: 0, to: CGFloat(timerModel.exerciseTimeRemainingInSeconds / (timerModel.prepTimeInSeconds + timerModel.exerciseTimeInSeconds)))
+                    .stroke(style: StrokeStyle(lineWidth: 10, lineCap: .round, lineJoin: .round))
+                    .rotationEffect(.degrees(-90))
+                    .foregroundColor((timerModel.stepType == .rest) ? .green : /*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
                 Text(formattedTime())
                     .font(.largeTitle)
                     .fontWeight(.bold)
+                    .foregroundColor((timerModel.prepTimeRemainingInSeconds > 0) ? .orange : ((timerModel.stepType == .rest) ? .green : /*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/))
             }
             .frame(maxWidth: 500)
-            
-            HStack {
-                Button {
-                    isRunning.toggle()
-                    if isRunning {
-                        startTimer()
-                    } else {
-                        pauseTimer()
-                    }
-                } label: {
-                    Image(systemName: isRunning ? "pause.fill" : "play.fill")
-                        .foregroundStyle(.foreground)
-                        .frame(width: 50, height: 50)
-                        .font(.largeTitle)
-                        .padding()
-                }
-            }
         }
         .padding()
         .padding(.horizontal, 30)
+        .opacity((timerModel.stepType == .repExercise) ? 0.3 : 1)
     }
     
     private func formattedTime() -> String {
-        let minutes = Int(timeRemaining) / 60
-        let seconds = Int(timeRemaining) % 60
+        let secondsRemaining = Int((timerModel.prepTimeRemainingInSeconds > 0) ? timerModel.prepTimeRemainingInSeconds : timerModel.exerciseTimeRemainingInSeconds)
+        let minutes = secondsRemaining / 60
+        let seconds = secondsRemaining % 60
         return String(format: "%02d:%02d", minutes, seconds)
-    }
-    
-    private func stopTimer() {
-        isRunning = false
-        timer?.invalidate()
-        timer = nil
-        timeRemaining = 10 // TODO: reset to initial value
-    }
-    
-    private func startTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: delta, repeats: true) { _ in
-            if timeRemaining > 0 {
-                if isRunning {
-                    timeRemaining -= delta
-                }
-            } else {
-                stopTimer()
-            }
-        }
-    }
-    
-    private func pauseTimer() {
-        isRunning = false
     }
 }
 
 #Preview {
-    TimerView()
+    @State var timerModel = TimerModel(timerStatus: .stopped, prepTimeInSeconds: 20, prepTimeRemainingInSeconds: 10, exerciseTimeInSeconds: 75, exerciseTimeRemainingInSeconds: 75)
+    return TimerView(timerModel: $timerModel)
 }

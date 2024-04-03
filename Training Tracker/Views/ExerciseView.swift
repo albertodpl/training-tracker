@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct ExerciseView: View {
+    @Binding var currentStep: Step
     @Binding var currentExercise: Step?
     @Binding var nextExercise: Step?
     
@@ -35,14 +36,15 @@ struct ExerciseView: View {
                     .opacity(0.5)
                     .padding([.top, .bottom])
             }
-        }
+        }.opacity((currentStep.stepType == .rest) ? 0.3 : 1)
     }
                      
 
 }
 
 #Preview {
-    @State var currentExercise: Step? = Step(name: "Current step", description: "Description of the current step", repetitions: 8)
-    @State var nextExercise: Step? = Step(name: "Next step", description: "Description of the next step", repetitions: 5)
-    return ExerciseView(currentExercise: $currentExercise, nextExercise: $nextExercise)
+    @State var currentStep: Step = Step(name: "Current step", description: "Description of the current step", repetitions: 8)
+    @State var currentExercise: Step? = Step(name: "Current exercise", description: "Description of the current exercise", repetitions: 8)
+    @State var nextExercise: Step? = Step(name: "Next exercise", description: "Description of the next exercise", repetitions: 5)
+    return ExerciseView(currentStep: $currentStep, currentExercise: $currentExercise, nextExercise: $nextExercise)
 }

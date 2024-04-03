@@ -70,5 +70,5 @@ struct TimerViewCopied: View {
 }
 
 #Preview {
-    TimerView()
+    TimerViewOld()
 }

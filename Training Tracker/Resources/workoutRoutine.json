@@ -3,13 +3,18 @@
     "exercisesGroups": [
         {
             "name": "Warm up",
-            "restAtTheEnd": 60,
+            "restAtTheEnd": 6,
             "exercises": [
+                {
+                    "name": "Start training",
+                    "repetitions": [1],
+                    "numberOfSets": 1
+                },
                 {
                     "name": "Skipping",
                     "description": "Boxer step",
                     "prepTimes": [10],
-                    "durations": [180],
+                    "durations": [3],
                     "numberOfSets": 1
                 },
                 {
@@ -72,33 +77,36 @@
                 },
                 {
                     "name": "Plank",
-                    "durations": [60],
+                    "prepTimes": [2],
+                    "durations": [3],
                     "numberOfSets": 1
                 },
                 {
                     "name": "Side plank - right",
-                    "durations": [60],
+                    "prepTimes": [2],
+                    "durations": [2],
                     "numberOfSets": 1
                 },
                 {
                     "name": "Side plank - left",
-                    "durations": [60],
+                    "prepTimes": [2],
+                    "durations": [2],
                     "numberOfSets": 1
                 },
                 {
                     "name": "Reverse plank",
-                    "durations": [60],
+                    "durations": [2],
                     "numberOfSets": 1
                 }
             ]
         },
         {
             "name": "Skill work",
-            "restAtTheEnd": 60,
+            "restAtTheEnd": 6,
             "exercises": [
                 {
                     "name": "Handstand work",
-                    "durations": [600],
+                    "durations": [7],
                     "numberOfSets": 1
                 }
             ]
@@ -108,20 +116,20 @@
             "exercisesGroups": [
                 {
                     "name": "German hang and L-sit",
-                    "restInBetween": 90,
-                    "restAtTheEnd": 120,
+                    "restInBetween": 2,
+                    "restAtTheEnd": 4,
                     "exercises": [
                         {
                             "name": "German hang",
                             "description": "Supinated grip on rings",
-                            "durations": [60, 60, 60],
-                            "prepTimes": [15, 15, 15],
+                            "durations": [5, 5, 5],
+                            "prepTimes": [2, 2, 2],
                             "numberOfSets": 3
                         },
                         {
                             "name": "Tuck L-Sit",
                             "description": "On parallettes or dip bars",
-                            "durations": [20, 20, 20],
+                            "durations": [2, 2, 2],
                             "prepTimes": [5, 5, 5],
                             "numberOfSets": 3
                         }
@@ -129,8 +137,8 @@
                 },
                 {
                     "name": "Pull-ups and dips",
-                    "restInBetween": 90,
-                    "restAtTheEnd": 120,
+                    "restInBetween": 2,
+                    "restAtTheEnd": 4,
                     "exercises": [
                         {
                             "name": "Pull-ups",
@@ -157,8 +165,8 @@
                 },
                 {
                     "name": "Nordic legs",
-                    "restInBetween": 90,
-                    "restAtTheEnd": 120,
+                    "restInBetween": 2,
+                    "restAtTheEnd": 4,
                     "exercises": [
                         {
                             "name": "Nordic leg curls",

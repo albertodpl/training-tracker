@@ -70,14 +70,14 @@ class ModelData {
                     exerciseWithRestSequence.append(exerciseSequence[index])
                     if let restInBetween = exerciseGroup.restInBetween {
                         if restInBetween > 0 {
-                            exerciseWithRestSequence.append(Step(name: "Rest in between: \(restInBetween)", stepType: StepType.rest))
+                            exerciseWithRestSequence.append(Step(name: "Rest in between: \(restInBetween)", duration: restInBetween, stepType: StepType.rest))
                         }
                     }
                 }
                 exerciseWithRestSequence.append(exerciseSequence[exerciseSequence.count-1])
                 if let restAtTheEnd = exerciseGroup.restAtTheEnd {
                     if restAtTheEnd > 0 {
-                        exerciseWithRestSequence.append(Step(name: "Rest at the end: \(restAtTheEnd)", stepType: StepType.rest))
+                        exerciseWithRestSequence.append(Step(name: "Rest at the end: \(restAtTheEnd)", duration: restAtTheEnd, stepType: StepType.rest))
                     }
                 }
                 print(exerciseWithRestSequence)
@@ -104,7 +104,7 @@ class ModelData {
             for exerciseIndex in 0..<exerciseList.count {
                 if setIndex < exerciseList[exerciseIndex].numberOfSets {
                     if let durations = exerciseList[exerciseIndex].durations {
-                        let step = Step(name: exerciseList[exerciseIndex].name, description: exerciseList[exerciseIndex].description, duration: durations[setIndex], stepType: .timedExercise)
+                        let step = Step(name: exerciseList[exerciseIndex].name, description: exerciseList[exerciseIndex].description, prepTime: exerciseList[exerciseIndex].prepTimes?[setIndex], duration: durations[setIndex], stepType: .timedExercise)
                         exercisesSequence.append(step)
                     } else if let repetitions = exerciseList[exerciseIndex].repetitions {
                         let step = Step(name: exerciseList[exerciseIndex].name, description: exerciseList[exerciseIndex].description, repetitions: repetitions[setIndex], stepType: .repExercise)
@@ -124,15 +124,18 @@ struct Step {
     let name: String
     let description: String?
     let repetitions: Int?
+    let prepTime: Int?
     let duration: Int?
     let stepType: StepType
 
-    init(name: String, description: String? = nil, repetitions: Int? = nil, duration: Int? = nil, stepType: StepType = StepType.repExercise) {
+    init(name: String, description: String? = nil, repetitions: Int? = nil, prepTime: Int? = nil, duration: Int? = nil, stepType: StepType = StepType.repExercise) {
         self.name = name
         self.description = description
         self.repetitions = repetitions
+        self .prepTime = prepTime
         self.duration = duration
         self.stepType = stepType
+        print("\(name) ==> Prep time: \(prepTime ?? 0) + Duration: \(duration ?? 0)")
     }
 }
 
@@ -140,4 +143,28 @@ enum StepType {
     case rest
     case repExercise
     case timedExercise
+}
+
+func load<T: Decodable>(_ filename: String) -> T {
+    let data: Data
+
+    guard let file = Bundle.main.url(forResource: filename, withExtension: nil)
+    else {
+        fatalError("Couldn't find \(filename) in main bundle.")
+    }
+
+
+    do {
+        data = try Data(contentsOf: file)
+    } catch {
+        fatalError("Couldn't load \(filename) from main bundle:\n\(error)")
+    }
+
+
+    do {
+        let decoder = JSONDecoder()
+        return try decoder.decode(T.self, from: data)
+    } catch {
+        fatalError("Couldn't parse \(filename) as \(T.self):\n\(error)")
+    }
 }
