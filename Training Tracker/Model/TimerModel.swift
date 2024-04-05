@@ -1,7 +1,7 @@
 import SwiftUI
 
 @Observable
-class TimerModel {
+final class TimerModel {
     var timerStatus: TimerStatus
     var isTimerInPrep: Bool
     var prepTimeInSeconds: TimeInterval
@@ -13,14 +13,14 @@ class TimerModel {
     var stepType: StepType
     var buttonSystemName: String
     
-    init(timerStatus: TimerStatus, prepTimeInSeconds: TimeInterval, prepTimeRemainingInSeconds: TimeInterval, exerciseTimeInSeconds: TimeInterval, exerciseTimeRemainingInSeconds: TimeInterval) {
+    init(timerStatus: TimerStatus, prepTimeInSeconds: TimeInterval = 0, prepTimeRemainingInSeconds: TimeInterval = 0, exerciseTimeInSeconds: TimeInterval, exerciseTimeRemainingInSeconds: TimeInterval, stepType: StepType = .timedExercise) {
         self.timerStatus = timerStatus
         self.prepTimeInSeconds = prepTimeInSeconds
         self.prepTimeRemainingInSeconds = prepTimeRemainingInSeconds
         self.isTimerInPrep = (prepTimeInSeconds > 0)
         self.exerciseTimeInSeconds = exerciseTimeInSeconds
         self.exerciseTimeRemainingInSeconds = exerciseTimeRemainingInSeconds
-        self.stepType = .timedExercise
+        self.stepType = stepType
         self.buttonSystemName = (timerStatus == .stopped) ? "play.fill" : "pause.fill"
     }
     

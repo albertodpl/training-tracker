@@ -1,7 +1,7 @@
 import Foundation
 
 @Observable
-class ModelData {
+final class ModelData {
     let jsonRoutine: JsonRoutine = load("workoutRoutine.json")
     var currentStepIndex = 0
     var currentStep: Step = Step(name: "Initialization step; you should not see this")

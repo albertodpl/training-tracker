@@ -2,7 +2,6 @@ import SwiftUI
 
 struct TimerView: View {
     @Binding var timerModel: TimerModel
-    
     var body: some View {
         VStack(alignment: .center) {
             ZStack {
@@ -10,20 +9,27 @@ struct TimerView: View {
                     .stroke(lineWidth: 10)
                     .opacity(0.3)
                     .foregroundColor(.blue)
-                Circle()
-                    .trim(from: CGFloat(timerModel.exerciseTimeRemainingInSeconds / (timerModel.prepTimeInSeconds + timerModel.exerciseTimeInSeconds)), to: CGFloat((timerModel.prepTimeRemainingInSeconds + timerModel.exerciseTimeRemainingInSeconds) / (timerModel.prepTimeInSeconds + timerModel.exerciseTimeInSeconds)))
-                    .stroke(style: StrokeStyle(lineWidth: 10, lineCap: .round, lineJoin: .round))
-                    .rotationEffect(.degrees(-90))
-                    .foregroundColor(.orange)
-                Circle()
-                    .trim(from: 0, to: CGFloat(timerModel.exerciseTimeRemainingInSeconds / (timerModel.prepTimeInSeconds + timerModel.exerciseTimeInSeconds)))
-                    .stroke(style: StrokeStyle(lineWidth: 10, lineCap: .round, lineJoin: .round))
-                    .rotationEffect(.degrees(-90))
-                    .foregroundColor((timerModel.stepType == .rest) ? .green : /*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
-                Text(formattedTime())
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .foregroundColor((timerModel.prepTimeRemainingInSeconds > 0) ? .orange : ((timerModel.stepType == .rest) ? .green : /*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/))
+                if timerModel.stepType == .rest {
+                    Circle()
+                        .trim(from: 0, to: CGFloat(timerModel.exerciseTimeRemainingInSeconds / timerModel.exerciseTimeInSeconds))
+                        .stroke(style: StrokeStyle(lineWidth: 10, lineCap: .round, lineJoin: .round))
+                        .rotationEffect(.degrees(-90))
+                        .foregroundColor(.green)
+                    Text(formattedTime())
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .foregroundColor(.green)
+                } else {
+                    Circle()
+                        .trim(from: 0, to: ((timerModel.prepTimeRemainingInSeconds > 0) ? CGFloat(timerModel.prepTimeRemainingInSeconds / timerModel.prepTimeInSeconds) : CGFloat(timerModel.exerciseTimeRemainingInSeconds / timerModel.exerciseTimeInSeconds)))
+                        .stroke(style: StrokeStyle(lineWidth: 10, lineCap: .round, lineJoin: .round))
+                        .rotationEffect(.degrees(-90))
+                        .foregroundColor((timerModel.prepTimeRemainingInSeconds > 0) ? .orange : /*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
+                    Text(formattedTime())
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .foregroundColor((timerModel.prepTimeRemainingInSeconds > 0) ? .orange : /*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
+                }
             }
             .frame(maxWidth: 500)
         }
@@ -40,7 +46,17 @@ struct TimerView: View {
     }
 }
 
-#Preview {
-    @State var timerModel = TimerModel(timerStatus: .stopped, prepTimeInSeconds: 20, prepTimeRemainingInSeconds: 10, exerciseTimeInSeconds: 75, exerciseTimeRemainingInSeconds: 75)
+#Preview("Rest") {
+    @State var timerModel = TimerModel(timerStatus: .stopped, exerciseTimeInSeconds: 75, exerciseTimeRemainingInSeconds: 25, stepType: .rest)
+    return TimerView(timerModel: $timerModel)
+}
+
+#Preview("Prep") {
+    @State var timerModel = TimerModel(timerStatus: .stopped, prepTimeInSeconds: 20, prepTimeRemainingInSeconds: 10, exerciseTimeInSeconds: 75, exerciseTimeRemainingInSeconds: 75, stepType: .timedExercise)
+    return TimerView(timerModel: $timerModel)
+}
+
+#Preview("Exercise") {
+    @State var timerModel = TimerModel(timerStatus: .stopped, prepTimeInSeconds: 20, prepTimeRemainingInSeconds: 0, exerciseTimeInSeconds: 75, exerciseTimeRemainingInSeconds: 15, stepType: .timedExercise)
     return TimerView(timerModel: $timerModel)
 }

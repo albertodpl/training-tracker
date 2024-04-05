@@ -19,6 +19,7 @@
 		D3F496712BBC5E27008FB68B /* TimerViewOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F496702BBC5E27008FB68B /* TimerViewOld.swift */; };
 		D3F496732BBD65BD008FB68B /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F496722BBD65BD008FB68B /* TimerView.swift */; };
 		D3F496752BBD86B4008FB68B /* TimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F496742BBD86B4008FB68B /* TimerModel.swift */; };
+		D3F496772BBDF4E4008FB68B /* workoutRoutine_real.json in Resources */ = {isa = PBXBuildFile; fileRef = D3F496762BBDF4E4008FB68B /* workoutRoutine_real.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		D3F496702BBC5E27008FB68B /* TimerViewOld.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewOld.swift; sourceTree = "<group>"; };
 		D3F496722BBD65BD008FB68B /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		D3F496742BBD86B4008FB68B /* TimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerModel.swift; sourceTree = "<group>"; };
+		D3F496762BBDF4E4008FB68B /* workoutRoutine_real.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = workoutRoutine_real.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 		D3F4965E2BB70214008FB68B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D3F496762BBDF4E4008FB68B /* workoutRoutine_real.json */,
 				D3F4965F2BB7029E008FB68B /* workoutRoutine.json */,
 			);
 			path = Resources;
@@ -173,6 +176,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3F496772BBDF4E4008FB68B /* workoutRoutine_real.json in Resources */,
 				D3F496602BB7029E008FB68B /* workoutRoutine.json in Resources */,
 				D3F4964D2BB6D23F008FB68B /* Preview Assets.xcassets in Resources */,
 				D3F4964A2BB6D23F008FB68B /* Assets.xcassets in Resources */,

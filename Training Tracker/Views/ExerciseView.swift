@@ -22,7 +22,6 @@ struct ExerciseView: View {
                 if let description = currentExercise?.description {
                     Text(description)
                         .font(.title2)
-                    
                 }
             }
             .padding([.top, .bottom])
