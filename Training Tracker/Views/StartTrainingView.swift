@@ -6,7 +6,7 @@ struct StartTrainingView: View {
     var body: some View {
         VStack {
             Spacer()
-            StartButtonView(appLifecycleControler: appLifecycleController)
+            TrainingButtonView(text: "Start", systemImage: "play.fill", click: appLifecycleController.startTraining)
         }
     }
 }

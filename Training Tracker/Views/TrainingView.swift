@@ -15,65 +15,62 @@ struct TrainingView: View {
             Divider()
             Spacer()
             
-            // For start and stop during rest and timed exercises:
-            //  Image(systemName: isRunning ? "stop.fill" : "play.fill")
             switch modelData.currentStep.stepType {
             case .rest:
-                Button {
-                    if timerModel.exerciseTimeRemainingInSeconds == 0 {
-                        modelData.next()
-                        timerModel.updateStep(currentStep: modelData.currentStep)
-                    } else {
-                        timerModel.click()
+                if timerModel.exerciseTimeRemainingInSeconds == 0 {
+                    let _ = modelData.next()
+                    let _ = timerModel.updateStep(currentStep: modelData.currentStep)
+                    // TODO: Clean up. In theory, this should transition automatically, so you do not see this.
+                    switch modelData.currentStep.stepType {
+                    case .rest:
+                        TrainingButtonView(text: "Pause", systemImage: "pause.fill", click: {
+                            timerModel.click()
+                        })
+                    case .repExercise:
+                        TrainingButtonView(text: "Complete", systemImage: "checkmark", click: {
+                            modelData.next()
+                            timerModel.updateStep(currentStep: modelData.currentStep)
+                        })
+                    case .timedExercise:
+                        TrainingButtonView(text: "Start", systemImage: "play.fill", click: {
+                            timerModel.click()
+                        })
                     }
-                } label: {
-                    HStack {
-                        Image(systemName: (timerModel.exerciseTimeRemainingInSeconds > 0) ? timerModel.buttonSystemName : "checkmark")
-                            .imageScale(.large)
-                        //                            .foregroundColor(.primary)
-                            .foregroundStyle(.foreground)
-                            .frame(width: 250, height: 50)
-                            .font(.largeTitle)
-                            .padding()
+                } else {
+                    switch timerModel.timerStatus {
+                    case .running:
+                        TrainingButtonView(text: "Pause", systemImage: "pause.fill", click: {
+                            timerModel.click()
+                        })
+                    case .stopped:
+                        TrainingButtonView(text: "Start", systemImage: "play.fill", click: {
+                            timerModel.click()
+                        })
                     }
                 }
-                .buttonStyle(.borderedProminent)
             case .repExercise:
-                Button {
+                TrainingButtonView(text: "Complete", systemImage: "checkmark", click: {
                     modelData.next()
                     timerModel.updateStep(currentStep: modelData.currentStep)
-                } label: {
-                    HStack {
-                        Image(systemName: "checkmark")
-                            .imageScale(.large)
-                        //                            .foregroundColor(.primary)
-                            .foregroundStyle(.foreground)
-                            .frame(width: 250, height: 50)
-                            .font(.largeTitle)
-                            .padding()
-                    }
-                }
-                .buttonStyle(.borderedProminent)
+                })
             case .timedExercise:
-                Button {
-                    if timerModel.exerciseTimeRemainingInSeconds == 0 {
+                if timerModel.exerciseTimeRemainingInSeconds == 0 {
+                    TrainingButtonView(text: "Complete", systemImage: "checkmark", click: {
                         modelData.next()
                         timerModel.updateStep(currentStep: modelData.currentStep)
-                    } else {
-                        timerModel.click()
-                    }
-                } label: {
-                    HStack {
-                        Image(systemName: (timerModel.exerciseTimeRemainingInSeconds > 0) ? timerModel.buttonSystemName : "checkmark")
-                            .imageScale(.large)
-                        //                            .foregroundColor(.primary)
-                            .foregroundStyle(.foreground)
-                            .frame(width: 250, height: 50)
-                            .font(.largeTitle)
-                            .padding()
+                    })
+                } else {
+                    switch timerModel.timerStatus {
+                    case .running:
+                        TrainingButtonView(text: "Pause", systemImage: "pause.fill", click: {
+                            timerModel.click()
+                        })
+                    case .stopped:
+                        TrainingButtonView(text: "Start", systemImage: "play.fill", click: {
+                            timerModel.click()
+                        })
                     }
                 }
-                .buttonStyle(.borderedProminent)
             }
         }
         .padding()
@@ -85,6 +82,6 @@ let routine: JsonRoutine = load("workoutRoutine.json")
     let appLifecycleModel: AppLifecycleModel = AppLifecycleModel()
     let appLifecycleController: AppLifecycleController = AppLifecycleController(appLifecycleModel: appLifecycleModel)
     @State var modelData = ModelData(appLifecycleController: appLifecycleController)
-    @State var timerModel = TimerModel(timerStatus: .stopped, prepTimeInSeconds: 5, prepTimeRemainingInSeconds: 2, exerciseTimeInSeconds: 75, exerciseTimeRemainingInSeconds: 75)
+    @State var timerModel = TimerModel(timerStatus: .stopped, prepTimeInSeconds: 5, prepTimeRemainingInSeconds: 2, exerciseTimeInSeconds: 2, exerciseTimeRemainingInSeconds: 2)
     return TrainingView(modelData: $modelData, timerModel: $timerModel)
 }

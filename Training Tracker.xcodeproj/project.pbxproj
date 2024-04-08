@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D3B59BB42BC41ABF007A9782 /* StartTrainingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B59BB32BC41ABF007A9782 /* StartTrainingView.swift */; };
-		D3B59BB62BC42641007A9782 /* StartButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B59BB52BC42641007A9782 /* StartButtonView.swift */; };
+		D3B59BB62BC42641007A9782 /* TrainingButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B59BB52BC42641007A9782 /* TrainingButtonView.swift */; };
 		D3B59BB82BC427CF007A9782 /* AppLifecycleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B59BB72BC427CF007A9782 /* AppLifecycleModel.swift */; };
 		D3B59BBA2BC43572007A9782 /* TrainingCompletedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B59BB92BC43572007A9782 /* TrainingCompletedView.swift */; };
 		D3B59BBC2BC435FB007A9782 /* TrainingLifecycleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B59BBB2BC435FB007A9782 /* TrainingLifecycleView.swift */; };
@@ -29,7 +29,7 @@
 
 /* Begin PBXFileReference section */
 		D3B59BB32BC41ABF007A9782 /* StartTrainingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTrainingView.swift; sourceTree = "<group>"; };
-		D3B59BB52BC42641007A9782 /* StartButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartButtonView.swift; sourceTree = "<group>"; };
+		D3B59BB52BC42641007A9782 /* TrainingButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingButtonView.swift; sourceTree = "<group>"; };
 		D3B59BB72BC427CF007A9782 /* AppLifecycleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLifecycleModel.swift; sourceTree = "<group>"; };
 		D3B59BB92BC43572007A9782 /* TrainingCompletedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingCompletedView.swift; sourceTree = "<group>"; };
 		D3B59BBB2BC435FB007A9782 /* TrainingLifecycleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingLifecycleView.swift; sourceTree = "<group>"; };
@@ -126,7 +126,7 @@
 				D3F496702BBC5E27008FB68B /* TimerViewOld.swift */,
 				D3F496722BBD65BD008FB68B /* TimerView.swift */,
 				D3B59BB32BC41ABF007A9782 /* StartTrainingView.swift */,
-				D3B59BB52BC42641007A9782 /* StartButtonView.swift */,
+				D3B59BB52BC42641007A9782 /* TrainingButtonView.swift */,
 				D3B59BB92BC43572007A9782 /* TrainingCompletedView.swift */,
 				D3B59BBB2BC435FB007A9782 /* TrainingLifecycleView.swift */,
 			);
@@ -216,7 +216,7 @@
 				D3F4966F2BBC434F008FB68B /* ExerciseView.swift in Sources */,
 				D3F496712BBC5E27008FB68B /* TimerViewOld.swift in Sources */,
 				D3B59BB82BC427CF007A9782 /* AppLifecycleModel.swift in Sources */,
-				D3B59BB62BC42641007A9782 /* StartButtonView.swift in Sources */,
+				D3B59BB62BC42641007A9782 /* TrainingButtonView.swift in Sources */,
 				D3F496482BB6D22A008FB68B /* TrainingView.swift in Sources */,
 				D3F496732BBD65BD008FB68B /* TimerView.swift in Sources */,
 			);
