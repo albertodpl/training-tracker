@@ -24,8 +24,6 @@ struct ExerciseView: View {
                         .font(.title2)
                 }
             }
-            .padding([.top, .bottom])
-            .opacity(currentExercise?.stepType == .rest ? 0 : 1)
             
             Divider()
             
@@ -37,11 +35,16 @@ struct ExerciseView: View {
             }
         }.opacity((currentStep.stepType == .rest) ? 0.3 : 1)
     }
-                     
-
 }
 
-#Preview {
+#Preview ("Long") {
+    @State var currentStep: Step = Step(name: "Current step", description: "Description of the current step", repetitions: 8)
+    @State var currentExercise: Step? = Step(name: "Current exercise super long, longer, and longer, what a long exercise", description: "Description of the current exercise", repetitions: 8)
+    @State var nextExercise: Step? = Step(name: "Next exercise", description: "Description of the next exercise", repetitions: 5)
+    return ExerciseView(currentStep: $currentStep, currentExercise: $currentExercise, nextExercise: $nextExercise)
+}
+
+#Preview ("Short") {
     @State var currentStep: Step = Step(name: "Current step", description: "Description of the current step", repetitions: 8)
     @State var currentExercise: Step? = Step(name: "Current exercise", description: "Description of the current exercise", repetitions: 8)
     @State var nextExercise: Step? = Step(name: "Next exercise", description: "Description of the next exercise", repetitions: 5)

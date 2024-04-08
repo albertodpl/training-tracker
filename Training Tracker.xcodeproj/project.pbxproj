@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D3B59BB42BC41ABF007A9782 /* StartTrainingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B59BB32BC41ABF007A9782 /* StartTrainingView.swift */; };
+		D3B59BB62BC42641007A9782 /* StartButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B59BB52BC42641007A9782 /* StartButtonView.swift */; };
+		D3B59BB82BC427CF007A9782 /* AppLifecycleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B59BB72BC427CF007A9782 /* AppLifecycleModel.swift */; };
+		D3B59BBA2BC43572007A9782 /* TrainingCompletedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B59BB92BC43572007A9782 /* TrainingCompletedView.swift */; };
+		D3B59BBC2BC435FB007A9782 /* TrainingLifecycleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B59BBB2BC435FB007A9782 /* TrainingLifecycleView.swift */; };
 		D3F496482BB6D22A008FB68B /* TrainingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F496472BB6D22A008FB68B /* TrainingView.swift */; };
 		D3F4964A2BB6D23F008FB68B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3F496492BB6D23F008FB68B /* Assets.xcassets */; };
 		D3F4964D2BB6D23F008FB68B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3F4964C2BB6D23F008FB68B /* Preview Assets.xcassets */; };
@@ -23,6 +28,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D3B59BB32BC41ABF007A9782 /* StartTrainingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTrainingView.swift; sourceTree = "<group>"; };
+		D3B59BB52BC42641007A9782 /* StartButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartButtonView.swift; sourceTree = "<group>"; };
+		D3B59BB72BC427CF007A9782 /* AppLifecycleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLifecycleModel.swift; sourceTree = "<group>"; };
+		D3B59BB92BC43572007A9782 /* TrainingCompletedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingCompletedView.swift; sourceTree = "<group>"; };
+		D3B59BBB2BC435FB007A9782 /* TrainingLifecycleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingLifecycleView.swift; sourceTree = "<group>"; };
 		D3F496422BB6D22A008FB68B /* Training Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Training Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3F496472BB6D22A008FB68B /* TrainingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingView.swift; sourceTree = "<group>"; };
 		D3F496492BB6D23F008FB68B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -93,6 +103,7 @@
 				D3F496612BB75B4B008FB68B /* JsonSchemas.swift */,
 				D3F496632BB83EFF008FB68B /* ModelData.swift */,
 				D3F496742BBD86B4008FB68B /* TimerModel.swift */,
+				D3B59BB72BC427CF007A9782 /* AppLifecycleModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -114,6 +125,10 @@
 				D3F4966E2BBC434F008FB68B /* ExerciseView.swift */,
 				D3F496702BBC5E27008FB68B /* TimerViewOld.swift */,
 				D3F496722BBD65BD008FB68B /* TimerView.swift */,
+				D3B59BB32BC41ABF007A9782 /* StartTrainingView.swift */,
+				D3B59BB52BC42641007A9782 /* StartButtonView.swift */,
+				D3B59BB92BC43572007A9782 /* TrainingCompletedView.swift */,
+				D3B59BBB2BC435FB007A9782 /* TrainingLifecycleView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -192,11 +207,16 @@
 			files = (
 				D3F496752BBD86B4008FB68B /* TimerModel.swift in Sources */,
 				D3F496542BB6D433008FB68B /* TimerViewCopied.swift in Sources */,
+				D3B59BBA2BC43572007A9782 /* TrainingCompletedView.swift in Sources */,
 				D3F496562BB6E4A1008FB68B /* TrainingApp.swift in Sources */,
+				D3B59BB42BC41ABF007A9782 /* StartTrainingView.swift in Sources */,
 				D3F496642BB83EFF008FB68B /* ModelData.swift in Sources */,
 				D3F496622BB75B4B008FB68B /* JsonSchemas.swift in Sources */,
+				D3B59BBC2BC435FB007A9782 /* TrainingLifecycleView.swift in Sources */,
 				D3F4966F2BBC434F008FB68B /* ExerciseView.swift in Sources */,
 				D3F496712BBC5E27008FB68B /* TimerViewOld.swift in Sources */,
+				D3B59BB82BC427CF007A9782 /* AppLifecycleModel.swift in Sources */,
+				D3B59BB62BC42641007A9782 /* StartButtonView.swift in Sources */,
 				D3F496482BB6D22A008FB68B /* TrainingView.swift in Sources */,
 				D3F496732BBD65BD008FB68B /* TimerView.swift in Sources */,
 			);

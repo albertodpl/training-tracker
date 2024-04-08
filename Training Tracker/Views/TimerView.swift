@@ -2,32 +2,39 @@ import SwiftUI
 
 struct TimerView: View {
     @Binding var timerModel: TimerModel
+    let timerFontSize = CGFloat(80)
     var body: some View {
         VStack(alignment: .center) {
             ZStack {
+                if timerModel.stepType == .rest {
+                    Text(formattedTime())
+                        .font(.system(size: timerFontSize))
+                        .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .foregroundColor(.green)
+                } else {
+                    Text(formattedTime())
+                        .font(.system(size: timerFontSize))
+                        .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .foregroundColor((timerModel.prepTimeRemainingInSeconds > 0) ? .orange : /*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
+                }
                 Circle()
                     .stroke(lineWidth: 10)
                     .opacity(0.3)
-                    .foregroundColor(.blue)
                 if timerModel.stepType == .rest {
                     Circle()
                         .trim(from: 0, to: CGFloat(timerModel.exerciseTimeRemainingInSeconds / timerModel.exerciseTimeInSeconds))
                         .stroke(style: StrokeStyle(lineWidth: 10, lineCap: .round, lineJoin: .round))
                         .rotationEffect(.degrees(-90))
                         .foregroundColor(.green)
-                    Text(formattedTime())
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                        .foregroundColor(.green)
                 } else {
                     Circle()
                         .trim(from: 0, to: ((timerModel.prepTimeRemainingInSeconds > 0) ? CGFloat(timerModel.prepTimeRemainingInSeconds / timerModel.prepTimeInSeconds) : CGFloat(timerModel.exerciseTimeRemainingInSeconds / timerModel.exerciseTimeInSeconds)))
                         .stroke(style: StrokeStyle(lineWidth: 10, lineCap: .round, lineJoin: .round))
                         .rotationEffect(.degrees(-90))
-                        .foregroundColor((timerModel.prepTimeRemainingInSeconds > 0) ? .orange : /*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
-                    Text(formattedTime())
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
                         .foregroundColor((timerModel.prepTimeRemainingInSeconds > 0) ? .orange : /*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
                 }
             }

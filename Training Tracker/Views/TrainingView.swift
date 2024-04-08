@@ -82,7 +82,9 @@ struct TrainingView: View {
 
 let routine: JsonRoutine = load("workoutRoutine.json")
 #Preview {
-    @State var modelData = ModelData()
+    let appLifecycleModel: AppLifecycleModel = AppLifecycleModel()
+    let appLifecycleController: AppLifecycleController = AppLifecycleController(appLifecycleModel: appLifecycleModel)
+    @State var modelData = ModelData(appLifecycleController: appLifecycleController)
     @State var timerModel = TimerModel(timerStatus: .stopped, prepTimeInSeconds: 5, prepTimeRemainingInSeconds: 2, exerciseTimeInSeconds: 75, exerciseTimeRemainingInSeconds: 75)
     return TrainingView(modelData: $modelData, timerModel: $timerModel)
 }

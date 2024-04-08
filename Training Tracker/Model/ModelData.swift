@@ -3,13 +3,16 @@ import Foundation
 @Observable
 final class ModelData {
     let jsonRoutine: JsonRoutine = load("workoutRoutine.json")
+    var appLifecycleController: AppLifecycleController
     var currentStepIndex = 0
     var currentStep: Step = Step(name: "Initialization step; you should not see this")
     var currentExercise: Step? = nil
     var nextExercise: Step? = nil
     var routineSteps = [Step]()
     
-    init() {
+    init(appLifecycleController: AppLifecycleController) {
+        self.appLifecycleController = appLifecycleController
+        
         for exerciseGroup in jsonRoutine.exercisesGroups {
             dfsExerciseGroup(exerciseGroup)
         }
@@ -21,8 +24,8 @@ final class ModelData {
         if currentStepIndex < routineSteps.count - 1 {
             currentStepIndex += 1
         }
-        else { // TODO: Communiate that you completed the training.
-            currentStepIndex = currentStepIndex
+        else {
+            appLifecycleController.completeTraining()
         }
         currentStep = routineSteps[currentStepIndex]
         
