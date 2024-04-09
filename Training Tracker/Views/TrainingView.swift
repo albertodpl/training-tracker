@@ -1,4 +1,5 @@
 import SwiftUI
+import AudioToolbox
 
 struct TrainingView: View {
     @Binding var modelData: ModelData
@@ -18,6 +19,7 @@ struct TrainingView: View {
             switch modelData.currentStep.stepType {
             case .rest:
                 if timerModel.exerciseTimeRemainingInSeconds == 0 {
+                    let _ = AudioServicesPlaySystemSound(1009) // ding ding
                     let _ = modelData.next()
                     let _ = timerModel.updateStep(currentStep: modelData.currentStep)
                     // TODO: Clean up. In theory, this should transition automatically, so you do not see this.
@@ -62,6 +64,7 @@ struct TrainingView: View {
                 })
             case .timedExercise:
                 if timerModel.exerciseTimeRemainingInSeconds == 0 {
+                    let _ = AudioServicesPlaySystemSound(1009) // ding ding
                     TrainingButtonView(text: "Complete", systemImage: "checkmark", click: {
                         modelData.next()
                         timerModel.updateStep(currentStep: modelData.currentStep)
