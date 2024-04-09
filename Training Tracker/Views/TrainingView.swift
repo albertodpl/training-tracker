@@ -30,6 +30,7 @@ struct TrainingView: View {
                         TrainingButtonView(text: "Complete", systemImage: "checkmark", click: {
                             modelData.next()
                             timerModel.updateStep(currentStep: modelData.currentStep)
+                            timerModel.click() // Starts the rest timer (one less user click)
                         })
                     case .timedExercise:
                         TrainingButtonView(text: "Start", systemImage: "play.fill", click: {
@@ -52,12 +53,24 @@ struct TrainingView: View {
                 TrainingButtonView(text: "Complete", systemImage: "checkmark", click: {
                     modelData.next()
                     timerModel.updateStep(currentStep: modelData.currentStep)
+                    switch timerModel.stepType {
+                    case .rest:
+                        timerModel.click() // Starts the rest timer (one less user click)
+                    default:
+                        break
+                    }
                 })
             case .timedExercise:
                 if timerModel.exerciseTimeRemainingInSeconds == 0 {
                     TrainingButtonView(text: "Complete", systemImage: "checkmark", click: {
                         modelData.next()
                         timerModel.updateStep(currentStep: modelData.currentStep)
+                        switch timerModel.stepType {
+                        case .rest:
+                            timerModel.click() // Starts the rest timer (one less user click)
+                        default:
+                            break
+                        }
                     })
                 } else {
                     switch timerModel.timerStatus {
@@ -81,7 +94,7 @@ let routine: JsonRoutine = load("workoutRoutine.json")
 #Preview {
     let appLifecycleModel: AppLifecycleModel = AppLifecycleModel()
     let appLifecycleController: AppLifecycleController = AppLifecycleController(appLifecycleModel: appLifecycleModel)
-    @State var modelData = ModelData(appLifecycleController: appLifecycleController)
+    @State var modelData = ModelData(workoutRoutine: "workoutRoutine.json", appLifecycleController: appLifecycleController)
     @State var timerModel = TimerModel(timerStatus: .stopped, prepTimeInSeconds: 5, prepTimeRemainingInSeconds: 2, exerciseTimeInSeconds: 2, exerciseTimeRemainingInSeconds: 2)
     return TrainingView(modelData: $modelData, timerModel: $timerModel)
 }

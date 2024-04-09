@@ -6,11 +6,6 @@
             "restAtTheEnd": 60,
             "exercises": [
                 {
-                    "name": "Start training",
-                    "repetitions": [1],
-                    "numberOfSets": 1
-                },
-                {
                     "name": "Skipping",
                     "description": "Boxer step",
                     "prepTimes": [10],
@@ -153,7 +148,7 @@
                         {
                             "name": "Dips",
                             "description": "Eccentrics on dip bars",
-                            "repetitions": [6, 6, 6],
+                            "repetitions": [7, 7, 7],
                             "tempo": {
                                 "eccentric": 5,
                                 "eccentricRest": 1,

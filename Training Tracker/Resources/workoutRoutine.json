@@ -6,11 +6,6 @@
             "restAtTheEnd": 3,
             "exercises": [
                 {
-                    "name": "Start training",
-                    "repetitions": [1],
-                    "numberOfSets": 1
-                },
-                {
                     "name": "Skipping",
                     "description": "Boxer step",
                     "prepTimes": [1],

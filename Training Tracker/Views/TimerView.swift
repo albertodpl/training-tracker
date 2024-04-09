@@ -6,14 +6,15 @@ struct TimerView: View {
     var body: some View {
         VStack(alignment: .center) {
             ZStack {
-                if timerModel.stepType == .rest {
+                switch timerModel.stepType {
+                case .rest(_):
                     Text(formattedTime())
                         .font(.system(size: timerFontSize))
                         .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .foregroundColor(.green)
-                } else {
+                default:
                     Text(formattedTime())
                         .font(.system(size: timerFontSize))
                         .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
@@ -21,16 +22,19 @@ struct TimerView: View {
                         .fontWeight(.bold)
                         .foregroundColor((timerModel.prepTimeRemainingInSeconds > 0) ? .orange : /*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
                 }
+                
                 Circle()
                     .stroke(lineWidth: 10)
                     .opacity(0.3)
-                if timerModel.stepType == .rest {
+                
+                switch timerModel.stepType {
+                case .rest(_):
                     Circle()
                         .trim(from: 0, to: CGFloat(timerModel.exerciseTimeRemainingInSeconds / timerModel.exerciseTimeInSeconds))
                         .stroke(style: StrokeStyle(lineWidth: 10, lineCap: .round, lineJoin: .round))
                         .rotationEffect(.degrees(-90))
                         .foregroundColor(.green)
-                } else {
+                default:
                     Circle()
                         .trim(from: 0, to: ((timerModel.prepTimeRemainingInSeconds > 0) ? CGFloat(timerModel.prepTimeRemainingInSeconds / timerModel.prepTimeInSeconds) : CGFloat(timerModel.exerciseTimeRemainingInSeconds / timerModel.exerciseTimeInSeconds)))
                         .stroke(style: StrokeStyle(lineWidth: 10, lineCap: .round, lineJoin: .round))
@@ -54,7 +58,7 @@ struct TimerView: View {
 }
 
 #Preview("Rest") {
-    @State var timerModel = TimerModel(timerStatus: .stopped, exerciseTimeInSeconds: 75, exerciseTimeRemainingInSeconds: 25, stepType: .rest)
+    @State var timerModel = TimerModel(timerStatus: .stopped, exerciseTimeInSeconds: 75, exerciseTimeRemainingInSeconds: 25, stepType: .rest(.stopped))
     return TimerView(timerModel: $timerModel)
 }
 

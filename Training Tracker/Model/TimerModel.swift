@@ -68,11 +68,16 @@ final class TimerModel {
     func updateStep(currentStep: Step) {
         self.stepType = currentStep.stepType
         resetTimer(prepTimeInSeconds: currentStep.prepTime, exerciseTimeInSeconds: currentStep.duration)
-        if self.stepType == .rest {
+        switch self.stepType {
+        case .rest(.stopped):
+            self.timerStatus = .stopped
+            self.buttonSystemName = "play.fill"
+            startTimer()
+        case .rest(.running):
             self.timerStatus = .running
             self.buttonSystemName = "pause.fill"
             startTimer()
-        } else {
+        default:
             self.timerStatus = .stopped
             self.buttonSystemName = "play.fill"
         }

@@ -33,7 +33,7 @@ struct ExerciseView: View {
                     .opacity(0.5)
                     .padding([.top, .bottom])
             }
-        }.opacity((currentStep.stepType == .rest) ? 0.3 : 1)
+        }.opacity(((currentStep.stepType == .rest(.stopped)) || (currentStep.stepType == .rest(.running))) ? 0.5 : 1)
     }
 }
 

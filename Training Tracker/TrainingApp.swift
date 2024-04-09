@@ -12,8 +12,12 @@ struct TrainingApp: App {
         self.appLifecycleModel = appLifecycleModel
         let appLifecycleController = AppLifecycleController(appLifecycleModel: appLifecycleModel)
         self.appLifecycleController = appLifecycleController
-        self.modelData = ModelData(appLifecycleController: appLifecycleController)
-        self.timerModel = TimerModel(timerStatus: .stopped, prepTimeInSeconds: 0, prepTimeRemainingInSeconds: 0, exerciseTimeInSeconds: 0, exerciseTimeRemainingInSeconds: 0)
+        let modelData = ModelData(workoutRoutine: "workoutRoutine.json", appLifecycleController: appLifecycleController)
+//        let modelData = ModelData(workoutRoutine: "workoutRoutine_real.json", appLifecycleController: appLifecycleController)
+        self.modelData = modelData
+        let timerModel = TimerModel(timerStatus: .stopped, prepTimeInSeconds: 0, prepTimeRemainingInSeconds: 0, exerciseTimeInSeconds: 0, exerciseTimeRemainingInSeconds: 0)
+        timerModel.updateStep(currentStep: modelData.currentStep)
+        self.timerModel = timerModel
     }
 
     var body: some Scene {

@@ -2,7 +2,7 @@ import Foundation
 
 @Observable
 final class ModelData {
-    let jsonRoutine: JsonRoutine = load("workoutRoutine.json")
+    let jsonRoutine: JsonRoutine
     var appLifecycleController: AppLifecycleController
     var currentStepIndex = 0
     var currentStep: Step = Step(name: "Initialization step; you should not see this")
@@ -10,7 +10,8 @@ final class ModelData {
     var nextExercise: Step? = nil
     var routineSteps = [Step]()
     
-    init(appLifecycleController: AppLifecycleController) {
+    init(workoutRoutine: String, appLifecycleController: AppLifecycleController) {
+        jsonRoutine = load(workoutRoutine)
         self.appLifecycleController = appLifecycleController
         
         for exerciseGroup in jsonRoutine.exercisesGroups {
@@ -36,8 +37,14 @@ final class ModelData {
     
     private func updateCurrentAndNextExercise() {
         var currentExerciseIndex = currentStepIndex
-        while (currentExerciseIndex < routineSteps.count) && (routineSteps[currentExerciseIndex].stepType == .rest) {
-            currentExerciseIndex += 1
+        var currentExerciseFound = false
+        while (currentExerciseIndex < routineSteps.count) && !currentExerciseFound {
+            switch routineSteps[currentExerciseIndex].stepType {
+            case .rest(_):
+                currentExerciseIndex += 1
+            default:
+                currentExerciseFound = true
+            }
         }
         
         if currentExerciseIndex < routineSteps.count {
@@ -47,8 +54,14 @@ final class ModelData {
         }
         
         var nextExerciseIndex = currentExerciseIndex + 1
-        while (nextExerciseIndex < routineSteps.count) && (routineSteps[nextExerciseIndex].stepType == .rest) {
-            nextExerciseIndex += 1
+        var nextExerciseFound = false
+        while (nextExerciseIndex < routineSteps.count) && !nextExerciseFound {
+            switch routineSteps[nextExerciseIndex].stepType {
+            case .rest(_):
+                nextExerciseIndex += 1
+            default:
+                nextExerciseFound = true
+            }
         }
 
         if nextExerciseIndex < routineSteps.count {
@@ -73,14 +86,14 @@ final class ModelData {
                     exerciseWithRestSequence.append(exerciseSequence[index])
                     if let restInBetween = exerciseGroup.restInBetween {
                         if restInBetween > 0 {
-                            exerciseWithRestSequence.append(Step(name: "Rest in between: \(restInBetween)", duration: restInBetween, stepType: StepType.rest))
+                            exerciseWithRestSequence.append(Step(name: "Rest in between: \(restInBetween)", duration: restInBetween, stepType: StepType.rest(.stopped)))
                         }
                     }
                 }
                 exerciseWithRestSequence.append(exerciseSequence[exerciseSequence.count-1])
                 if let restAtTheEnd = exerciseGroup.restAtTheEnd {
                     if restAtTheEnd > 0 {
-                        exerciseWithRestSequence.append(Step(name: "Rest at the end: \(restAtTheEnd)", duration: restAtTheEnd, stepType: StepType.rest))
+                        exerciseWithRestSequence.append(Step(name: "Rest at the end: \(restAtTheEnd)", duration: restAtTheEnd, stepType: StepType.rest(.stopped)))
                     }
                 }
                 print(exerciseWithRestSequence)
@@ -142,8 +155,8 @@ struct Step {
     }
 }
 
-enum StepType {
-    case rest
+enum StepType: Equatable {
+    case rest(TimerStatus)
     case repExercise
     case timedExercise
 }
