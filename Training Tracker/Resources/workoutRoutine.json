@@ -3,7 +3,7 @@
     "exercisesGroups": [
         {
             "name": "Warm up",
-            "restAtTheEnd": 3,
+            "restAtTheEnd": 2,
             "exercises": [
                 {
                     "name": "Skipping",
@@ -38,6 +38,7 @@
                 {
                     "name": "Handstand work",
                     "durations": [2],
+                    "prepTimes": [1],
                     "numberOfSets": 1
                 }
             ]

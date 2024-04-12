@@ -25,10 +25,8 @@ final class AppLifecycleController {
     func startTraining() {
         if appLifecycleModel.appLifecycleStatus == .trainingNotStrated {
             appLifecycleModel.appLifecycleStatus = .trainingStarted
-            print("startTraining(): transitioned to \(appLifecycleModel.appLifecycleStatus)")
         } else {
-            // TODO: Handle impossible transition
-            print("TODO: ERROR: Handle impossible transition to start training from \(appLifecycleModel.appLifecycleStatus).")
+            fatalError("Impossible transition: trying to start training from \(appLifecycleModel.appLifecycleStatus).")
         }
     }
     
@@ -37,8 +35,7 @@ final class AppLifecycleController {
             appLifecycleModel.appLifecycleStatus = .trainingCompleted
             print("completeTraining(): transitioned to \(appLifecycleModel.appLifecycleStatus)")
         } else {
-            // TODO: Handle impossible transition
-            print("TODO: ERROR: Handle impossible transition to complete training from \(appLifecycleModel.appLifecycleStatus).")
+            fatalError("Impossible transition: trying to complete training from \(appLifecycleModel.appLifecycleStatus).")
         }
     }
 }

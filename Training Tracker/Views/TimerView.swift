@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct TimerView: View {
-    @Binding var timerModel: TimerModel
+    var timerModel: TimerModel
     let timerFontSize = CGFloat(80)
     var body: some View {
         VStack(alignment: .center) {
@@ -58,16 +58,23 @@ struct TimerView: View {
 }
 
 #Preview("Rest") {
-    @State var timerModel = TimerModel(timerStatus: .stopped, exerciseTimeInSeconds: 75, exerciseTimeRemainingInSeconds: 25, stepType: .rest(.stopped))
-    return TimerView(timerModel: $timerModel)
+    let step = Step(name: "Rest", duration: 75, stepType: .rest(.stopped))
+    let timerModel = TimerModel(step: step)
+    timerModel.exerciseTimeRemainingInSeconds = 25
+    return TimerView(timerModel: timerModel)
 }
 
 #Preview("Prep") {
-    @State var timerModel = TimerModel(timerStatus: .stopped, prepTimeInSeconds: 20, prepTimeRemainingInSeconds: 10, exerciseTimeInSeconds: 75, exerciseTimeRemainingInSeconds: 75, stepType: .timedExercise)
-    return TimerView(timerModel: $timerModel)
+    let step = Step(name: "Prep", prepTime: 20, duration: 75, stepType: .timedExercise)
+    let timerModel = TimerModel(step: step)
+    timerModel.prepTimeRemainingInSeconds = 10
+    return TimerView(timerModel: timerModel)
 }
 
 #Preview("Exercise") {
-    @State var timerModel = TimerModel(timerStatus: .stopped, prepTimeInSeconds: 20, prepTimeRemainingInSeconds: 0, exerciseTimeInSeconds: 75, exerciseTimeRemainingInSeconds: 15, stepType: .timedExercise)
-    return TimerView(timerModel: $timerModel)
+    let step = Step(name: "Prep", prepTime: 20, duration: 75, stepType: .timedExercise)
+    let timerModel = TimerModel(step: step)
+    timerModel.prepTimeRemainingInSeconds = 0
+    timerModel.exerciseTimeRemainingInSeconds = 15
+    return TimerView(timerModel: timerModel)
 }

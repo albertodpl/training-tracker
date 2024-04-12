@@ -2,9 +2,9 @@ import SwiftUI
 
 @main
 struct TrainingApp: App {
-    @State private var modelData: ModelData
-    @State private var timerModel: TimerModel
-    @State private var appLifecycleModel: AppLifecycleModel
+    private var routineModel: RoutineModel
+    private var routineController: RoutineController
+    private var appLifecycleModel: AppLifecycleModel
     private var appLifecycleController: AppLifecycleController
     
     init() {
@@ -12,17 +12,18 @@ struct TrainingApp: App {
         self.appLifecycleModel = appLifecycleModel
         let appLifecycleController = AppLifecycleController(appLifecycleModel: appLifecycleModel)
         self.appLifecycleController = appLifecycleController
-        let modelData = ModelData(workoutRoutine: "workoutRoutine.json", appLifecycleController: appLifecycleController)
-//        let modelData = ModelData(workoutRoutine: "workoutRoutine_real.json", appLifecycleController: appLifecycleController)
-        self.modelData = modelData
-        let timerModel = TimerModel(timerStatus: .stopped, prepTimeInSeconds: 0, prepTimeRemainingInSeconds: 0, exerciseTimeInSeconds: 0, exerciseTimeRemainingInSeconds: 0)
-        timerModel.updateStep(currentStep: modelData.currentStep)
-        self.timerModel = timerModel
+        let workoutRoutine = "workoutRoutine.json"
+//        let workoutRoutine = "workoutRoutine_real.json"
+        let jsonRoutine: JsonRoutine = load(workoutRoutine)
+        let routineSteps = RoutineSteps(jsonRoutine: jsonRoutine)
+        let routineModel = RoutineModel(routineSteps: routineSteps)
+        self.routineModel = routineModel
+        self.routineController = RoutineController(routineModel: routineModel, appLifecycleController: appLifecycleController)
     }
 
     var body: some Scene {
         WindowGroup {
-            TrainingLifecycleView(modelData: $modelData, timerModel: $timerModel, appLifecycleStatus: appLifecycleModel.appLifecycleStatus, appLifecycleController: appLifecycleController)
+            TrainingLifecycleView(routineModel: routineModel, routineController: routineController, appLifecycleStatus: appLifecycleModel.appLifecycleStatus, appLifecycleController: appLifecycleController)
         }
     }
 }

@@ -1,45 +1,57 @@
 import Foundation
 
 @Observable
-final class ModelData {
-    let jsonRoutine: JsonRoutine
-    var appLifecycleController: AppLifecycleController
+final class RoutineModel {
     var currentStepIndex = 0
-    var currentStep: Step = Step(name: "Initialization step; you should not see this")
+    var currentStep: Step = Step(name: "Initialization step; you should not see this") // TODO: Fix this weird initialization
     var currentExercise: Step? = nil
     var nextExercise: Step? = nil
     var routineSteps = [Step]()
+    var currentStepTimerModel: TimerModel = TimerModel(step: Step(name: "Dummy step; you should not see this")) // TODO: Fix this weird initialization
     
-    init(workoutRoutine: String, appLifecycleController: AppLifecycleController) {
-        jsonRoutine = load(workoutRoutine)
+    init(routineSteps: RoutineSteps) {
+        self.routineSteps = routineSteps.routineSteps
+    }
+}
+
+final class Callback {
+    var callback: () -> Void = {}
+}
+
+final class RoutineController {
+    let routineModel: RoutineModel
+    let appLifecycleController: AppLifecycleController
+    var currentStepTimerController: TimerController
+    var callback = Callback()
+
+    init(routineModel: RoutineModel, appLifecycleController: AppLifecycleController) {
+        self.routineModel = routineModel
         self.appLifecycleController = appLifecycleController
+        self.currentStepTimerController = TimerController(timerModel: routineModel.currentStepTimerModel, callback: callback)
         
-        for exerciseGroup in jsonRoutine.exercisesGroups {
-            dfsExerciseGroup(exerciseGroup)
-        }
-        currentStep = routineSteps[0]
+        routineModel.currentStep = routineModel.routineSteps[0]
         updateCurrentAndNextExercise()
+        self.callback.callback = self.next
     }
     
     func next() {
-        if currentStepIndex < routineSteps.count - 1 {
-            currentStepIndex += 1
+        if routineModel.currentStepIndex < routineModel.routineSteps.count - 1 {
+            routineModel.currentStepIndex += 1
+            routineModel.currentStep = routineModel.routineSteps[routineModel.currentStepIndex]
+            routineModel.currentStepTimerModel = TimerModel(step: routineModel.currentStep)
+            currentStepTimerController = TimerController(timerModel: routineModel.currentStepTimerModel, callback: callback)
+            updateCurrentAndNextExercise()
         }
         else {
             appLifecycleController.completeTraining()
         }
-        currentStep = routineSteps[currentStepIndex]
-        
-        // Add logic to manage different types of steps.
-        
-        updateCurrentAndNextExercise()
     }
     
     private func updateCurrentAndNextExercise() {
-        var currentExerciseIndex = currentStepIndex
+        var currentExerciseIndex = routineModel.currentStepIndex
         var currentExerciseFound = false
-        while (currentExerciseIndex < routineSteps.count) && !currentExerciseFound {
-            switch routineSteps[currentExerciseIndex].stepType {
+        while (currentExerciseIndex < routineModel.routineSteps.count) && !currentExerciseFound {
+            switch routineModel.routineSteps[currentExerciseIndex].stepType {
             case .rest(_):
                 currentExerciseIndex += 1
             default:
@@ -47,16 +59,16 @@ final class ModelData {
             }
         }
         
-        if currentExerciseIndex < routineSteps.count {
-            currentExercise = routineSteps[currentExerciseIndex]
+        if currentExerciseIndex < routineModel.routineSteps.count {
+            routineModel.currentExercise = routineModel.routineSteps[currentExerciseIndex]
         } else {
-            currentExercise = nil
+            routineModel.currentExercise = nil
         }
         
         var nextExerciseIndex = currentExerciseIndex + 1
         var nextExerciseFound = false
-        while (nextExerciseIndex < routineSteps.count) && !nextExerciseFound {
-            switch routineSteps[nextExerciseIndex].stepType {
+        while (nextExerciseIndex < routineModel.routineSteps.count) && !nextExerciseFound {
+            switch routineModel.routineSteps[nextExerciseIndex].stepType {
             case .rest(_):
                 nextExerciseIndex += 1
             default:
@@ -64,14 +76,26 @@ final class ModelData {
             }
         }
 
-        if nextExerciseIndex < routineSteps.count {
-            nextExercise = routineSteps[nextExerciseIndex]
+        if nextExerciseIndex < routineModel.routineSteps.count {
+            routineModel.nextExercise = routineModel.routineSteps[nextExerciseIndex]
         }
         else {
-            nextExercise = nil
+            routineModel.nextExercise = nil
         }
     }
-    
+}
+
+final class RoutineSteps {
+    var routineSteps: [Step]
+
+    init(jsonRoutine: JsonRoutine) {
+        routineSteps = [Step]()
+        
+        for exerciseGroup in jsonRoutine.exercisesGroups {
+            dfsExerciseGroup(exerciseGroup)
+        }
+    }
+
     private func dfsExerciseGroup(_ exerciseGroup: JsonExerciseGroup) {
         if exerciseGroup.exercisesGroups == nil { // Process exercises
             if exerciseGroup.exercises == nil {
@@ -125,8 +149,8 @@ final class ModelData {
                     } else if let repetitions = exerciseList[exerciseIndex].repetitions {
                         let step = Step(name: exerciseList[exerciseIndex].name, description: exerciseList[exerciseIndex].description, repetitions: repetitions[setIndex], stepType: .repExercise)
                         exercisesSequence.append(step)
-                    } else { // TODO: handle the case where it is not repetitions and it is not timed (malformed JSON most likely)
-                        print("ERROR: no duration and no repetitions; the exercise is not defined.")
+                    } else {
+                        fatalError("No duration and no repetitions for exercise \(exerciseList[exerciseIndex].name). The exercise is not defined.")
                     }
                 }
             }
@@ -134,6 +158,7 @@ final class ModelData {
         
         return exercisesSequence
     }
+
 }
 
 struct Step {

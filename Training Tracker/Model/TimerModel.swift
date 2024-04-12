@@ -9,86 +9,85 @@ final class TimerModel {
     var exerciseTimeInSeconds: TimeInterval
     var exerciseTimeRemainingInSeconds: TimeInterval
     let delta: TimeInterval = 1/100
-    var timer: Timer? = nil
     var stepType: StepType
-    var buttonSystemName: String
     
-    init(timerStatus: TimerStatus, prepTimeInSeconds: TimeInterval = 0, prepTimeRemainingInSeconds: TimeInterval = 0, exerciseTimeInSeconds: TimeInterval, exerciseTimeRemainingInSeconds: TimeInterval, stepType: StepType = .timedExercise) {
-        self.timerStatus = timerStatus
-        self.prepTimeInSeconds = prepTimeInSeconds
-        self.prepTimeRemainingInSeconds = prepTimeRemainingInSeconds
-        self.isTimerInPrep = (prepTimeInSeconds > 0)
-        self.exerciseTimeInSeconds = exerciseTimeInSeconds
-        self.exerciseTimeRemainingInSeconds = exerciseTimeRemainingInSeconds
-        self.stepType = stepType
-        self.buttonSystemName = (timerStatus == .stopped) ? "play.fill" : "pause.fill"
-    }
-    
-    func startTimer() {
-        if let timer = timer {
-            timer.invalidate()
+    init(step: Step) {
+        switch step.stepType {
+        case .rest(let timerStatus):
+            self.timerStatus = timerStatus
+            let prepTimeInSeconds = TimeInterval(step.prepTime ?? 0)
+            self.prepTimeInSeconds = prepTimeInSeconds
+            let prepTimeRemainingInSeconds = prepTimeInSeconds
+            self.prepTimeRemainingInSeconds = prepTimeRemainingInSeconds
+            self.isTimerInPrep = (prepTimeRemainingInSeconds > 0)
+            let exerciseTimeInSeconds = TimeInterval(step.duration ?? 0)
+            self.exerciseTimeInSeconds = exerciseTimeInSeconds
+            self.exerciseTimeRemainingInSeconds = exerciseTimeInSeconds
+            self.stepType = step.stepType
+            break
+        case .repExercise:
+            self.timerStatus = .stopped
+            self.prepTimeInSeconds = 0
+            self.prepTimeRemainingInSeconds = 0
+            self.isTimerInPrep = false
+            self.exerciseTimeInSeconds = 0
+            self.exerciseTimeRemainingInSeconds = 0
+            self.stepType = step.stepType
+            break
+        case .timedExercise:
+            self.timerStatus = .stopped
+            let prepTimeInSeconds = TimeInterval(step.prepTime ?? 0)
+            self.prepTimeInSeconds = prepTimeInSeconds
+            let prepTimeRemainingInSeconds = prepTimeInSeconds
+            self.prepTimeRemainingInSeconds = prepTimeRemainingInSeconds
+            self.isTimerInPrep = (prepTimeRemainingInSeconds > 0)
+            let exerciseTimeInSeconds = TimeInterval(step.duration ?? 0)
+            self.exerciseTimeInSeconds = exerciseTimeInSeconds
+            self.exerciseTimeRemainingInSeconds = exerciseTimeInSeconds
+            self.stepType = step.stepType
+            break
         }
-        timer = Timer.scheduledTimer(withTimeInterval: delta, repeats: true) { [self] _ in
-            if timerStatus == .running {
-                if prepTimeRemainingInSeconds > 0 {
-                    prepTimeRemainingInSeconds = max(0, prepTimeRemainingInSeconds - delta)
-                } else if exerciseTimeRemainingInSeconds > 0 {
-                    exerciseTimeRemainingInSeconds = max(0, exerciseTimeRemainingInSeconds - delta)
+    }
+}
+
+final class TimerController {
+    let timerModel: TimerModel
+    let timer: Timer
+    
+    init(timerModel: TimerModel, callback: Callback) {
+        self.timerModel = timerModel
+        
+        self.timer = Timer.scheduledTimer(withTimeInterval: timerModel.delta, repeats: true) { [timerModel] _ in
+            switch timerModel.timerStatus {
+            case .running:
+                if timerModel.prepTimeRemainingInSeconds > 0 {
+                    timerModel.prepTimeRemainingInSeconds = max(0, timerModel.prepTimeRemainingInSeconds - timerModel.delta)
+                } else if timerModel.exerciseTimeRemainingInSeconds > 0 {
+                    timerModel.exerciseTimeRemainingInSeconds = max(0, timerModel.exerciseTimeRemainingInSeconds - timerModel.delta)
                 } else {
-                    timerStatus = .stopped
+                    timerModel.timerStatus = .stopped
+                    callback.callback()
                 }
+            case .stopped:
+                break
             }
-            isTimerInPrep = exerciseTimeRemainingInSeconds > exerciseTimeInSeconds
+
+            timerModel.isTimerInPrep = timerModel.exerciseTimeRemainingInSeconds > timerModel.exerciseTimeInSeconds
         }
     }
     
-    func stopTimer() {
-        timer?.invalidate()
-        timerStatus = .stopped
-    }
-    
-    func click() {
-        switch timerStatus {
-        case .stopped:
-            if exerciseTimeRemainingInSeconds > 0 {
-                timerStatus = .running
-                startTimer()
-                buttonSystemName = "pause.fill"
-            } else {
-                stopTimer()
-                buttonSystemName = "play.fill"
-            }
-        case .running:
-            timerStatus = .stopped
-            stopTimer()
-            buttonSystemName = "play.fill"
+    func play() {
+        if timerModel.exerciseTimeRemainingInSeconds > 0 {
+            timerModel.timerStatus = .running
         }
     }
     
-    func updateStep(currentStep: Step) {
-        self.stepType = currentStep.stepType
-        resetTimer(prepTimeInSeconds: currentStep.prepTime, exerciseTimeInSeconds: currentStep.duration)
-        switch self.stepType {
-        case .rest(.stopped):
-            self.timerStatus = .stopped
-            self.buttonSystemName = "play.fill"
-            startTimer()
-        case .rest(.running):
-            self.timerStatus = .running
-            self.buttonSystemName = "pause.fill"
-            startTimer()
-        default:
-            self.timerStatus = .stopped
-            self.buttonSystemName = "play.fill"
-        }
-        print("\(currentStep), TIMER MODEL DATA: prep time (\(self.prepTimeInSeconds)) exercise time (\(self.exerciseTimeInSeconds))")
+    func pause() {
+        timerModel.timerStatus = .stopped
     }
     
-    func resetTimer(prepTimeInSeconds: Int?, exerciseTimeInSeconds: Int?) {
-        self.prepTimeInSeconds = TimeInterval(prepTimeInSeconds ?? 0)
-        self.exerciseTimeInSeconds = TimeInterval(exerciseTimeInSeconds ?? 0)
-        self.prepTimeRemainingInSeconds = self.prepTimeInSeconds
-        self.exerciseTimeRemainingInSeconds = self.exerciseTimeInSeconds
+    deinit {
+        timer.invalidate()
     }
 }
 
