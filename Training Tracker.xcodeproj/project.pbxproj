@@ -17,16 +17,17 @@
 		D3B59BD22BD10F33007A9782 /* RoutineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B59BD12BD10F33007A9782 /* RoutineController.swift */; };
 		D3B59BD62BD1884E007A9782 /* TimerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B59BD52BD1884E007A9782 /* TimerController.swift */; };
 		D3B59BDB2BD2A62D007A9782 /* PeriodicTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B59BDA2BD2A62D007A9782 /* PeriodicTimer.swift */; };
+		D3B59BDD2BD2BBA5007A9782 /* TimerControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B59BDC2BD2BBA5007A9782 /* TimerControllerTest.swift */; };
+		D3B59BDF2BD2D3E8007A9782 /* Step.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B59BDE2BD2D3E8007A9782 /* Step.swift */; };
+		D3B59BE22BD2D45E007A9782 /* StepTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B59BE12BD2D45E007A9782 /* StepTest.swift */; };
 		D3F496482BB6D22A008FB68B /* TrainingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F496472BB6D22A008FB68B /* TrainingView.swift */; };
 		D3F4964A2BB6D23F008FB68B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3F496492BB6D23F008FB68B /* Assets.xcassets */; };
 		D3F4964D2BB6D23F008FB68B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3F4964C2BB6D23F008FB68B /* Preview Assets.xcassets */; };
-		D3F496542BB6D433008FB68B /* TimerViewCopied.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F496532BB6D433008FB68B /* TimerViewCopied.swift */; };
 		D3F496562BB6E4A1008FB68B /* TrainingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F496552BB6E4A1008FB68B /* TrainingApp.swift */; };
 		D3F496602BB7029E008FB68B /* workoutRoutine.json in Resources */ = {isa = PBXBuildFile; fileRef = D3F4965F2BB7029E008FB68B /* workoutRoutine.json */; };
 		D3F496622BB75B4B008FB68B /* JsonSchemas.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F496612BB75B4B008FB68B /* JsonSchemas.swift */; };
 		D3F496642BB83EFF008FB68B /* RoutineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F496632BB83EFF008FB68B /* RoutineModel.swift */; };
 		D3F4966F2BBC434F008FB68B /* ExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F4966E2BBC434F008FB68B /* ExerciseView.swift */; };
-		D3F496712BBC5E27008FB68B /* TimerViewOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F496702BBC5E27008FB68B /* TimerViewOld.swift */; };
 		D3F496732BBD65BD008FB68B /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F496722BBD65BD008FB68B /* TimerView.swift */; };
 		D3F496752BBD86B4008FB68B /* TimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F496742BBD86B4008FB68B /* TimerModel.swift */; };
 		D3F496772BBDF4E4008FB68B /* workoutRoutine_real.json in Resources */ = {isa = PBXBuildFile; fileRef = D3F496762BBDF4E4008FB68B /* workoutRoutine_real.json */; };
@@ -54,17 +55,18 @@
 		D3B59BD12BD10F33007A9782 /* RoutineController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineController.swift; sourceTree = "<group>"; };
 		D3B59BD52BD1884E007A9782 /* TimerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerController.swift; sourceTree = "<group>"; };
 		D3B59BDA2BD2A62D007A9782 /* PeriodicTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodicTimer.swift; sourceTree = "<group>"; };
+		D3B59BDC2BD2BBA5007A9782 /* TimerControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerControllerTest.swift; sourceTree = "<group>"; };
+		D3B59BDE2BD2D3E8007A9782 /* Step.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Step.swift; sourceTree = "<group>"; };
+		D3B59BE12BD2D45E007A9782 /* StepTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepTest.swift; sourceTree = "<group>"; };
 		D3F496422BB6D22A008FB68B /* Training Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Training Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3F496472BB6D22A008FB68B /* TrainingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingView.swift; sourceTree = "<group>"; };
 		D3F496492BB6D23F008FB68B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D3F4964C2BB6D23F008FB68B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		D3F496532BB6D433008FB68B /* TimerViewCopied.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewCopied.swift; sourceTree = "<group>"; };
 		D3F496552BB6E4A1008FB68B /* TrainingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingApp.swift; sourceTree = "<group>"; };
 		D3F4965F2BB7029E008FB68B /* workoutRoutine.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = workoutRoutine.json; sourceTree = "<group>"; };
 		D3F496612BB75B4B008FB68B /* JsonSchemas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonSchemas.swift; sourceTree = "<group>"; };
 		D3F496632BB83EFF008FB68B /* RoutineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineModel.swift; sourceTree = "<group>"; };
 		D3F4966E2BBC434F008FB68B /* ExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseView.swift; sourceTree = "<group>"; };
-		D3F496702BBC5E27008FB68B /* TimerViewOld.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewOld.swift; sourceTree = "<group>"; };
 		D3F496722BBD65BD008FB68B /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		D3F496742BBD86B4008FB68B /* TimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerModel.swift; sourceTree = "<group>"; };
 		D3F496762BBDF4E4008FB68B /* workoutRoutine_real.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = workoutRoutine_real.json; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 		D3B59BC22BC96E47007A9782 /* Training Tracker Tests */ = {
 			isa = PBXGroup;
 			children = (
+				D3B59BE02BD2D44A007A9782 /* Model */,
 				D3B59BCE2BC96FEA007A9782 /* Controller */,
 			);
 			path = "Training Tracker Tests";
@@ -110,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				D3B59BCF2BC97025007A9782 /* AppLifecycleControllerTest.swift */,
+				D3B59BDC2BD2BBA5007A9782 /* TimerControllerTest.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -120,6 +124,14 @@
 				D3B59BDA2BD2A62D007A9782 /* PeriodicTimer.swift */,
 			);
 			path = Timer;
+			sourceTree = "<group>";
+		};
+		D3B59BE02BD2D44A007A9782 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D3B59BE12BD2D45E007A9782 /* StepTest.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		D3F496392BB6D22A008FB68B = {
@@ -170,6 +182,7 @@
 				D3F496632BB83EFF008FB68B /* RoutineModel.swift */,
 				D3F496742BBD86B4008FB68B /* TimerModel.swift */,
 				D3B59BB72BC427CF007A9782 /* AppLifecycleModel.swift */,
+				D3B59BDE2BD2D3E8007A9782 /* Step.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -186,10 +199,8 @@
 		D3F496652BB85410008FB68B /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				D3F496532BB6D433008FB68B /* TimerViewCopied.swift */,
 				D3F496472BB6D22A008FB68B /* TrainingView.swift */,
 				D3F4966E2BBC434F008FB68B /* ExerciseView.swift */,
-				D3F496702BBC5E27008FB68B /* TimerViewOld.swift */,
 				D3F496722BBD65BD008FB68B /* TimerView.swift */,
 				D3B59BB32BC41ABF007A9782 /* StartTrainingView.swift */,
 				D3B59BB52BC42641007A9782 /* TrainingButtonView.swift */,
@@ -302,6 +313,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3B59BD02BC97025007A9782 /* AppLifecycleControllerTest.swift in Sources */,
+				D3B59BDD2BD2BBA5007A9782 /* TimerControllerTest.swift in Sources */,
+				D3B59BE22BD2D45E007A9782 /* StepTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,8 +323,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3F496752BBD86B4008FB68B /* TimerModel.swift in Sources */,
-				D3F496542BB6D433008FB68B /* TimerViewCopied.swift in Sources */,
 				D3B59BBA2BC43572007A9782 /* TrainingCompletedView.swift in Sources */,
+				D3B59BDF2BD2D3E8007A9782 /* Step.swift in Sources */,
 				D3F496562BB6E4A1008FB68B /* TrainingApp.swift in Sources */,
 				D3B59BB42BC41ABF007A9782 /* StartTrainingView.swift in Sources */,
 				D3F496642BB83EFF008FB68B /* RoutineModel.swift in Sources */,
@@ -320,7 +333,6 @@
 				D3B59BD62BD1884E007A9782 /* TimerController.swift in Sources */,
 				D3F4966F2BBC434F008FB68B /* ExerciseView.swift in Sources */,
 				D3B59BDB2BD2A62D007A9782 /* PeriodicTimer.swift in Sources */,
-				D3F496712BBC5E27008FB68B /* TimerViewOld.swift in Sources */,
 				D3B59BB82BC427CF007A9782 /* AppLifecycleModel.swift in Sources */,
 				D3B59BB62BC42641007A9782 /* TrainingButtonView.swift in Sources */,
 				D3B59BD22BD10F33007A9782 /* RoutineController.swift in Sources */,

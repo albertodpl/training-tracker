@@ -3,6 +3,7 @@ import Foundation
 protocol TimerCtrl {
     func startResume()
     func pause()
+    func registerCallback(onCompletion: @escaping () -> Void)
 }
 
 final class TimerController: TimerCtrl {
@@ -19,8 +20,8 @@ final class TimerController: TimerCtrl {
             self.onTick()
         }
     }
-    
-    func onTick() {
+
+    private func onTick() {
         switch timerModel.timerStatus {
         case .running:
             if timerModel.prepTimeRemainingInSeconds > 0 {
@@ -46,5 +47,9 @@ final class TimerController: TimerCtrl {
     
     func pause() {
         timerModel.timerStatus = .stopped
+    }
+    
+    func registerCallback(onCompletion: @escaping () -> Void) {
+        self.onCompletion = onCompletion
     }
 }

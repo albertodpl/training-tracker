@@ -85,6 +85,6 @@ let routine: JsonRoutine = JsonRoutine.load("workoutRoutine.json")
     let routineSteps = RoutineSteps(jsonRoutine: jsonRoutine)
     @State var routineModel = RoutineModel(routineSteps: routineSteps)
     let periodicTimer = PeriodicTimerWrapper()
-    let routineController = RoutineController(routineModel: routineModel, appLifecycleController: appLifecycleController, periodicTimer: periodicTimer)
+    let routineController = RoutineController(routineModel: routineModel, appLifecycleController: appLifecycleController, periodicTimerBuilder: { periodicTimer })
     return TrainingView(routineModel: routineModel, routineController: routineController)
 }

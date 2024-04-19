@@ -14,10 +14,6 @@ final class RoutineModel {
     }
 }
 
-final class Callback {
-    var callback: () -> Void = {}
-}
-
 final class RoutineSteps {
     var routineSteps: [Step]
 
@@ -92,29 +88,4 @@ final class RoutineSteps {
         return exercisesSequence
     }
 
-}
-
-struct Step {
-    let name: String
-    let description: String?
-    let repetitions: Int?
-    let prepTime: Int?
-    let duration: Int?
-    let stepType: StepType
-
-    init(name: String, description: String? = nil, repetitions: Int? = nil, prepTime: Int? = nil, duration: Int? = nil, stepType: StepType = StepType.repExercise) {
-        self.name = name
-        self.description = description
-        self.repetitions = repetitions
-        self .prepTime = prepTime
-        self.duration = duration
-        self.stepType = stepType
-        print("\(name) ==> Prep time: \(prepTime ?? 0) + Duration: \(duration ?? 0)")
-    }
-}
-
-enum StepType: Equatable {
-    case rest(TimerStatus)
-    case repExercise
-    case timedExercise
 }

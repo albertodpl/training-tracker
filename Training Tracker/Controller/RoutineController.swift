@@ -9,19 +9,21 @@ protocol RoutineCtrl {
 final class RoutineController: RoutineCtrl {
     let routineModel: RoutineModel
     let appLifecycleController: AppLifecycleController
-    let periodicTimer: PeriodicTimer
+    let periodicTimerBuilder: () -> PeriodicTimer
     var currentStepTimerController: TimerCtrl? = nil
 
-    init(routineModel: RoutineModel, appLifecycleController: AppLifecycleController, periodicTimer: PeriodicTimer) {
+    init(routineModel: RoutineModel, appLifecycleController: AppLifecycleController, periodicTimerBuilder: @escaping () -> PeriodicTimer) {
         self.routineModel = routineModel
         self.appLifecycleController = appLifecycleController
-        self.periodicTimer = periodicTimer
+        self.periodicTimerBuilder = periodicTimerBuilder
 
         routineModel.currentStepIndex = 0
         routineModel.currentStep = routineModel.routineSteps[routineModel.currentStepIndex]
         routineModel.currentStepTimerModel = TimerModel(step: routineModel.currentStep)
         
-        self.currentStepTimerController = TimerController(timerModel: routineModel.currentStepTimerModel, periodicTimer: periodicTimer, onCompletion: self.completeStep)
+        self.currentStepTimerController = TimerController(timerModel: routineModel.currentStepTimerModel, periodicTimer: periodicTimerBuilder(), onCompletion: self.completeStep)
+        
+        // TODO: do not pass the periodicTimerBuilder to TimerController. Instead, connect the TimerController with the registerCallback function on the PeriodicTimer from here. It will make testing easier. I'll keep pushing it up in the hierarchy.
         
         updateCurrentAndNextExercise()
     }
@@ -31,7 +33,7 @@ final class RoutineController: RoutineCtrl {
             routineModel.currentStepIndex += 1
             routineModel.currentStep = routineModel.routineSteps[routineModel.currentStepIndex]
             routineModel.currentStepTimerModel = TimerModel(step: routineModel.currentStep)
-            currentStepTimerController = TimerController(timerModel: routineModel.currentStepTimerModel, periodicTimer: periodicTimer, onCompletion: self.completeStep)
+            currentStepTimerController = TimerController(timerModel: routineModel.currentStepTimerModel, periodicTimer: periodicTimerBuilder(), onCompletion: self.completeStep)
             updateCurrentAndNextExercise()
         }
         else {

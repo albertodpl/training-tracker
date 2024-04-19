@@ -6,7 +6,6 @@ struct TrainingApp: App {
     private var routineController: RoutineCtrl
     private var appLifecycleModel: AppLifecycleModel
     private var appLifecycleController: AppLifecycleController
-    private var periodicTimer: PeriodicTimer
 
     init() {
         let appLifecycleModel = AppLifecycleModel()
@@ -19,9 +18,7 @@ struct TrainingApp: App {
         let routineSteps = RoutineSteps(jsonRoutine: jsonRoutine)
         let routineModel = RoutineModel(routineSteps: routineSteps)
         self.routineModel = routineModel
-        let periodicTimer = PeriodicTimerWrapper()
-        self.periodicTimer = periodicTimer
-        self.routineController = RoutineController(routineModel: routineModel, appLifecycleController: appLifecycleController, periodicTimer: periodicTimer)
+        self.routineController = RoutineController(routineModel: routineModel, appLifecycleController: appLifecycleController, periodicTimerBuilder: { PeriodicTimerWrapper() })
     }
 
     var body: some Scene {
