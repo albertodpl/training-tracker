@@ -8,7 +8,7 @@ struct TimerView: View {
         VStack(alignment: .center) {
             ZStack {
                 switch stepType {
-                case .rest(_):
+                case .timed(.rest):
                     Text(formattedTime())
                         .font(.system(size: timerFontSize))
                         .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
@@ -29,7 +29,7 @@ struct TimerView: View {
                     .opacity(0.3)
                 
                 switch stepType {
-                case .rest(_):
+                case .timed(.rest):
                     Circle()
                         .trim(from: 0, to: CGFloat(timerModel.exerciseTimeRemainingInSeconds / timerModel.exerciseTimeInSeconds))
                         .stroke(style: StrokeStyle(lineWidth: 10, lineCap: .round, lineJoin: .round))
@@ -47,7 +47,7 @@ struct TimerView: View {
         }
         .padding()
         .padding(.horizontal, 30)
-        .opacity((stepType == .repExercise) ? 0.3 : 1)
+        .opacity((stepType == .reps) ? 0.3 : 1)
     }
     
     private func formattedTime() -> String {
@@ -59,21 +59,21 @@ struct TimerView: View {
 }
 
 #Preview("Rest") {
-    let step = Step(name: "Rest", duration: 75, stepType: .rest(.stopped))
+    let step = Step(name: "Rest", duration: 75, stepType: .timed(.rest))
     let timerModel = TimerModel(step: step)
     timerModel.exerciseTimeRemainingInSeconds = 25
     return TimerView(timerModel: timerModel, stepType: step.stepType)
 }
 
 #Preview("Prep") {
-    let step = Step(name: "Prep", prepTime: 20, duration: 75, stepType: .timedExercise)
+    let step = Step(name: "Prep", prepTime: 20, duration: 75, stepType: .timed(.exercise))
     let timerModel = TimerModel(step: step)
     timerModel.prepTimeRemainingInSeconds = 10
     return TimerView(timerModel: timerModel, stepType: step.stepType)
 }
 
 #Preview("Exercise") {
-    let step = Step(name: "Prep", prepTime: 20, duration: 75, stepType: .timedExercise)
+    let step = Step(name: "Prep", prepTime: 20, duration: 75, stepType: .timed(.exercise))
     let timerModel = TimerModel(step: step)
     timerModel.prepTimeRemainingInSeconds = 0
     timerModel.exerciseTimeRemainingInSeconds = 15

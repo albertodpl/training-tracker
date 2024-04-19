@@ -13,8 +13,8 @@ final class TimerModel {
     
     init(step: Step) {
         switch step.stepType {
-        case .rest(let timerStatus):
-            self.timerStatus = timerStatus
+        case .timed(.rest):
+            self.timerStatus = .stopped
             let prepTimeInSeconds = TimeInterval(step.prepTime ?? 0)
             self.prepTimeInSeconds = prepTimeInSeconds
             let prepTimeRemainingInSeconds = prepTimeInSeconds
@@ -25,7 +25,7 @@ final class TimerModel {
             self.exerciseTimeRemainingInSeconds = exerciseTimeInSeconds
             self.stepType = step.stepType
             break
-        case .repExercise:
+        case .reps:
             self.timerStatus = .stopped
             self.prepTimeInSeconds = 0
             self.prepTimeRemainingInSeconds = 0
@@ -34,7 +34,7 @@ final class TimerModel {
             self.exerciseTimeRemainingInSeconds = 0
             self.stepType = step.stepType
             break
-        case .timedExercise:
+        case .timed(.exercise):
             self.timerStatus = .stopped
             let prepTimeInSeconds = TimeInterval(step.prepTime ?? 0)
             self.prepTimeInSeconds = prepTimeInSeconds

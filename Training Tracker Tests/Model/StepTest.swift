@@ -9,7 +9,7 @@ final class StepTest: XCTestCase {
         repetitions: 3,
         prepTime: 8,
         duration: 20,
-        stepType: StepType.repExercise
+        stepType: StepType.reps
     )
     
     override func setUpWithError() throws {

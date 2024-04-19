@@ -4,16 +4,7 @@ struct ExerciseView: View {
     let currentStep: Step
     let currentExercise: Step?
     let nextExercise: Step?
-    
-    // TODO: Extract to View
-    private func currentExerciseRepsAndNameView(repetitions: Int?, exerciseName: String?) -> some View {
-        if let repetitions = repetitions {
-            return Text("x\(repetitions) - \(exerciseName ?? "")")
-        }
-        else {
-            return Text(exerciseName ?? "")
-        }
-    }
+
     var body: some View {
         VStack {
             VStack {
@@ -33,7 +24,7 @@ struct ExerciseView: View {
                     .opacity(0.5)
                     .padding([.top, .bottom])
             }
-        }.opacity(((currentStep.stepType == .rest(.stopped)) || (currentStep.stepType == .rest(.running))) ? 0.5 : 1)
+        }.opacity((currentStep.stepType == .timed(.rest)) ? 0.5 : 1)
     }
 }
 

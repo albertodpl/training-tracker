@@ -13,7 +13,7 @@ struct TrainingView: View {
     var body: some View {
         VStack {
             switch routineModel.currentStep.stepType {
-            case .repExercise:
+            case .reps:
                 RepsView(step: routineModel.currentStep)
             default:
                 TimerView(timerModel: routineModel.currentStepTimerModel, stepType: routineModel.currentStep.stepType)
@@ -28,7 +28,7 @@ struct TrainingView: View {
             
             // TODO: Make it more compact, extracting commonalities.
             switch routineModel.currentStep.stepType {
-            case .rest:
+            case .timed(.rest):
                 if routineModel.currentStepTimerModel.exerciseTimeRemainingInSeconds == 0 {
                     let _ = AudioServicesPlaySystemSound(1009) // ding ding
                 }
@@ -42,23 +42,23 @@ struct TrainingView: View {
                         routineController.startResumeStep()
                     })
                 }
-            case .repExercise:
+            case .reps:
                 TrainingButtonView(text: "Complete", systemImage: "checkmark", click: {
                     routineController.completeStep()
                     switch routineModel.currentStep.stepType {
-                    case .rest:
+                    case .timed(.rest):
                         routineController.startResumeStep() // Starts the rest timer (one less user click)
                     default:
                         break
                     }
                 })
-            case .timedExercise:
+            case .timed(.exercise):
                 if routineModel.currentStepTimerModel.exerciseTimeRemainingInSeconds == 0 {
                     let _ = AudioServicesPlaySystemSound(1009) // ding ding
                     TrainingButtonView(text: "Complete", systemImage: "checkmark", click: {
                         routineController.completeStep()
                         switch routineModel.currentStep.stepType {
-                        case .rest:
+                        case .timed(.rest):
                             routineController.startResumeStep() // Starts the rest timer (one less user click)
                         default:
                             break

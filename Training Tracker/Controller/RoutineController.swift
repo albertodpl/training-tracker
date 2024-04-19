@@ -52,7 +52,7 @@ final class RoutineController: RoutineCtrl {
         var currentExerciseFound = false
         while (currentExerciseIndex < routineModel.routineSteps.count) && !currentExerciseFound {
             switch routineModel.routineSteps[currentExerciseIndex].stepType {
-            case .rest(_):
+            case .timed(.rest):
                 currentExerciseIndex += 1
             default:
                 currentExerciseFound = true
@@ -69,7 +69,7 @@ final class RoutineController: RoutineCtrl {
         var nextExerciseFound = false
         while (nextExerciseIndex < routineModel.routineSteps.count) && !nextExerciseFound {
             switch routineModel.routineSteps[nextExerciseIndex].stepType {
-            case .rest(_):
+            case .timed(.rest):
                 nextExerciseIndex += 1
             default:
                 nextExerciseFound = true
