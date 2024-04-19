@@ -12,7 +12,12 @@ struct TrainingView: View {
     
     var body: some View {
         VStack {
-            TimerView(timerModel: routineModel.currentStepTimerModel)
+            switch routineModel.currentStep.stepType {
+            case .repExercise:
+                RepsView(step: routineModel.currentStep)
+            default:
+                TimerView(timerModel: routineModel.currentStepTimerModel, stepType: routineModel.currentStep.stepType)
+            }
             
             Divider()
             
@@ -40,7 +45,7 @@ struct TrainingView: View {
             case .repExercise:
                 TrainingButtonView(text: "Complete", systemImage: "checkmark", click: {
                     routineController.completeStep()
-                    switch routineModel.currentStepTimerModel.stepType {
+                    switch routineModel.currentStep.stepType {
                     case .rest:
                         routineController.startResumeStep() // Starts the rest timer (one less user click)
                     default:
@@ -52,7 +57,7 @@ struct TrainingView: View {
                     let _ = AudioServicesPlaySystemSound(1009) // ding ding
                     TrainingButtonView(text: "Complete", systemImage: "checkmark", click: {
                         routineController.completeStep()
-                        switch routineModel.currentStepTimerModel.stepType {
+                        switch routineModel.currentStep.stepType {
                         case .rest:
                             routineController.startResumeStep() // Starts the rest timer (one less user click)
                         default:

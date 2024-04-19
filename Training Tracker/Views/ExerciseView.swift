@@ -17,7 +17,7 @@ struct ExerciseView: View {
     var body: some View {
         VStack {
             VStack {
-                currentExerciseRepsAndNameView(repetitions: currentExercise?.repetitions, exerciseName: currentExercise?.name)
+                Text(currentExercise?.name ?? "")
                     .font(.title)
                 if let description = currentExercise?.description {
                     Text(description)

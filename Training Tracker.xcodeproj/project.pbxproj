@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D3B431F22BD2FD8700D24555 /* RepsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B431F12BD2FD8700D24555 /* RepsView.swift */; };
 		D3B59BB42BC41ABF007A9782 /* StartTrainingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B59BB32BC41ABF007A9782 /* StartTrainingView.swift */; };
 		D3B59BB62BC42641007A9782 /* TrainingButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B59BB52BC42641007A9782 /* TrainingButtonView.swift */; };
 		D3B59BB82BC427CF007A9782 /* AppLifecycleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B59BB72BC427CF007A9782 /* AppLifecycleModel.swift */; };
@@ -44,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D3B431F12BD2FD8700D24555 /* RepsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepsView.swift; sourceTree = "<group>"; };
 		D3B59BB32BC41ABF007A9782 /* StartTrainingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTrainingView.swift; sourceTree = "<group>"; };
 		D3B59BB52BC42641007A9782 /* TrainingButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingButtonView.swift; sourceTree = "<group>"; };
 		D3B59BB72BC427CF007A9782 /* AppLifecycleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLifecycleModel.swift; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 				D3B59BB52BC42641007A9782 /* TrainingButtonView.swift */,
 				D3B59BB92BC43572007A9782 /* TrainingCompletedView.swift */,
 				D3B59BBB2BC435FB007A9782 /* TrainingLifecycleView.swift */,
+				D3B431F12BD2FD8700D24555 /* RepsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -326,6 +329,7 @@
 				D3B59BBA2BC43572007A9782 /* TrainingCompletedView.swift in Sources */,
 				D3B59BDF2BD2D3E8007A9782 /* Step.swift in Sources */,
 				D3F496562BB6E4A1008FB68B /* TrainingApp.swift in Sources */,
+				D3B431F22BD2FD8700D24555 /* RepsView.swift in Sources */,
 				D3B59BB42BC41ABF007A9782 /* StartTrainingView.swift in Sources */,
 				D3F496642BB83EFF008FB68B /* RoutineModel.swift in Sources */,
 				D3F496622BB75B4B008FB68B /* JsonSchemas.swift in Sources */,

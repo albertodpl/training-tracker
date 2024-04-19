@@ -7,14 +7,21 @@ struct Step {
     let prepTime: Int?
     let duration: Int?
     let stepType: StepType
+    let timedStepData: TimedStep?
 
     init(name: String, description: String? = nil, repetitions: Int? = nil, prepTime: Int? = nil, duration: Int? = nil, stepType: StepType = StepType.repExercise) {
         self.name = name
         self.description = description
         self.repetitions = repetitions
-        self .prepTime = prepTime
+        self.prepTime = prepTime
         self.duration = duration
         self.stepType = stepType
+        switch stepType {
+        case .repExercise:
+            self.timedStepData = nil
+        default:
+            self.timedStepData = TimedStep(prepTime: prepTime, duration: duration)
+        }
     }
     
     func withName(_ name: String) -> Step {
@@ -46,4 +53,14 @@ enum StepType: Equatable {
     case rest(TimerStatus)
     case repExercise
     case timedExercise
+}
+
+struct TimedStep {
+    let prepTime: Int
+    let duration: Int
+
+    init(prepTime: Int? = 0, duration: Int? = 0) {
+        self.prepTime = prepTime ?? 0
+        self.duration = duration ?? 0
+    }
 }
