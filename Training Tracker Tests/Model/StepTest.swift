@@ -63,7 +63,7 @@ final class StepTest: XCTestCase {
     }
 
     func testBuildStepWithStepType() {
-        let stepType = StepType.rest(.running)
+        let stepType = StepType.timed(.rest)
         let sut = stepWithEverything.withStepType(stepType)
         
         assertSameStepType(sut, stepType)

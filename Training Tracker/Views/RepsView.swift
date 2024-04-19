@@ -24,7 +24,7 @@ struct RepsView: View {
     }
     
     private func formattedReps() -> String {
-        return "x \(step.repetitions ?? 0)"
+        return "x \(step.repsStepData?.repetitions ?? 0)"
     }
 }
 
