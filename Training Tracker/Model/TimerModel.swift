@@ -50,47 +50,6 @@ final class TimerModel {
     }
 }
 
-final class TimerController {
-    let timerModel: TimerModel
-    let timer: Timer
-    
-    init(timerModel: TimerModel, callback: Callback) {
-        self.timerModel = timerModel
-        
-        self.timer = Timer.scheduledTimer(withTimeInterval: timerModel.delta, repeats: true) { [timerModel] _ in
-            switch timerModel.timerStatus {
-            case .running:
-                if timerModel.prepTimeRemainingInSeconds > 0 {
-                    timerModel.prepTimeRemainingInSeconds = max(0, timerModel.prepTimeRemainingInSeconds - timerModel.delta)
-                } else if timerModel.exerciseTimeRemainingInSeconds > 0 {
-                    timerModel.exerciseTimeRemainingInSeconds = max(0, timerModel.exerciseTimeRemainingInSeconds - timerModel.delta)
-                } else {
-                    timerModel.timerStatus = .stopped
-                    callback.callback()
-                }
-            case .stopped:
-                break
-            }
-
-            timerModel.isTimerInPrep = timerModel.exerciseTimeRemainingInSeconds > timerModel.exerciseTimeInSeconds
-        }
-    }
-    
-    func play() {
-        if timerModel.exerciseTimeRemainingInSeconds > 0 {
-            timerModel.timerStatus = .running
-        }
-    }
-    
-    func pause() {
-        timerModel.timerStatus = .stopped
-    }
-    
-    deinit {
-        timer.invalidate()
-    }
-}
-
 enum TimerStatus {
     case stopped
     case running

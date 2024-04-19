@@ -3,9 +3,9 @@ import AudioToolbox
 
 struct TrainingView: View {
     let routineModel: RoutineModel
-    let routineController: RoutineController
+    let routineController: RoutineCtrl
     
-    init(routineModel: RoutineModel, routineController: RoutineController) {
+    init(routineModel: RoutineModel, routineController: RoutineCtrl) {
         self.routineModel = routineModel
         self.routineController = routineController
     }
@@ -30,19 +30,19 @@ struct TrainingView: View {
                 switch routineModel.currentStepTimerModel.timerStatus {
                 case .running:
                     TrainingButtonView(text: "Pause", systemImage: "pause.fill", click: {
-                        routineController.currentStepTimerController.pause()
+                        routineController.pauseStep()
                     })
                 case .stopped:
                     TrainingButtonView(text: "Start", systemImage: "play.fill", click: {
-                        routineController.currentStepTimerController.play()
+                        routineController.startResumeStep()
                     })
                 }
             case .repExercise:
                 TrainingButtonView(text: "Complete", systemImage: "checkmark", click: {
-                    routineController.next()
+                    routineController.completeStep()
                     switch routineModel.currentStepTimerModel.stepType {
                     case .rest:
-                        routineController.currentStepTimerController.play() // Starts the rest timer (one less user click)
+                        routineController.startResumeStep() // Starts the rest timer (one less user click)
                     default:
                         break
                     }
@@ -51,10 +51,10 @@ struct TrainingView: View {
                 if routineModel.currentStepTimerModel.exerciseTimeRemainingInSeconds == 0 {
                     let _ = AudioServicesPlaySystemSound(1009) // ding ding
                     TrainingButtonView(text: "Complete", systemImage: "checkmark", click: {
-                        routineController.next()
+                        routineController.completeStep()
                         switch routineModel.currentStepTimerModel.stepType {
                         case .rest:
-                            routineController.currentStepTimerController.play() // Starts the rest timer (one less user click)
+                            routineController.startResumeStep() // Starts the rest timer (one less user click)
                         default:
                             break
                         }
@@ -63,11 +63,11 @@ struct TrainingView: View {
                     switch routineModel.currentStepTimerModel.timerStatus {
                     case .running:
                         TrainingButtonView(text: "Pause", systemImage: "pause.fill", click: {
-                            routineController.currentStepTimerController.pause()
+                            routineController.pauseStep()
                         })
                     case .stopped:
                         TrainingButtonView(text: "Start", systemImage: "play.fill", click: {
-                            routineController.currentStepTimerController.play()
+                            routineController.startResumeStep()
                         })
                     }
                 }
@@ -77,13 +77,14 @@ struct TrainingView: View {
     }
 }
 
-let routine: JsonRoutine = load("workoutRoutine.json")
+let routine: JsonRoutine = JsonRoutine.load("workoutRoutine.json")
 #Preview {
-    let appLifecycleModel: AppLifecycleModel = AppLifecycleModel()
+    let appLifecycleModel: AppLifecycleModel = AppLifecycleModel(appLifecycleStatus: .trainingStarted)
     let appLifecycleController: AppLifecycleController = AppLifecycleController(appLifecycleModel: appLifecycleModel)
-    let jsonRoutine: JsonRoutine = load("workoutRoutine.json")
+    let jsonRoutine: JsonRoutine = JsonRoutine.load("workoutRoutine.json")
     let routineSteps = RoutineSteps(jsonRoutine: jsonRoutine)
     @State var routineModel = RoutineModel(routineSteps: routineSteps)
-    let routineController = RoutineController(routineModel: routineModel, appLifecycleController: appLifecycleController)
+    let periodicTimer = PeriodicTimerWrapper()
+    let routineController = RoutineController(routineModel: routineModel, appLifecycleController: appLifecycleController, periodicTimer: periodicTimer)
     return TrainingView(routineModel: routineModel, routineController: routineController)
 }

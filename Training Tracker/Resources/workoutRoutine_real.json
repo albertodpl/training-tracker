@@ -167,7 +167,7 @@
                         {
                             "name": "Nordic leg curls",
                             "description": "Eccentric only with push up support",
-                            "repetitions": [8, 8, 8],
+                            "repetitions": [10, 10, 10],
                             "tempo": {
                                 "eccentric": 3
                             },
@@ -176,7 +176,7 @@
                         {
                             "name": "Reverse nordic leg curls",
                             "description": "With roll and box support",
-                            "repetitions": [8, 8, 8],
+                            "repetitions": [10, 10, 10],
                             "tempo": {
                                 "eccentric": 4,
                                 "eccentricRest": 0,

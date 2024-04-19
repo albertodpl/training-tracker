@@ -12,6 +12,11 @@
 		D3B59BB82BC427CF007A9782 /* AppLifecycleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B59BB72BC427CF007A9782 /* AppLifecycleModel.swift */; };
 		D3B59BBA2BC43572007A9782 /* TrainingCompletedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B59BB92BC43572007A9782 /* TrainingCompletedView.swift */; };
 		D3B59BBC2BC435FB007A9782 /* TrainingLifecycleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B59BBB2BC435FB007A9782 /* TrainingLifecycleView.swift */; };
+		D3B59BCD2BC96FB9007A9782 /* AppLifecycleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B59BCC2BC96FB9007A9782 /* AppLifecycleController.swift */; };
+		D3B59BD02BC97025007A9782 /* AppLifecycleControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B59BCF2BC97025007A9782 /* AppLifecycleControllerTest.swift */; };
+		D3B59BD22BD10F33007A9782 /* RoutineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B59BD12BD10F33007A9782 /* RoutineController.swift */; };
+		D3B59BD62BD1884E007A9782 /* TimerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B59BD52BD1884E007A9782 /* TimerController.swift */; };
+		D3B59BDB2BD2A62D007A9782 /* PeriodicTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B59BDA2BD2A62D007A9782 /* PeriodicTimer.swift */; };
 		D3F496482BB6D22A008FB68B /* TrainingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F496472BB6D22A008FB68B /* TrainingView.swift */; };
 		D3F4964A2BB6D23F008FB68B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3F496492BB6D23F008FB68B /* Assets.xcassets */; };
 		D3F4964D2BB6D23F008FB68B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3F4964C2BB6D23F008FB68B /* Preview Assets.xcassets */; };
@@ -27,12 +32,28 @@
 		D3F496772BBDF4E4008FB68B /* workoutRoutine_real.json in Resources */ = {isa = PBXBuildFile; fileRef = D3F496762BBDF4E4008FB68B /* workoutRoutine_real.json */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		D3B59BC52BC96E47007A9782 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D3F4963A2BB6D22A008FB68B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D3F496412BB6D22A008FB68B;
+			remoteInfo = "Training Tracker";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		D3B59BB32BC41ABF007A9782 /* StartTrainingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTrainingView.swift; sourceTree = "<group>"; };
 		D3B59BB52BC42641007A9782 /* TrainingButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingButtonView.swift; sourceTree = "<group>"; };
 		D3B59BB72BC427CF007A9782 /* AppLifecycleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLifecycleModel.swift; sourceTree = "<group>"; };
 		D3B59BB92BC43572007A9782 /* TrainingCompletedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingCompletedView.swift; sourceTree = "<group>"; };
 		D3B59BBB2BC435FB007A9782 /* TrainingLifecycleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingLifecycleView.swift; sourceTree = "<group>"; };
+		D3B59BC12BC96E47007A9782 /* Training Tracker Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Training Tracker Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3B59BCC2BC96FB9007A9782 /* AppLifecycleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLifecycleController.swift; sourceTree = "<group>"; };
+		D3B59BCF2BC97025007A9782 /* AppLifecycleControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLifecycleControllerTest.swift; sourceTree = "<group>"; };
+		D3B59BD12BD10F33007A9782 /* RoutineController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineController.swift; sourceTree = "<group>"; };
+		D3B59BD52BD1884E007A9782 /* TimerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerController.swift; sourceTree = "<group>"; };
+		D3B59BDA2BD2A62D007A9782 /* PeriodicTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodicTimer.swift; sourceTree = "<group>"; };
 		D3F496422BB6D22A008FB68B /* Training Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Training Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3F496472BB6D22A008FB68B /* TrainingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingView.swift; sourceTree = "<group>"; };
 		D3F496492BB6D23F008FB68B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -50,6 +71,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D3B59BBE2BC96E47007A9782 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D3F4963F2BB6D22A008FB68B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -60,10 +88,45 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D3B59BC22BC96E47007A9782 /* Training Tracker Tests */ = {
+			isa = PBXGroup;
+			children = (
+				D3B59BCE2BC96FEA007A9782 /* Controller */,
+			);
+			path = "Training Tracker Tests";
+			sourceTree = "<group>";
+		};
+		D3B59BCB2BC96F87007A9782 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D3B59BCC2BC96FB9007A9782 /* AppLifecycleController.swift */,
+				D3B59BD12BD10F33007A9782 /* RoutineController.swift */,
+				D3B59BD52BD1884E007A9782 /* TimerController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D3B59BCE2BC96FEA007A9782 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D3B59BCF2BC97025007A9782 /* AppLifecycleControllerTest.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D3B59BD92BD2A60D007A9782 /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+				D3B59BDA2BD2A62D007A9782 /* PeriodicTimer.swift */,
+			);
+			path = Timer;
+			sourceTree = "<group>";
+		};
 		D3F496392BB6D22A008FB68B = {
 			isa = PBXGroup;
 			children = (
 				D3F496442BB6D22A008FB68B /* Training Tracker */,
+				D3B59BC22BC96E47007A9782 /* Training Tracker Tests */,
 				D3F496432BB6D22A008FB68B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -72,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				D3F496422BB6D22A008FB68B /* Training Tracker.app */,
+				D3B59BC12BC96E47007A9782 /* Training Tracker Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -79,6 +143,8 @@
 		D3F496442BB6D22A008FB68B /* Training Tracker */ = {
 			isa = PBXGroup;
 			children = (
+				D3B59BD92BD2A60D007A9782 /* Timer */,
+				D3B59BCB2BC96F87007A9782 /* Controller */,
 				D3F496652BB85410008FB68B /* Views */,
 				D3F4965E2BB70214008FB68B /* Resources */,
 				D3F496592BB6E9B2008FB68B /* Model */,
@@ -136,6 +202,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		D3B59BC02BC96E47007A9782 /* Training Tracker Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D3B59BC72BC96E47007A9782 /* Build configuration list for PBXNativeTarget "Training Tracker Tests" */;
+			buildPhases = (
+				D3B59BBD2BC96E47007A9782 /* Sources */,
+				D3B59BBE2BC96E47007A9782 /* Frameworks */,
+				D3B59BBF2BC96E47007A9782 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D3B59BC62BC96E47007A9782 /* PBXTargetDependency */,
+			);
+			name = "Training Tracker Tests";
+			productName = "Training Tracker Tests";
+			productReference = D3B59BC12BC96E47007A9782 /* Training Tracker Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		D3F496412BB6D22A008FB68B /* Training Tracker */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D3F496502BB6D23F008FB68B /* Build configuration list for PBXNativeTarget "Training Tracker" */;
@@ -163,6 +247,10 @@
 				LastSwiftUpdateCheck = 1520;
 				LastUpgradeCheck = 1520;
 				TargetAttributes = {
+					D3B59BC02BC96E47007A9782 = {
+						CreatedOnToolsVersion = 15.2;
+						TestTargetID = D3F496412BB6D22A008FB68B;
+					};
 					D3F496412BB6D22A008FB68B = {
 						CreatedOnToolsVersion = 15.2;
 					};
@@ -182,11 +270,19 @@
 			projectRoot = "";
 			targets = (
 				D3F496412BB6D22A008FB68B /* Training Tracker */,
+				D3B59BC02BC96E47007A9782 /* Training Tracker Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		D3B59BBF2BC96E47007A9782 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D3F496402BB6D22A008FB68B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -201,6 +297,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		D3B59BBD2BC96E47007A9782 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D3B59BD02BC97025007A9782 /* AppLifecycleControllerTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D3F4963E2BB6D22A008FB68B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -213,18 +317,66 @@
 				D3F496642BB83EFF008FB68B /* RoutineModel.swift in Sources */,
 				D3F496622BB75B4B008FB68B /* JsonSchemas.swift in Sources */,
 				D3B59BBC2BC435FB007A9782 /* TrainingLifecycleView.swift in Sources */,
+				D3B59BD62BD1884E007A9782 /* TimerController.swift in Sources */,
 				D3F4966F2BBC434F008FB68B /* ExerciseView.swift in Sources */,
+				D3B59BDB2BD2A62D007A9782 /* PeriodicTimer.swift in Sources */,
 				D3F496712BBC5E27008FB68B /* TimerViewOld.swift in Sources */,
 				D3B59BB82BC427CF007A9782 /* AppLifecycleModel.swift in Sources */,
 				D3B59BB62BC42641007A9782 /* TrainingButtonView.swift in Sources */,
+				D3B59BD22BD10F33007A9782 /* RoutineController.swift in Sources */,
 				D3F496482BB6D22A008FB68B /* TrainingView.swift in Sources */,
 				D3F496732BBD65BD008FB68B /* TimerView.swift in Sources */,
+				D3B59BCD2BC96FB9007A9782 /* AppLifecycleController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		D3B59BC62BC96E47007A9782 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D3F496412BB6D22A008FB68B /* Training Tracker */;
+			targetProxy = D3B59BC52BC96E47007A9782 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		D3B59BC82BC96E47007A9782 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = K7XK8HM9WR;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.adpl.Training-Tracker-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Training Tracker.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Training Tracker";
+			};
+			name = Debug;
+		};
+		D3B59BC92BC96E47007A9782 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = K7XK8HM9WR;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.adpl.Training-Tracker-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Training Tracker.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Training Tracker";
+			};
+			name = Release;
+		};
 		D3F4964E2BB6D23F008FB68B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -405,6 +557,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D3B59BC72BC96E47007A9782 /* Build configuration list for PBXNativeTarget "Training Tracker Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D3B59BC82BC96E47007A9782 /* Debug */,
+				D3B59BC92BC96E47007A9782 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		D3F4963D2BB6D22A008FB68B /* Build configuration list for PBXProject "Training Tracker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

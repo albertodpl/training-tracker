@@ -3,10 +3,11 @@ import SwiftUI
 @main
 struct TrainingApp: App {
     private var routineModel: RoutineModel
-    private var routineController: RoutineController
+    private var routineController: RoutineCtrl
     private var appLifecycleModel: AppLifecycleModel
     private var appLifecycleController: AppLifecycleController
-    
+    private var periodicTimer: PeriodicTimer
+
     init() {
         let appLifecycleModel = AppLifecycleModel()
         self.appLifecycleModel = appLifecycleModel
@@ -14,11 +15,13 @@ struct TrainingApp: App {
         self.appLifecycleController = appLifecycleController
         let workoutRoutine = "workoutRoutine.json"
 //        let workoutRoutine = "workoutRoutine_real.json"
-        let jsonRoutine: JsonRoutine = load(workoutRoutine)
+        let jsonRoutine: JsonRoutine = JsonRoutine.load(workoutRoutine)
         let routineSteps = RoutineSteps(jsonRoutine: jsonRoutine)
         let routineModel = RoutineModel(routineSteps: routineSteps)
         self.routineModel = routineModel
-        self.routineController = RoutineController(routineModel: routineModel, appLifecycleController: appLifecycleController)
+        let periodicTimer = PeriodicTimerWrapper()
+        self.periodicTimer = periodicTimer
+        self.routineController = RoutineController(routineModel: routineModel, appLifecycleController: appLifecycleController, periodicTimer: periodicTimer)
     }
 
     var body: some Scene {

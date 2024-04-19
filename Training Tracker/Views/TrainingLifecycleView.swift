@@ -2,7 +2,7 @@ import SwiftUI
 
 struct TrainingLifecycleView: View {
     var routineModel: RoutineModel
-    var routineController: RoutineController
+    var routineController: RoutineCtrl
     var appLifecycleStatus: AppLifecycleStatus
     var appLifecycleController: AppLifecycleController
 
@@ -18,12 +18,35 @@ struct TrainingLifecycleView: View {
     }
 }
 
-#Preview {
-    let appLifecycleModel: AppLifecycleModel = AppLifecycleModel()
+#Preview("Start training") {
+    let appLifecycleModel: AppLifecycleModel = AppLifecycleModel(appLifecycleStatus: .trainingNotStrated)
     let appLifecycleController: AppLifecycleController = AppLifecycleController(appLifecycleModel: appLifecycleModel)
-    let jsonRoutine: JsonRoutine = load("workoutRoutine.json")
+    let jsonRoutine: JsonRoutine = JsonRoutine.load("workoutRoutine.json")
     let routineSteps = RoutineSteps(jsonRoutine: jsonRoutine)
     let routineModel = RoutineModel(routineSteps: routineSteps)
-    let routineController = RoutineController(routineModel: routineModel, appLifecycleController: appLifecycleController)
+    let periodicTimer = PeriodicTimerWrapper()
+    let routineController = RoutineController(routineModel: routineModel, appLifecycleController: appLifecycleController, periodicTimer: periodicTimer)
+    return TrainingLifecycleView(routineModel: routineModel, routineController: routineController, appLifecycleStatus: appLifecycleModel.appLifecycleStatus, appLifecycleController: appLifecycleController)
+}
+
+#Preview("Training") {
+    let appLifecycleModel: AppLifecycleModel = AppLifecycleModel(appLifecycleStatus: .trainingStarted)
+    let appLifecycleController: AppLifecycleController = AppLifecycleController(appLifecycleModel: appLifecycleModel)
+    let jsonRoutine: JsonRoutine = JsonRoutine.load("workoutRoutine.json")
+    let routineSteps = RoutineSteps(jsonRoutine: jsonRoutine)
+    let routineModel = RoutineModel(routineSteps: routineSteps)
+    let periodicTimer = PeriodicTimerWrapper()
+    let routineController = RoutineController(routineModel: routineModel, appLifecycleController: appLifecycleController, periodicTimer: periodicTimer)
+    return TrainingLifecycleView(routineModel: routineModel, routineController: routineController, appLifecycleStatus: appLifecycleModel.appLifecycleStatus, appLifecycleController: appLifecycleController)
+}
+
+#Preview("Training completed") {
+    let appLifecycleModel: AppLifecycleModel = AppLifecycleModel(appLifecycleStatus: .trainingCompleted)
+    let appLifecycleController: AppLifecycleController = AppLifecycleController(appLifecycleModel: appLifecycleModel)
+    let jsonRoutine: JsonRoutine = JsonRoutine.load("workoutRoutine.json")
+    let routineSteps = RoutineSteps(jsonRoutine: jsonRoutine)
+    let routineModel = RoutineModel(routineSteps: routineSteps)
+    let periodicTimer = PeriodicTimerWrapper()
+    let routineController = RoutineController(routineModel: routineModel, appLifecycleController: appLifecycleController, periodicTimer: periodicTimer)
     return TrainingLifecycleView(routineModel: routineModel, routineController: routineController, appLifecycleStatus: appLifecycleModel.appLifecycleStatus, appLifecycleController: appLifecycleController)
 }
