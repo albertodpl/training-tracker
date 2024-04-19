@@ -23,8 +23,6 @@ final class RoutineController: RoutineCtrl {
         
         self.currentStepTimerController = TimerController(timerModel: routineModel.currentStepTimerModel, periodicTimer: periodicTimerBuilder(), onCompletion: self.completeStep)
         
-        // TODO: do not pass the periodicTimerBuilder to TimerController. Instead, connect the TimerController with the registerCallback function on the PeriodicTimer from here. It will make testing easier. I'll keep pushing it up in the hierarchy.
-        
         updateCurrentAndNextExercise()
     }
     

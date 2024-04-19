@@ -4,9 +4,9 @@ import SwiftUI
 final class TimerModel {
     var timerStatus: TimerStatus
     var isTimerInPrep: Bool
-    var prepTimeInSeconds: TimeInterval
+    let prepTimeInSeconds: TimeInterval
     var prepTimeRemainingInSeconds: TimeInterval
-    var exerciseTimeInSeconds: TimeInterval
+    let exerciseTimeInSeconds: TimeInterval
     var exerciseTimeRemainingInSeconds: TimeInterval
     let delta: TimeInterval = 1/100
     var stepType: StepType
