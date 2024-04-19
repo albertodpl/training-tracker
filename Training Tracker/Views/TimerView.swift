@@ -2,20 +2,20 @@ import SwiftUI
 
 struct TimerView: View {
     var timerModel: TimerModel
-    var stepType: StepType
+    var timedStepType: TimedStepType
     let timerFontSize = CGFloat(80)
     var body: some View {
         VStack(alignment: .center) {
             ZStack {
-                switch stepType {
-                case .timed(.rest):
+                switch timedStepType {
+                case .rest(_):
                     Text(formattedTime())
                         .font(.system(size: timerFontSize))
                         .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .foregroundColor(.green)
-                default:
+                case .exercise(_):
                     Text(formattedTime())
                         .font(.system(size: timerFontSize))
                         .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
@@ -28,14 +28,14 @@ struct TimerView: View {
                     .stroke(lineWidth: 10)
                     .opacity(0.3)
                 
-                switch stepType {
-                case .timed(.rest):
+                switch timedStepType {
+                case .rest(_):
                     Circle()
                         .trim(from: 0, to: CGFloat(timerModel.exerciseTimeRemainingInSeconds / timerModel.exerciseTimeInSeconds))
                         .stroke(style: StrokeStyle(lineWidth: 10, lineCap: .round, lineJoin: .round))
                         .rotationEffect(.degrees(-90))
                         .foregroundColor(.green)
-                default:
+                case .exercise(_):
                     Circle()
                         .trim(from: 0, to: ((timerModel.prepTimeRemainingInSeconds > 0) ? CGFloat(timerModel.prepTimeRemainingInSeconds / timerModel.prepTimeInSeconds) : CGFloat(timerModel.exerciseTimeRemainingInSeconds / timerModel.exerciseTimeInSeconds)))
                         .stroke(style: StrokeStyle(lineWidth: 10, lineCap: .round, lineJoin: .round))
@@ -47,7 +47,6 @@ struct TimerView: View {
         }
         .padding()
         .padding(.horizontal, 30)
-        .opacity((stepType == .reps) ? 0.3 : 1)
     }
     
     private func formattedTime() -> String {
@@ -59,23 +58,29 @@ struct TimerView: View {
 }
 
 #Preview("Rest") {
-    let step = Step(name: "Rest", duration: 75, stepType: .timed(.rest))
+    let timedStepType: TimedStepType = .rest(TimedStepData(duration: 75))
+    let stepType: StepType = .timed(timedStepType)
+    let step = Step(name: "Rest", stepType: stepType)
     let timerModel = TimerModel(step: step)
     timerModel.exerciseTimeRemainingInSeconds = 25
-    return TimerView(timerModel: timerModel, stepType: step.stepType)
+    return TimerView(timerModel: timerModel, timedStepType: timedStepType)
 }
 
 #Preview("Prep") {
-    let step = Step(name: "Prep", prepTime: 20, duration: 75, stepType: .timed(.exercise))
+    let timedStepType: TimedStepType = .rest(TimedStepData(prepTime: 20, duration: 75))
+    let stepType: StepType = .timed(timedStepType)
+    let step = Step(name: "Prep", stepType: stepType)
     let timerModel = TimerModel(step: step)
     timerModel.prepTimeRemainingInSeconds = 10
-    return TimerView(timerModel: timerModel, stepType: step.stepType)
+    return TimerView(timerModel: timerModel, timedStepType: timedStepType)
 }
 
 #Preview("Exercise") {
-    let step = Step(name: "Prep", prepTime: 20, duration: 75, stepType: .timed(.exercise))
+    let timedStepType: TimedStepType = .exercise(TimedStepData(prepTime: 20, duration: 75))
+    let stepType: StepType = .timed(timedStepType)
+    let step = Step(name: "Prep", stepType: stepType)
     let timerModel = TimerModel(step: step)
     timerModel.prepTimeRemainingInSeconds = 0
     timerModel.exerciseTimeRemainingInSeconds = 15
-    return TimerView(timerModel: timerModel, stepType: step.stepType)
+    return TimerView(timerModel: timerModel, timedStepType: timedStepType)
 }

@@ -11,16 +11,17 @@ final class TimerModel {
     let delta: TimeInterval = 1/100
     var stepType: StepType
     
+    // TODO: Relay only on TimedStepType, and remove dep with Step all together
     init(step: Step) {
         switch step.stepType {
-        case .timed(.rest):
+        case let .timed(.rest(timedStepData)):
             self.timerStatus = .stopped
-            let prepTimeInSeconds = TimeInterval(step.prepTime ?? 0)
+            let prepTimeInSeconds = TimeInterval(timedStepData.prepTime)
             self.prepTimeInSeconds = prepTimeInSeconds
             let prepTimeRemainingInSeconds = prepTimeInSeconds
             self.prepTimeRemainingInSeconds = prepTimeRemainingInSeconds
             self.isTimerInPrep = (prepTimeRemainingInSeconds > 0)
-            let exerciseTimeInSeconds = TimeInterval(step.duration ?? 0)
+            let exerciseTimeInSeconds = TimeInterval(timedStepData.duration)
             self.exerciseTimeInSeconds = exerciseTimeInSeconds
             self.exerciseTimeRemainingInSeconds = exerciseTimeInSeconds
             self.stepType = step.stepType
@@ -34,14 +35,14 @@ final class TimerModel {
             self.exerciseTimeRemainingInSeconds = 0
             self.stepType = step.stepType
             break
-        case .timed(.exercise):
+        case let .timed(.exercise(timedStepData)):
             self.timerStatus = .stopped
-            let prepTimeInSeconds = TimeInterval(step.prepTime ?? 0)
+            let prepTimeInSeconds = TimeInterval(timedStepData.prepTime)
             self.prepTimeInSeconds = prepTimeInSeconds
             let prepTimeRemainingInSeconds = prepTimeInSeconds
             self.prepTimeRemainingInSeconds = prepTimeRemainingInSeconds
             self.isTimerInPrep = (prepTimeRemainingInSeconds > 0)
-            let exerciseTimeInSeconds = TimeInterval(step.duration ?? 0)
+            let exerciseTimeInSeconds = TimeInterval(timedStepData.duration)
             self.exerciseTimeInSeconds = exerciseTimeInSeconds
             self.exerciseTimeRemainingInSeconds = exerciseTimeInSeconds
             self.stepType = step.stepType

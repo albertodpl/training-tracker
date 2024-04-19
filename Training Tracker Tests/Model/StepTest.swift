@@ -6,10 +6,7 @@ final class StepTest: XCTestCase {
     let stepWithEverything = Step(
         name: "Step with everything name",
         description: "Step with everything description",
-        repetitions: 3,
-        prepTime: 8,
-        duration: 20,
-        stepType: StepType.reps
+        stepType: StepType.reps(RepsStepData(repetitions: 3))
     )
     
     override func setUpWithError() throws {
@@ -27,7 +24,7 @@ final class StepTest: XCTestCase {
         assertSameName(sut, name)
     }
     
-    func testBuildStepWithDespcription() {
+    func testBuildStepWithDescription() {
         let description = "New description"
         let sut = stepWithEverything.withDescription(description)
         
@@ -41,29 +38,22 @@ final class StepTest: XCTestCase {
         assertSameDescription(sut, description)
     }
 
-    func testBuildStepWithRepetitions() {
-        let repetitions = 99
-        let sut = stepWithEverything.withRepetitions(repetitions)
+    func testBuildStepWithStepTypeRest() {
+        let stepType = StepType.timed(.rest(TimedStepData(prepTime: 8, duration: 20)))
+        let sut = stepWithEverything.withStepType(stepType)
         
-        assertSameRepetitions(sut, repetitions)
+        assertSameStepType(sut, stepType)
     }
 
-    func testBuildStepWithPrepTime() {
-        let prepTime = 99
-        let sut = stepWithEverything.withPrepTime(prepTime)
+    func testBuildStepWithStepTypeTimedExercise() {
+        let stepType = StepType.timed(.exercise(TimedStepData(prepTime: 8, duration: 20)))
+        let sut = stepWithEverything.withStepType(stepType)
         
-        assertSamePrepTime(sut, prepTime)
+        assertSameStepType(sut, stepType)
     }
-
-    func testBuildStepWithDuration() {
-        let duration = 99
-        let sut = stepWithEverything.withDuration(duration)
-        
-        assertSameDuration(sut, duration)
-    }
-
-    func testBuildStepWithStepType() {
-        let stepType = StepType.timed(.rest)
+    
+    func testBuildStepWithStepTypeReps() {
+        let stepType = StepType.reps(RepsStepData(repetitions: 8))
         let sut = stepWithEverything.withStepType(stepType)
         
         assertSameStepType(sut, stepType)
@@ -75,18 +65,6 @@ final class StepTest: XCTestCase {
 
     private func assertSameDescription(_ step: Step, _ description: String?) {
         XCTAssertEqual(step.description, description)
-    }
-
-    private func assertSameRepetitions(_ step: Step, _ repetitions: Int?) {
-        XCTAssertEqual(step.repetitions, repetitions)
-    }
-
-    private func assertSamePrepTime(_ step: Step, _ prepTime: Int?) {
-        XCTAssertEqual(step.prepTime, prepTime)
-    }
-
-    private func assertSameDuration(_ step: Step, _ duration: Int?) {
-        XCTAssertEqual(step.duration, duration)
     }
 
     private func assertSameStepType(_ step: Step, _ stepType: StepType) {

@@ -3,11 +3,11 @@ import Foundation
 @Observable
 final class RoutineModel {
     var currentStepIndex = 0
-    var currentStep: Step = Step(name: "Initialization step; you should not see this") // TODO: Fix this weird initialization
+    var currentStep: Step = Step(name: "Initialization step; you should not see this", stepType: .reps(RepsStepData(repetitions: 0))) // TODO: Fix this weird initialization
     var currentExercise: Step? = nil
     var nextExercise: Step? = nil
     var routineSteps = [Step]()
-    var currentStepTimerModel: TimerModel = TimerModel(step: Step(name: "Dummy step; you should not see this")) // TODO: Fix this weird initialization
+    var currentStepTimerModel: TimerModel = TimerModel(step: Step(name: "Dummy step; you should not see this", stepType: .reps(RepsStepData(repetitions: 0)))) // TODO: Fix this weird initialization
     
     init(routineSteps: RoutineSteps) {
         self.routineSteps = routineSteps.routineSteps
@@ -39,14 +39,14 @@ final class RoutineSteps {
                     exerciseWithRestSequence.append(exerciseSequence[index])
                     if let restInBetween = exerciseGroup.restInBetween {
                         if restInBetween > 0 {
-                            exerciseWithRestSequence.append(Step(name: "Rest in between: \(restInBetween)", duration: restInBetween, stepType: StepType.timed(.rest)))
+                            exerciseWithRestSequence.append(Step(name: "Rest in between: \(restInBetween)", stepType: StepType.timed(.rest(TimedStepData(duration: restInBetween)))))
                         }
                     }
                 }
                 exerciseWithRestSequence.append(exerciseSequence[exerciseSequence.count-1])
                 if let restAtTheEnd = exerciseGroup.restAtTheEnd {
                     if restAtTheEnd > 0 {
-                        exerciseWithRestSequence.append(Step(name: "Rest at the end: \(restAtTheEnd)", duration: restAtTheEnd, stepType: StepType.timed(.rest)))
+                        exerciseWithRestSequence.append(Step(name: "Rest at the end: \(restAtTheEnd)", stepType: StepType.timed(.rest(TimedStepData(duration: restAtTheEnd)))))
                     }
                 }
                 print(exerciseWithRestSequence)
@@ -73,10 +73,10 @@ final class RoutineSteps {
             for exerciseIndex in 0..<exerciseList.count {
                 if setIndex < exerciseList[exerciseIndex].numberOfSets {
                     if let durations = exerciseList[exerciseIndex].durations {
-                        let step = Step(name: exerciseList[exerciseIndex].name, description: exerciseList[exerciseIndex].description, prepTime: exerciseList[exerciseIndex].prepTimes?[setIndex], duration: durations[setIndex], stepType: .timed(.exercise))
+                        let step = Step(name: exerciseList[exerciseIndex].name, description: exerciseList[exerciseIndex].description, stepType: .timed(.exercise(TimedStepData(prepTime: exerciseList[exerciseIndex].prepTimes?[setIndex], duration: durations[setIndex]))))
                         exercisesSequence.append(step)
                     } else if let repetitions = exerciseList[exerciseIndex].repetitions {
-                        let step = Step(name: exerciseList[exerciseIndex].name, description: exerciseList[exerciseIndex].description, repetitions: repetitions[setIndex], stepType: .reps)
+                        let step = Step(name: exerciseList[exerciseIndex].name, description: exerciseList[exerciseIndex].description, stepType: .reps(RepsStepData(repetitions: repetitions[setIndex])))
                         exercisesSequence.append(step)
                     } else {
                         fatalError("No duration and no repetitions for exercise \(exerciseList[exerciseIndex].name). The exercise is not defined.")

@@ -13,15 +13,20 @@ struct TrainingView: View {
     var body: some View {
         VStack {
             switch routineModel.currentStep.stepType {
-            case .reps:
-                RepsView(step: routineModel.currentStep)
-            default:
-                TimerView(timerModel: routineModel.currentStepTimerModel, stepType: routineModel.currentStep.stepType)
+            case let .reps(repsStepData):
+                RepsView(repsStepData: repsStepData)
+            case let .timed(timedStepType):
+                TimerView(timerModel: routineModel.currentStepTimerModel, timedStepType: timedStepType)
             }
             
             Divider()
             
-            ExerciseView(currentStep: routineModel.currentStep, currentExercise: routineModel.currentExercise, nextExercise: routineModel.nextExercise)
+            switch routineModel.currentStep.stepType {
+            case .timed(.rest(_)):
+                ExerciseView(currentExercise: routineModel.currentExercise, nextExercise: routineModel.nextExercise, dim: true)
+            default:
+                ExerciseView(currentExercise: routineModel.currentExercise, nextExercise: routineModel.nextExercise)
+            }
             
             Divider()
             Spacer()

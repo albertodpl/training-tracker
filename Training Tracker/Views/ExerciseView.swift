@@ -1,9 +1,15 @@
 import SwiftUI
 
 struct ExerciseView: View {
-    let currentStep: Step
+    let dim: Bool
     let currentExercise: Step?
     let nextExercise: Step?
+    
+    init(currentExercise: Step? = nil, nextExercise: Step? = nil, dim: Bool = false) {
+        self.currentExercise = currentExercise
+        self.nextExercise = nextExercise
+        self.dim = dim
+    }
 
     var body: some View {
         VStack {
@@ -24,20 +30,24 @@ struct ExerciseView: View {
                     .opacity(0.5)
                     .padding([.top, .bottom])
             }
-        }.opacity((currentStep.stepType == .timed(.rest)) ? 0.5 : 1)
+        }.opacity(dim ? 0.5 : 1)
     }
 }
 
 #Preview ("Long") {
-    let currentStep: Step = Step(name: "Current step", description: "Description of the current step", repetitions: 8)
-    let currentExercise: Step? = Step(name: "Current exercise super long, longer, and longer, what a long exercise", description: "Description of the current exercise", repetitions: 8)
-    let nextExercise: Step? = Step(name: "Next exercise", description: "Description of the next exercise", repetitions: 5)
-    return ExerciseView(currentStep: currentStep, currentExercise: currentExercise, nextExercise: nextExercise)
+    let currentExercise: Step? = Step(name: "Current exercise super long, longer, and longer, what a long exercise", description: "Description of the current exercise", stepType: .reps(RepsStepData(repetitions: 8)))
+    let nextExercise: Step? = Step(name: "Next exercise", description: "Description of the next exercise", stepType: .reps(RepsStepData(repetitions: 12)))
+    return ExerciseView(currentExercise: currentExercise, nextExercise: nextExercise)
 }
 
 #Preview ("Short") {
-    let currentStep: Step = Step(name: "Current step", description: "Description of the current step", repetitions: 8)
-    let currentExercise: Step? = Step(name: "Current exercise", description: "Description of the current exercise", repetitions: 8)
-    let nextExercise: Step? = Step(name: "Next exercise", description: "Description of the next exercise", repetitions: 5)
-    return ExerciseView(currentStep: currentStep, currentExercise: currentExercise, nextExercise: nextExercise)
+    let currentExercise: Step? = Step(name: "Current exercise", description: "Description of the current exercise", stepType: .reps(RepsStepData(repetitions: 8)))
+    let nextExercise: Step? = Step(name: "Next exercise", description: "Description of the next exercise", stepType: .reps(RepsStepData(repetitions: 12)))
+    return ExerciseView(currentExercise: currentExercise, nextExercise: nextExercise)
+}
+
+#Preview ("Short") {
+    let currentExercise: Step? = Step(name: "Current exercise", description: "Description of the current exercise", stepType: .reps(RepsStepData(repetitions: 8)))
+    let nextExercise: Step? = Step(name: "Next exercise", description: "Description of the next exercise", stepType: .reps(RepsStepData(repetitions: 12)))
+    return ExerciseView(currentExercise: currentExercise, nextExercise: nextExercise, dim: true)
 }

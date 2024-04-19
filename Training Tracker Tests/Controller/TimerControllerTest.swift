@@ -19,7 +19,7 @@ final class TimerControllerTest: XCTestCase {
     var periodicTimer: PeriodicTimerForUnitTesting!
     var sut: TimerCtrl!
     
-    let timedExerciseStep = Step(name: "Timed exercise step", prepTime: 5, duration: 20, stepType: .timed(.exercise))
+    let timedExerciseStep = Step(name: "Timed exercise step", stepType: .timed(.exercise(TimedStepData(prepTime: 5, duration: 20))))
     
     override func setUpWithError() throws {
         periodicTimer = PeriodicTimerForUnitTesting()
