@@ -9,12 +9,13 @@ final class TimerModel {
     let exerciseTimeInSeconds: TimeInterval
     var exerciseTimeRemainingInSeconds: TimeInterval
     let delta: TimeInterval = 1/100
-    var stepType: StepType
+    var timedStepType: TimedStepType
     
     // TODO: Relay only on TimedStepType, and remove dep with Step all together
-    init(step: Step) {
-        switch step.stepType {
-        case let .timed(.rest(timedStepData)):
+    // TODO: Extract initialization commonalities to a function: func initialize(timedStepData:)
+    init(timedStepType: TimedStepType) {
+        switch timedStepType {
+        case let .rest(timedStepData):
             self.timerStatus = .stopped
             let prepTimeInSeconds = TimeInterval(timedStepData.prepTime)
             self.prepTimeInSeconds = prepTimeInSeconds
@@ -24,18 +25,9 @@ final class TimerModel {
             let exerciseTimeInSeconds = TimeInterval(timedStepData.duration)
             self.exerciseTimeInSeconds = exerciseTimeInSeconds
             self.exerciseTimeRemainingInSeconds = exerciseTimeInSeconds
-            self.stepType = step.stepType
+            self.timedStepType = timedStepType
             break
-        case .reps:
-            self.timerStatus = .stopped
-            self.prepTimeInSeconds = 0
-            self.prepTimeRemainingInSeconds = 0
-            self.isTimerInPrep = false
-            self.exerciseTimeInSeconds = 0
-            self.exerciseTimeRemainingInSeconds = 0
-            self.stepType = step.stepType
-            break
-        case let .timed(.exercise(timedStepData)):
+        case let .exercise(timedStepData):
             self.timerStatus = .stopped
             let prepTimeInSeconds = TimeInterval(timedStepData.prepTime)
             self.prepTimeInSeconds = prepTimeInSeconds
@@ -45,7 +37,7 @@ final class TimerModel {
             let exerciseTimeInSeconds = TimeInterval(timedStepData.duration)
             self.exerciseTimeInSeconds = exerciseTimeInSeconds
             self.exerciseTimeRemainingInSeconds = exerciseTimeInSeconds
-            self.stepType = step.stepType
+            self.timedStepType = timedStepType
             break
         }
     }

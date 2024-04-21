@@ -59,27 +59,21 @@ struct TimerView: View {
 
 #Preview("Rest") {
     let timedStepType: TimedStepType = .rest(TimedStepData(duration: 75))
-    let stepType: StepType = .timed(timedStepType)
-    let step = Step(name: "Rest", stepType: stepType)
-    let timerModel = TimerModel(step: step)
+    let timerModel = TimerModel(timedStepType: timedStepType)
     timerModel.exerciseTimeRemainingInSeconds = 25
     return TimerView(timerModel: timerModel, timedStepType: timedStepType)
 }
 
 #Preview("Prep") {
     let timedStepType: TimedStepType = .rest(TimedStepData(prepTime: 20, duration: 75))
-    let stepType: StepType = .timed(timedStepType)
-    let step = Step(name: "Prep", stepType: stepType)
-    let timerModel = TimerModel(step: step)
+    let timerModel = TimerModel(timedStepType: timedStepType)
     timerModel.prepTimeRemainingInSeconds = 10
     return TimerView(timerModel: timerModel, timedStepType: timedStepType)
 }
 
 #Preview("Exercise") {
     let timedStepType: TimedStepType = .exercise(TimedStepData(prepTime: 20, duration: 75))
-    let stepType: StepType = .timed(timedStepType)
-    let step = Step(name: "Prep", stepType: stepType)
-    let timerModel = TimerModel(step: step)
+    let timerModel = TimerModel(timedStepType: timedStepType)
     timerModel.prepTimeRemainingInSeconds = 0
     timerModel.exerciseTimeRemainingInSeconds = 15
     return TimerView(timerModel: timerModel, timedStepType: timedStepType)

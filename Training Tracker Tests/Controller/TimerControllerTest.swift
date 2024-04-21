@@ -19,7 +19,7 @@ final class TimerControllerTest: XCTestCase {
     var periodicTimer: PeriodicTimerForUnitTesting!
     var sut: TimerCtrl!
     
-    let timedExerciseStep = Step(name: "Timed exercise step", stepType: .timed(.exercise(TimedStepData(prepTime: 5, duration: 20))))
+    let timedExerciseStep = TimedStepType.exercise(TimedStepData(prepTime: 5, duration: 20))
     
     override func setUpWithError() throws {
         periodicTimer = PeriodicTimerForUnitTesting()
@@ -30,7 +30,7 @@ final class TimerControllerTest: XCTestCase {
     }
 
     func testPauseUpdatesTimerStatusToStopped() {
-        timerModel = TimerModel(step: timedExerciseStep)
+        timerModel = TimerModel(timedStepType: timedExerciseStep)
         timerModel.timerStatus = .running
         sut = TimerController(timerModel: timerModel, periodicTimer: periodicTimer, onCompletion: {})
         
@@ -40,7 +40,7 @@ final class TimerControllerTest: XCTestCase {
     }
 
     func testStartResumeUpdatesTimerStatusToRunningIfThereIsTimeRemaining() {
-        timerModel = TimerModel(step: timedExerciseStep)
+        timerModel = TimerModel(timedStepType: timedExerciseStep)
         timerModel.exerciseTimeRemainingInSeconds = 10
         timerModel.timerStatus = .stopped
         
@@ -52,7 +52,7 @@ final class TimerControllerTest: XCTestCase {
     }
         
     func testDoesNotResumeIfItAlreadyReachedZero() {
-        timerModel = TimerModel(step: timedExerciseStep)
+        timerModel = TimerModel(timedStepType: timedExerciseStep)
         timerModel.prepTimeRemainingInSeconds = 0
         timerModel.exerciseTimeRemainingInSeconds = 0
         timerModel.timerStatus = .stopped
@@ -65,7 +65,7 @@ final class TimerControllerTest: XCTestCase {
     }
     
     func testKeepsRunningWhenCallingStartResumeTwice() {
-        timerModel = TimerModel(step: timedExerciseStep)
+        timerModel = TimerModel(timedStepType: timedExerciseStep)
         timerModel.prepTimeRemainingInSeconds = 5
         timerModel.exerciseTimeRemainingInSeconds = 10
         timerModel.timerStatus = .stopped
@@ -79,7 +79,7 @@ final class TimerControllerTest: XCTestCase {
     }
 
     func testKeepsPausedWhenCallingPauseTwice() {
-        timerModel = TimerModel(step: timedExerciseStep)
+        timerModel = TimerModel(timedStepType: timedExerciseStep)
         timerModel.prepTimeRemainingInSeconds = 5
         timerModel.exerciseTimeRemainingInSeconds = 20
         timerModel.timerStatus = .running
@@ -93,7 +93,7 @@ final class TimerControllerTest: XCTestCase {
     }
     
     func testDecreasesOnlyExerciseTimeEachTick() {
-        timerModel = TimerModel(step: timedExerciseStep)
+        timerModel = TimerModel(timedStepType: timedExerciseStep)
         timerModel.prepTimeRemainingInSeconds = 0
         let exerciseTimeRemaingBeforeTick = 10.9
         let exerciseTimeRemainingAfterTick = exerciseTimeRemaingBeforeTick - timerModel.delta
@@ -109,7 +109,7 @@ final class TimerControllerTest: XCTestCase {
     }
     
     func testDecreasesOnlyPrepTimeEachTick() {
-        timerModel = TimerModel(step: timedExerciseStep)
+        timerModel = TimerModel(timedStepType: timedExerciseStep)
         let prepTimeRemainingBeforeTick = 5.7
         let prepTimeRemainingAfterTick = prepTimeRemainingBeforeTick - timerModel.delta
         timerModel.prepTimeRemainingInSeconds = prepTimeRemainingBeforeTick
@@ -126,7 +126,7 @@ final class TimerControllerTest: XCTestCase {
     }
         
     func testNothingChangesAfterReachingZeroWithOneCallbackCall() {
-        timerModel = TimerModel(step: timedExerciseStep)
+        timerModel = TimerModel(timedStepType: timedExerciseStep)
         timerModel.prepTimeRemainingInSeconds = 0.0
         timerModel.exerciseTimeRemainingInSeconds = timerModel.delta
         timerModel.timerStatus = .running

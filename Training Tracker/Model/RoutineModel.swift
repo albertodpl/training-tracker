@@ -7,7 +7,7 @@ final class RoutineModel {
     var currentExercise: Step? = nil
     var nextExercise: Step? = nil
     var routineSteps = [Step]()
-    var currentStepTimerModel: TimerModel = TimerModel(step: Step(name: "Dummy step; you should not see this", stepType: .reps(RepsStepData(repetitions: 0)))) // TODO: Fix this weird initialization
+    var currentStepTimerModel: TimerModel? = nil
     
     init(routineSteps: RoutineSteps) {
         self.routineSteps = routineSteps.routineSteps

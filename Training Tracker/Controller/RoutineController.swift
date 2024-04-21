@@ -19,9 +19,17 @@ final class RoutineController: RoutineCtrl {
 
         routineModel.currentStepIndex = 0
         routineModel.currentStep = routineModel.routineSteps[routineModel.currentStepIndex]
-        routineModel.currentStepTimerModel = TimerModel(step: routineModel.currentStep)
         
-        self.currentStepTimerController = TimerController(timerModel: routineModel.currentStepTimerModel, periodicTimer: periodicTimerBuilder(), onCompletion: self.completeStep)
+        // TODO: Extract to a function and share with func completeStep()
+        switch routineModel.currentStep.stepType {
+        case let .timed(timedStepType):
+            let timerModel = TimerModel(timedStepType: timedStepType)
+            routineModel.currentStepTimerModel = timerModel
+            self.currentStepTimerController = TimerController(timerModel: timerModel, periodicTimer: periodicTimerBuilder(), onCompletion: self.completeStep)
+        case .reps(_):
+            routineModel.currentStepTimerModel = nil
+            self.currentStepTimerController = nil
+        }
         
         updateCurrentAndNextExercise()
     }
@@ -30,8 +38,18 @@ final class RoutineController: RoutineCtrl {
         if routineModel.currentStepIndex < routineModel.routineSteps.count - 1 {
             routineModel.currentStepIndex += 1
             routineModel.currentStep = routineModel.routineSteps[routineModel.currentStepIndex]
-            routineModel.currentStepTimerModel = TimerModel(step: routineModel.currentStep)
-            currentStepTimerController = TimerController(timerModel: routineModel.currentStepTimerModel, periodicTimer: periodicTimerBuilder(), onCompletion: self.completeStep)
+
+            // TODO: Extract and share with init
+            switch routineModel.currentStep.stepType {
+            case let .timed(timedStepType):
+                let timerModel = TimerModel(timedStepType: timedStepType)
+                routineModel.currentStepTimerModel = timerModel
+                self.currentStepTimerController = TimerController(timerModel: timerModel, periodicTimer: periodicTimerBuilder(), onCompletion: self.completeStep)
+            case .reps(_):
+                routineModel.currentStepTimerModel = nil
+                self.currentStepTimerController = nil
+            }
+
             updateCurrentAndNextExercise()
         }
         else {

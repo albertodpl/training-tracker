@@ -16,7 +16,8 @@ struct TrainingView: View {
             case let .reps(repsStepData):
                 RepsView(repsStepData: repsStepData)
             case let .timed(timedStepType):
-                TimerView(timerModel: routineModel.currentStepTimerModel, timedStepType: timedStepType)
+                // TODO: Fix the forced unwrapping of the timerModel
+                TimerView(timerModel: routineModel.currentStepTimerModel!, timedStepType: timedStepType)
             }
             
             Divider()
@@ -34,10 +35,11 @@ struct TrainingView: View {
             // TODO: Make it more compact, extracting commonalities.
             switch routineModel.currentStep.stepType {
             case .timed(.rest):
-                if routineModel.currentStepTimerModel.exerciseTimeRemainingInSeconds == 0 {
+                // TODO: Maybe pass the state of the timer in the corresponding enum
+                if routineModel.currentStepTimerModel?.exerciseTimeRemainingInSeconds == 0 {
                     let _ = AudioServicesPlaySystemSound(1009) // ding ding
                 }
-                switch routineModel.currentStepTimerModel.timerStatus {
+                switch routineModel.currentStepTimerModel?.timerStatus {
                 case .running:
                     TrainingButtonView(text: "Pause", systemImage: "pause.fill", click: {
                         routineController.pauseStep()
@@ -46,6 +48,8 @@ struct TrainingView: View {
                     TrainingButtonView(text: "Start", systemImage: "play.fill", click: {
                         routineController.startResumeStep()
                     })
+                case .none:
+                    fatalError(".timed(.rest) with no TimerModel.")
                 }
             case .reps:
                 TrainingButtonView(text: "Complete", systemImage: "checkmark", click: {
@@ -58,7 +62,7 @@ struct TrainingView: View {
                     }
                 })
             case .timed(.exercise):
-                if routineModel.currentStepTimerModel.exerciseTimeRemainingInSeconds == 0 {
+                if routineModel.currentStepTimerModel?.exerciseTimeRemainingInSeconds == 0 {
                     let _ = AudioServicesPlaySystemSound(1009) // ding ding
                     TrainingButtonView(text: "Complete", systemImage: "checkmark", click: {
                         routineController.completeStep()
@@ -70,7 +74,7 @@ struct TrainingView: View {
                         }
                     })
                 } else {
-                    switch routineModel.currentStepTimerModel.timerStatus {
+                    switch routineModel.currentStepTimerModel?.timerStatus {
                     case .running:
                         TrainingButtonView(text: "Pause", systemImage: "pause.fill", click: {
                             routineController.pauseStep()
@@ -79,6 +83,8 @@ struct TrainingView: View {
                         TrainingButtonView(text: "Start", systemImage: "play.fill", click: {
                             routineController.startResumeStep()
                         })
+                    case .none:
+                        fatalError(".timed(.exercise) with no TimerModel.")
                     }
                 }
             }
