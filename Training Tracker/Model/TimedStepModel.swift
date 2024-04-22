@@ -1,7 +1,11 @@
 import SwiftUI
 
 @Observable
-final class TimedStepModel {
+final class TimedStepModel: Equatable {
+    static func == (lhs: TimedStepModel, rhs: TimedStepModel) -> Bool {
+        return (lhs.definition == rhs.definition) && (lhs.state == rhs.state)
+    }
+    
     let definition: TimedStepDefinition
     var state: TimedStepState
     

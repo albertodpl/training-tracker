@@ -22,8 +22,7 @@ final class RoutineController: RoutineCtrl {
         
         // TODO: Extract to a function and share with func completeStep()
         switch routineModel.currentStep.stepType {
-        case let .timed(timedStepDefinition):
-            let timedStepModel = TimedStepModel(timedStepDefinition: timedStepDefinition)
+        case let .timed(timedStepModel):
             routineModel.currentStepTimedStepModel = timedStepModel
             self.currentStepTimerController = TimerController(timedStepModel: timedStepModel, periodicTimer: periodicTimerBuilder(), onCompletion: self.completeStep)
         case .reps(_):
@@ -41,8 +40,7 @@ final class RoutineController: RoutineCtrl {
 
             // TODO: Extract and share with init
             switch routineModel.currentStep.stepType {
-            case let .timed(timedStepDefinition):
-                let timedStepModel = TimedStepModel(timedStepDefinition: timedStepDefinition)
+            case let .timed(timedStepModel):
                 routineModel.currentStepTimedStepModel = timedStepModel
                 self.currentStepTimerController = TimerController(timedStepModel: timedStepModel, periodicTimer: periodicTimerBuilder(), onCompletion: self.completeStep)
             case .reps(_):
@@ -70,7 +68,7 @@ final class RoutineController: RoutineCtrl {
         var currentExerciseFound = false
         while (currentExerciseIndex < routineModel.routineSteps.count) && !currentExerciseFound {
             switch routineModel.routineSteps[currentExerciseIndex].stepType {
-            case let .timed(timedStepDefinition) where timedStepDefinition.type == .rest:
+            case let .timed(timedStepModel) where timedStepModel.definition.type == .rest:
                 currentExerciseIndex += 1
             default:
                 currentExerciseFound = true
@@ -87,7 +85,7 @@ final class RoutineController: RoutineCtrl {
         var nextExerciseFound = false
         while (nextExerciseIndex < routineModel.routineSteps.count) && !nextExerciseFound {
             switch routineModel.routineSteps[nextExerciseIndex].stepType {
-            case let .timed(timedStepDefinition) where timedStepDefinition.type == .rest:
+            case let .timed(timedStepModel) where timedStepModel.definition.type == .rest:
                 nextExerciseIndex += 1
             default:
                 nextExerciseFound = true

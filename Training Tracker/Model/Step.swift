@@ -25,7 +25,7 @@ struct Step {
 }
 
 enum StepType: Equatable {
-    case timed(TimedStepDefinition)
+    case timed(TimedStepModel)
     case reps(RepsStepDefinition)
 }
 
