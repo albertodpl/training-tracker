@@ -3,13 +3,19 @@ import Foundation
 @Observable
 final class RoutineModel {
     var currentStepIndex = 0
-    var currentStep: Step = Step(name: "Initialization step; you should not see this", stepType: .reps(RepsStepDefinition(repetitions: 0))) // TODO: Fix this weird initialization
+    var currentStep: Step
     var currentExercise: Step? = nil
     var nextExercise: Step? = nil
     var routineSteps = [Step]()
     
     init(routineSteps: RoutineSteps) {
         self.routineSteps = routineSteps.routineSteps
+        
+        if routineSteps.routineSteps.count > 0 {
+            self.currentStep = routineSteps.routineSteps[0]
+        } else {
+            fatalError("The routine has 0 steps.")
+        }
     }
 }
 

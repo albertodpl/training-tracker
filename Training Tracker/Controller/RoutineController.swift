@@ -59,6 +59,7 @@ final class RoutineController: RoutineCtrl {
         currentStepTimerController?.startResume()
     }
     
+    // Finds the next two exercises from the current position, ignoring rest steps
     private func updateCurrentAndNextExercise() {
         var currentExerciseIndex = routineModel.currentStepIndex
         var currentExerciseFound = false
