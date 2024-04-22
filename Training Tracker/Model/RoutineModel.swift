@@ -7,7 +7,6 @@ final class RoutineModel {
     var currentExercise: Step? = nil
     var nextExercise: Step? = nil
     var routineSteps = [Step]()
-    var currentStepTimedStepModel: TimedStepModel? = nil
     
     init(routineSteps: RoutineSteps) {
         self.routineSteps = routineSteps.routineSteps
