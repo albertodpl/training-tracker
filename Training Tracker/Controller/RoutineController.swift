@@ -23,11 +23,11 @@ final class RoutineController: RoutineCtrl {
         // TODO: Extract to a function and share with func completeStep()
         switch routineModel.currentStep.stepType {
         case let .timed(timedStepType):
-            let timerModel = TimerModel(timedStepDefinition: timedStepType.getTimedStepData())
-            routineModel.currentStepTimerModel = timerModel
-            self.currentStepTimerController = TimerController(timerModel: timerModel, periodicTimer: periodicTimerBuilder(), onCompletion: self.completeStep)
+            let timedStepModel = TimedStepModel(timedStepDefinition: timedStepType.getTimedStepData())
+            routineModel.currentStepTimedStepModel = timedStepModel
+            self.currentStepTimerController = TimerController(timedStepModel: timedStepModel, periodicTimer: periodicTimerBuilder(), onCompletion: self.completeStep)
         case .reps(_):
-            routineModel.currentStepTimerModel = nil
+            routineModel.currentStepTimedStepModel = nil
             self.currentStepTimerController = nil
         }
         
@@ -42,11 +42,11 @@ final class RoutineController: RoutineCtrl {
             // TODO: Extract and share with init
             switch routineModel.currentStep.stepType {
             case let .timed(timedStepType):
-                let timerModel = TimerModel(timedStepDefinition: timedStepType.getTimedStepData())
-                routineModel.currentStepTimerModel = timerModel
-                self.currentStepTimerController = TimerController(timerModel: timerModel, periodicTimer: periodicTimerBuilder(), onCompletion: self.completeStep)
+                let timedStepModel = TimedStepModel(timedStepDefinition: timedStepType.getTimedStepData())
+                routineModel.currentStepTimedStepModel = timedStepModel
+                self.currentStepTimerController = TimerController(timedStepModel: timedStepModel, periodicTimer: periodicTimerBuilder(), onCompletion: self.completeStep)
             case .reps(_):
-                routineModel.currentStepTimerModel = nil
+                routineModel.currentStepTimedStepModel = nil
                 self.currentStepTimerController = nil
             }
 

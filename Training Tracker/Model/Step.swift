@@ -26,27 +26,7 @@ struct Step {
 
 enum StepType: Equatable {
     case timed(TimedStepType)
-    case reps(RepsStepData)
-}
-
-struct TimedStepDefinition: Equatable {
-    let prepTimeInSeconds: TimeInterval
-    let durationInSeconds: TimeInterval
-    let delta: TimeInterval = 1/100
-    let type: TimedStepTypeXXX
-
-    init(type: TimedStepTypeXXX, prepTime: TimeInterval? = 0, duration: TimeInterval? = 0) {
-        self.type = type
-        self.prepTimeInSeconds = prepTime ?? 0
-        self.durationInSeconds = duration ?? 0
-    }
-}
-
-struct TimedStepState: Equatable {
-    var timerStatus: TimerStatus
-    var isTimerInPrep: Bool
-    var prepTimeRemainingInSeconds: TimeInterval
-    var exerciseTimeRemainingInSeconds: TimeInterval
+    case reps(RepsStepDefinition)
 }
 
 enum TimedStepTypeXXX {
@@ -68,7 +48,7 @@ enum TimedStepType: Equatable {
     }
 }
 
-struct RepsStepData: Equatable {
+struct RepsStepDefinition: Equatable {
     let repetitions: Int
 
     init(repetitions: Int? = 0) {

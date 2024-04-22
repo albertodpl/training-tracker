@@ -7,12 +7,12 @@ protocol TimerCtrl {
 }
 
 final class TimerController: TimerCtrl {
-    let timerModel: TimerModel
+    let timedStepModel: TimedStepModel
     let periodicTimer: PeriodicTimer
     var onCompletion: () -> Void = {}
     
-    init(timerModel: TimerModel, periodicTimer: PeriodicTimer, onCompletion: @escaping () -> Void) {
-        self.timerModel = timerModel
+    init(timedStepModel: TimedStepModel, periodicTimer: PeriodicTimer, onCompletion: @escaping () -> Void) {
+        self.timedStepModel = timedStepModel
         self.periodicTimer = periodicTimer
         self.onCompletion = onCompletion
 
@@ -22,31 +22,31 @@ final class TimerController: TimerCtrl {
     }
 
     private func onTick() {
-        switch timerModel.state.timerStatus {
+        switch timedStepModel.state.timerStatus {
         case .running:
-            if timerModel.state.prepTimeRemainingInSeconds > 0 {
-                timerModel.state.prepTimeRemainingInSeconds = max(0, timerModel.state.prepTimeRemainingInSeconds - timerModel.definition.delta)
-            } else if timerModel.state.exerciseTimeRemainingInSeconds > 0 {
-                timerModel.state.exerciseTimeRemainingInSeconds = max(0, timerModel.state.exerciseTimeRemainingInSeconds - timerModel.definition.delta)
+            if timedStepModel.state.prepTimeRemainingInSeconds > 0 {
+                timedStepModel.state.prepTimeRemainingInSeconds = max(0, timedStepModel.state.prepTimeRemainingInSeconds - timedStepModel.definition.delta)
+            } else if timedStepModel.state.exerciseTimeRemainingInSeconds > 0 {
+                timedStepModel.state.exerciseTimeRemainingInSeconds = max(0, timedStepModel.state.exerciseTimeRemainingInSeconds - timedStepModel.definition.delta)
             } else { // Timer reached zero.
-                timerModel.state.timerStatus = .stopped
+                timedStepModel.state.timerStatus = .stopped
                 onCompletion() // Call back to whover registered to get notified.
             }
         case .stopped:
             break
         }
 
-        timerModel.state.isTimerInPrep = timerModel.state.prepTimeRemainingInSeconds > 0
+        timedStepModel.state.isTimerInPrep = timedStepModel.state.prepTimeRemainingInSeconds > 0
     }
     
     func startResume() {
-        if timerModel.state.exerciseTimeRemainingInSeconds > 0 {
-            timerModel.state.timerStatus = .running
+        if timedStepModel.state.exerciseTimeRemainingInSeconds > 0 {
+            timedStepModel.state.timerStatus = .running
         }
     }
     
     func pause() {
-        timerModel.state.timerStatus = .stopped
+        timedStepModel.state.timerStatus = .stopped
     }
     
     func registerCallback(onCompletion: @escaping () -> Void) {

@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct RepsView: View {
-    var repsStepData: RepsStepData
+    var repsStepData: RepsStepDefinition
     let repsFontSize = CGFloat(80)
     var body: some View {
         VStack(alignment: .center) {
@@ -29,16 +29,16 @@ struct RepsView: View {
 }
 
 #Preview("Reps") {
-    let repsStepData = RepsStepData(repetitions: 8)
+    let repsStepData = RepsStepDefinition(repetitions: 8)
     return RepsView(repsStepData: repsStepData)
 }
 
 #Preview("Reps 2 digits") {
-    let repsStepData = RepsStepData(repetitions: 56)
+    let repsStepData = RepsStepDefinition(repetitions: 56)
     return RepsView(repsStepData: repsStepData)
 }
 
 #Preview("Reps 3 digits") {
-    let repsStepData = RepsStepData(repetitions: 56)
+    let repsStepData = RepsStepDefinition(repetitions: 56)
     return RepsView(repsStepData: repsStepData)
 }

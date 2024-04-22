@@ -6,7 +6,7 @@ final class StepTest: XCTestCase {
     let stepWithEverything = Step(
         name: "Step with everything name",
         description: "Step with everything description",
-        stepType: StepType.reps(RepsStepData(repetitions: 3))
+        stepType: StepType.reps(RepsStepDefinition(repetitions: 3))
     )
     
     override func setUpWithError() throws {
@@ -53,7 +53,7 @@ final class StepTest: XCTestCase {
     }
     
     func testBuildStepWithStepTypeReps() {
-        let stepType = StepType.reps(RepsStepData(repetitions: 8))
+        let stepType = StepType.reps(RepsStepDefinition(repetitions: 8))
         let sut = stepWithEverything.withStepType(stepType)
         
         assertSameStepType(sut, stepType)

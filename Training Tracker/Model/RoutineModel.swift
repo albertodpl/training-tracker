@@ -3,11 +3,11 @@ import Foundation
 @Observable
 final class RoutineModel {
     var currentStepIndex = 0
-    var currentStep: Step = Step(name: "Initialization step; you should not see this", stepType: .reps(RepsStepData(repetitions: 0))) // TODO: Fix this weird initialization
+    var currentStep: Step = Step(name: "Initialization step; you should not see this", stepType: .reps(RepsStepDefinition(repetitions: 0))) // TODO: Fix this weird initialization
     var currentExercise: Step? = nil
     var nextExercise: Step? = nil
     var routineSteps = [Step]()
-    var currentStepTimerModel: TimerModel? = nil
+    var currentStepTimedStepModel: TimedStepModel? = nil
     
     init(routineSteps: RoutineSteps) {
         self.routineSteps = routineSteps.routineSteps
@@ -76,7 +76,7 @@ final class RoutineSteps {
                         let step = Step(name: exerciseList[exerciseIndex].name, description: exerciseList[exerciseIndex].description, stepType: .timed(.exercise(TimedStepDefinition(type: .exercise, prepTime: toOptionalTimeInterval(exerciseList[exerciseIndex].prepTimes?[setIndex]), duration: toOptionalTimeInterval(durations[setIndex])))))
                         exercisesSequence.append(step)
                     } else if let repetitions = exerciseList[exerciseIndex].repetitions {
-                        let step = Step(name: exerciseList[exerciseIndex].name, description: exerciseList[exerciseIndex].description, stepType: .reps(RepsStepData(repetitions: repetitions[setIndex])))
+                        let step = Step(name: exerciseList[exerciseIndex].name, description: exerciseList[exerciseIndex].description, stepType: .reps(RepsStepDefinition(repetitions: repetitions[setIndex])))
                         exercisesSequence.append(step)
                     } else {
                         fatalError("No duration and no repetitions for exercise \(exerciseList[exerciseIndex].name). The exercise is not defined.")

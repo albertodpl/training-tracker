@@ -30,7 +30,7 @@
 		D3F496642BB83EFF008FB68B /* RoutineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F496632BB83EFF008FB68B /* RoutineModel.swift */; };
 		D3F4966F2BBC434F008FB68B /* ExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F4966E2BBC434F008FB68B /* ExerciseView.swift */; };
 		D3F496732BBD65BD008FB68B /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F496722BBD65BD008FB68B /* TimerView.swift */; };
-		D3F496752BBD86B4008FB68B /* TimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F496742BBD86B4008FB68B /* TimerModel.swift */; };
+		D3F496752BBD86B4008FB68B /* TimedStepModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F496742BBD86B4008FB68B /* TimedStepModel.swift */; };
 		D3F496772BBDF4E4008FB68B /* workoutRoutine_real.json in Resources */ = {isa = PBXBuildFile; fileRef = D3F496762BBDF4E4008FB68B /* workoutRoutine_real.json */; };
 /* End PBXBuildFile section */
 
@@ -70,7 +70,7 @@
 		D3F496632BB83EFF008FB68B /* RoutineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineModel.swift; sourceTree = "<group>"; };
 		D3F4966E2BBC434F008FB68B /* ExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseView.swift; sourceTree = "<group>"; };
 		D3F496722BBD65BD008FB68B /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
-		D3F496742BBD86B4008FB68B /* TimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerModel.swift; sourceTree = "<group>"; };
+		D3F496742BBD86B4008FB68B /* TimedStepModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimedStepModel.swift; sourceTree = "<group>"; };
 		D3F496762BBDF4E4008FB68B /* workoutRoutine_real.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = workoutRoutine_real.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -182,7 +182,7 @@
 			children = (
 				D3F496612BB75B4B008FB68B /* JsonSchemas.swift */,
 				D3F496632BB83EFF008FB68B /* RoutineModel.swift */,
-				D3F496742BBD86B4008FB68B /* TimerModel.swift */,
+				D3F496742BBD86B4008FB68B /* TimedStepModel.swift */,
 				D3B59BB72BC427CF007A9782 /* AppLifecycleModel.swift */,
 				D3B59BDE2BD2D3E8007A9782 /* Step.swift */,
 			);
@@ -325,7 +325,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D3F496752BBD86B4008FB68B /* TimerModel.swift in Sources */,
+				D3F496752BBD86B4008FB68B /* TimedStepModel.swift in Sources */,
 				D3B59BBA2BC43572007A9782 /* TrainingCompletedView.swift in Sources */,
 				D3B59BDF2BD2D3E8007A9782 /* Step.swift in Sources */,
 				D3F496562BB6E4A1008FB68B /* TrainingApp.swift in Sources */,
