@@ -25,27 +25,13 @@ struct Step {
 }
 
 enum StepType: Equatable {
-    case timed(TimedStepType)
+    case timed(TimedStepDefinition)
     case reps(RepsStepDefinition)
 }
 
-enum TimedStepTypeXXX {
+enum TimedStepType {
     case exercise
     case rest
-}
-
-enum TimedStepType: Equatable {
-    case exercise(TimedStepDefinition)
-    case rest(TimedStepDefinition)
-    
-    func getTimedStepData() -> TimedStepDefinition {
-        switch self {
-        case let .exercise(timedStepData):
-            return timedStepData
-        case let .rest(timedStepData):
-            return timedStepData
-        }
-    }
 }
 
 struct RepsStepDefinition: Equatable {

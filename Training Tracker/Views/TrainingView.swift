@@ -23,7 +23,7 @@ struct TrainingView: View {
             Divider()
             
             switch routineModel.currentStep.stepType {
-            case .timed(.rest(_)):
+            case let .timed(timedStepDefinition) where timedStepDefinition.type == .rest:
                 ExerciseView(currentExercise: routineModel.currentExercise, nextExercise: routineModel.nextExercise, dim: true)
             default:
                 ExerciseView(currentExercise: routineModel.currentExercise, nextExercise: routineModel.nextExercise)
@@ -34,7 +34,7 @@ struct TrainingView: View {
             
             // TODO: Make it more compact, extracting commonalities.
             switch routineModel.currentStep.stepType {
-            case .timed(.rest):
+            case let .timed(timedStepDefinition) where timedStepDefinition.type == .rest:
                 // TODO: Maybe pass the state of the timer in the corresponding enum
                 if routineModel.currentStepTimedStepModel?.state.exerciseTimeRemainingInSeconds == 0 {
                     let _ = AudioServicesPlaySystemSound(1009) // ding ding
@@ -55,19 +55,19 @@ struct TrainingView: View {
                 TrainingButtonView(text: "Complete", systemImage: "checkmark", click: {
                     routineController.completeStep()
                     switch routineModel.currentStep.stepType {
-                    case .timed(.rest):
+                    case let .timed(timedStepDefinition) where timedStepDefinition.type == .rest:
                         routineController.startResumeStep() // Starts the rest timer (one less user click)
                     default:
                         break
                     }
                 })
-            case .timed(.exercise):
+            case .timed(_): // Exercise
                 if routineModel.currentStepTimedStepModel?.state.exerciseTimeRemainingInSeconds == 0 {
                     let _ = AudioServicesPlaySystemSound(1009) // ding ding
                     TrainingButtonView(text: "Complete", systemImage: "checkmark", click: {
                         routineController.completeStep()
                         switch routineModel.currentStep.stepType {
-                        case .timed(.rest):
+                        case let .timed(timedStepDefinition) where timedStepDefinition.type == .rest:
                             routineController.startResumeStep() // Starts the rest timer (one less user click)
                         default:
                             break
