@@ -59,7 +59,7 @@ struct TrainingView: View {
                 })
             case let .timed(timedStepModel): // Exercise
                 if timedStepModel.state.exerciseTimeRemainingInSeconds == 0 {
-                    let _ = AudioServicesPlaySystemSound(1009) // ding ding
+                    let _ = AudioServicesPlaySystemSound(1009) // ding ding to finish the exercise
                     TrainingButtonView(text: "Complete", systemImage: "checkmark", click: {
                         routineController.completeStep()
                         switch routineModel.currentStep.stepType {
@@ -70,6 +70,10 @@ struct TrainingView: View {
                         }
                     })
                 } else {
+                    if (timedStepModel.state.exerciseTimeRemainingInSeconds == timedStepModel.definition.durationInSeconds)
+                        && (timedStepModel.state.prepTimeRemainingInSeconds == 0) {
+                        let _ = AudioServicesPlaySystemSound(1009) // ding ding to start the exercise after prep time
+                    }
                     switch timedStepModel.state.timerStatus {
                     case .running:
                         TrainingButtonView(text: "Pause", systemImage: "pause.fill", click: {

@@ -34,9 +34,18 @@ struct TimerView: View {
     }
     
     private func formattedTime() -> String {
-        let secondsRemaining = Int((timedStepModel.state.prepTimeRemainingInSeconds > 0) ? timedStepModel.state.prepTimeRemainingInSeconds : timedStepModel.state.exerciseTimeRemainingInSeconds)
-        let minutes = secondsRemaining / 60
-        let seconds = secondsRemaining % 60
+        let secondsRemaining = (timedStepModel.state.prepTimeRemainingInSeconds > 0) ? timedStepModel.state.prepTimeRemainingInSeconds : timedStepModel.state.exerciseTimeRemainingInSeconds
+        let secondsRemainingTruncated = TimeInterval(Int(secondsRemaining))
+        
+        var secondsToRepresent: Int = 0
+        if secondsRemaining > (secondsRemainingTruncated + 0.3) { // To make it visaully pleasant
+            secondsToRepresent = Int(secondsRemainingTruncated + 1)
+        } else {
+            secondsToRepresent = Int(secondsRemainingTruncated)
+        }
+        
+        let minutes = secondsToRepresent / 60
+        let seconds = secondsToRepresent % 60
         return String(format: "%02d:%02d", minutes, seconds)
     }
     
