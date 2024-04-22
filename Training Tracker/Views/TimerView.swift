@@ -21,7 +21,7 @@ struct TimerView: View {
                         .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
                         .font(.largeTitle)
                         .fontWeight(.bold)
-                        .foregroundColor((timerModel.prepTimeRemainingInSeconds > 0) ? .orange : /*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
+                        .foregroundColor((timerModel.state.prepTimeRemainingInSeconds > 0) ? .orange : /*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
                 }
                 
                 Circle()
@@ -31,16 +31,16 @@ struct TimerView: View {
                 switch timedStepType {
                 case .rest(_):
                     Circle()
-                        .trim(from: 0, to: CGFloat(timerModel.exerciseTimeRemainingInSeconds / timerModel.exerciseTimeInSeconds))
+                        .trim(from: 0, to: CGFloat(timerModel.state.exerciseTimeRemainingInSeconds / timerModel.definition.durationInSeconds))
                         .stroke(style: StrokeStyle(lineWidth: 10, lineCap: .round, lineJoin: .round))
                         .rotationEffect(.degrees(-90))
                         .foregroundColor(.green)
                 case .exercise(_):
                     Circle()
-                        .trim(from: 0, to: ((timerModel.prepTimeRemainingInSeconds > 0) ? CGFloat(timerModel.prepTimeRemainingInSeconds / timerModel.prepTimeInSeconds) : CGFloat(timerModel.exerciseTimeRemainingInSeconds / timerModel.exerciseTimeInSeconds)))
+                        .trim(from: 0, to: ((timerModel.state.prepTimeRemainingInSeconds > 0) ? CGFloat(timerModel.state.prepTimeRemainingInSeconds / timerModel.definition.prepTimeInSeconds) : CGFloat(timerModel.state.exerciseTimeRemainingInSeconds / timerModel.definition.durationInSeconds)))
                         .stroke(style: StrokeStyle(lineWidth: 10, lineCap: .round, lineJoin: .round))
                         .rotationEffect(.degrees(-90))
-                        .foregroundColor((timerModel.prepTimeRemainingInSeconds > 0) ? .orange : /*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
+                        .foregroundColor((timerModel.state.prepTimeRemainingInSeconds > 0) ? .orange : /*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
                 }
             }
             .frame(maxWidth: 500)
@@ -50,7 +50,7 @@ struct TimerView: View {
     }
     
     private func formattedTime() -> String {
-        let secondsRemaining = Int((timerModel.prepTimeRemainingInSeconds > 0) ? timerModel.prepTimeRemainingInSeconds : timerModel.exerciseTimeRemainingInSeconds)
+        let secondsRemaining = Int((timerModel.state.prepTimeRemainingInSeconds > 0) ? timerModel.state.prepTimeRemainingInSeconds : timerModel.state.exerciseTimeRemainingInSeconds)
         let minutes = secondsRemaining / 60
         let seconds = secondsRemaining % 60
         return String(format: "%02d:%02d", minutes, seconds)
@@ -58,23 +58,26 @@ struct TimerView: View {
 }
 
 #Preview("Rest") {
-    let timedStepType: TimedStepType = .rest(TimedStepData(duration: 75))
-    let timerModel = TimerModel(timedStepType: timedStepType)
-    timerModel.exerciseTimeRemainingInSeconds = 25
+    let timedStepDefinition = TimedStepDefinition(type: .rest, duration: 75)
+    let timedStepType: TimedStepType = .rest(timedStepDefinition)
+    let timerModel = TimerModel(timedStepDefinition: timedStepDefinition)
+    timerModel.state.exerciseTimeRemainingInSeconds = 25
     return TimerView(timerModel: timerModel, timedStepType: timedStepType)
 }
 
 #Preview("Prep") {
-    let timedStepType: TimedStepType = .rest(TimedStepData(prepTime: 20, duration: 75))
-    let timerModel = TimerModel(timedStepType: timedStepType)
-    timerModel.prepTimeRemainingInSeconds = 10
+    let timedStepDefinition = TimedStepDefinition(type: .exercise, prepTime: 20, duration: 75)
+    let timedStepType: TimedStepType = .rest(timedStepDefinition)
+    let timerModel = TimerModel(timedStepDefinition: timedStepDefinition)
+    timerModel.state.prepTimeRemainingInSeconds = 10
     return TimerView(timerModel: timerModel, timedStepType: timedStepType)
 }
 
 #Preview("Exercise") {
-    let timedStepType: TimedStepType = .exercise(TimedStepData(prepTime: 20, duration: 75))
-    let timerModel = TimerModel(timedStepType: timedStepType)
-    timerModel.prepTimeRemainingInSeconds = 0
-    timerModel.exerciseTimeRemainingInSeconds = 15
+    let timedStepDefinition = TimedStepDefinition(type: .exercise, prepTime: 20, duration: 75)
+    let timedStepType: TimedStepType = .exercise(timedStepDefinition)
+    let timerModel = TimerModel(timedStepDefinition: timedStepDefinition)
+    timerModel.state.prepTimeRemainingInSeconds = 0
+    timerModel.state.exerciseTimeRemainingInSeconds = 15
     return TimerView(timerModel: timerModel, timedStepType: timedStepType)
 }

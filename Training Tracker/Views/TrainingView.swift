@@ -36,10 +36,10 @@ struct TrainingView: View {
             switch routineModel.currentStep.stepType {
             case .timed(.rest):
                 // TODO: Maybe pass the state of the timer in the corresponding enum
-                if routineModel.currentStepTimerModel?.exerciseTimeRemainingInSeconds == 0 {
+                if routineModel.currentStepTimerModel?.state.exerciseTimeRemainingInSeconds == 0 {
                     let _ = AudioServicesPlaySystemSound(1009) // ding ding
                 }
-                switch routineModel.currentStepTimerModel?.timerStatus {
+                switch routineModel.currentStepTimerModel?.state.timerStatus {
                 case .running:
                     TrainingButtonView(text: "Pause", systemImage: "pause.fill", click: {
                         routineController.pauseStep()
@@ -62,7 +62,7 @@ struct TrainingView: View {
                     }
                 })
             case .timed(.exercise):
-                if routineModel.currentStepTimerModel?.exerciseTimeRemainingInSeconds == 0 {
+                if routineModel.currentStepTimerModel?.state.exerciseTimeRemainingInSeconds == 0 {
                     let _ = AudioServicesPlaySystemSound(1009) // ding ding
                     TrainingButtonView(text: "Complete", systemImage: "checkmark", click: {
                         routineController.completeStep()
@@ -74,7 +74,7 @@ struct TrainingView: View {
                         }
                     })
                 } else {
-                    switch routineModel.currentStepTimerModel?.timerStatus {
+                    switch routineModel.currentStepTimerModel?.state.timerStatus {
                     case .running:
                         TrainingButtonView(text: "Pause", systemImage: "pause.fill", click: {
                             routineController.pauseStep()

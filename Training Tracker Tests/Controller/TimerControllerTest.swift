@@ -19,7 +19,7 @@ final class TimerControllerTest: XCTestCase {
     var periodicTimer: PeriodicTimerForUnitTesting!
     var sut: TimerCtrl!
     
-    let timedExerciseStep = TimedStepType.exercise(TimedStepData(prepTime: 5, duration: 20))
+    let timedStepData = TimedStepDefinition(type: .exercise, prepTime: 5, duration: 20)
     
     override func setUpWithError() throws {
         periodicTimer = PeriodicTimerForUnitTesting()
@@ -30,115 +30,115 @@ final class TimerControllerTest: XCTestCase {
     }
 
     func testPauseUpdatesTimerStatusToStopped() {
-        timerModel = TimerModel(timedStepType: timedExerciseStep)
-        timerModel.timerStatus = .running
+        timerModel = TimerModel(timedStepDefinition: timedStepData)
+        timerModel.state.timerStatus = .running
         sut = TimerController(timerModel: timerModel, periodicTimer: periodicTimer, onCompletion: {})
         
         sut.pause()
         
-        XCTAssertEqual(timerModel.timerStatus, TimerStatus.stopped)
+        XCTAssertEqual(timerModel.state.timerStatus, TimerStatus.stopped)
     }
 
     func testStartResumeUpdatesTimerStatusToRunningIfThereIsTimeRemaining() {
-        timerModel = TimerModel(timedStepType: timedExerciseStep)
-        timerModel.exerciseTimeRemainingInSeconds = 10
-        timerModel.timerStatus = .stopped
+        timerModel = TimerModel(timedStepDefinition: timedStepData)
+        timerModel.state.exerciseTimeRemainingInSeconds = 10
+        timerModel.state.timerStatus = .stopped
         
         sut = TimerController(timerModel: timerModel, periodicTimer: periodicTimer, onCompletion: {})
         
         sut.startResume()
         
-        XCTAssertEqual(timerModel.timerStatus, TimerStatus.running)
+        XCTAssertEqual(timerModel.state.timerStatus, TimerStatus.running)
     }
         
     func testDoesNotResumeIfItAlreadyReachedZero() {
-        timerModel = TimerModel(timedStepType: timedExerciseStep)
-        timerModel.prepTimeRemainingInSeconds = 0
-        timerModel.exerciseTimeRemainingInSeconds = 0
-        timerModel.timerStatus = .stopped
+        timerModel = TimerModel(timedStepDefinition: timedStepData)
+        timerModel.state.prepTimeRemainingInSeconds = 0
+        timerModel.state.exerciseTimeRemainingInSeconds = 0
+        timerModel.state.timerStatus = .stopped
         
         sut = TimerController(timerModel: timerModel, periodicTimer: periodicTimer, onCompletion: {})
         
         sut.startResume()
         
-        XCTAssertEqual(timerModel.timerStatus, TimerStatus.stopped)
+        XCTAssertEqual(timerModel.state.timerStatus, TimerStatus.stopped)
     }
     
     func testKeepsRunningWhenCallingStartResumeTwice() {
-        timerModel = TimerModel(timedStepType: timedExerciseStep)
-        timerModel.prepTimeRemainingInSeconds = 5
-        timerModel.exerciseTimeRemainingInSeconds = 10
-        timerModel.timerStatus = .stopped
+        timerModel = TimerModel(timedStepDefinition: timedStepData)
+        timerModel.state.prepTimeRemainingInSeconds = 5
+        timerModel.state.exerciseTimeRemainingInSeconds = 10
+        timerModel.state.timerStatus = .stopped
         
         sut = TimerController(timerModel: timerModel, periodicTimer: periodicTimer, onCompletion: {})
         
         sut.startResume()
         sut.startResume()
         
-        XCTAssertEqual(timerModel.timerStatus, TimerStatus.running)
+        XCTAssertEqual(timerModel.state.timerStatus, TimerStatus.running)
     }
 
     func testKeepsPausedWhenCallingPauseTwice() {
-        timerModel = TimerModel(timedStepType: timedExerciseStep)
-        timerModel.prepTimeRemainingInSeconds = 5
-        timerModel.exerciseTimeRemainingInSeconds = 20
-        timerModel.timerStatus = .running
+        timerModel = TimerModel(timedStepDefinition: timedStepData)
+        timerModel.state.prepTimeRemainingInSeconds = 5
+        timerModel.state.exerciseTimeRemainingInSeconds = 20
+        timerModel.state.timerStatus = .running
         
         sut = TimerController(timerModel: timerModel, periodicTimer: periodicTimer, onCompletion: {})
         
         sut.pause()
         sut.pause()
         
-        XCTAssertEqual(timerModel.timerStatus, TimerStatus.stopped)
+        XCTAssertEqual(timerModel.state.timerStatus, TimerStatus.stopped)
     }
     
     func testDecreasesOnlyExerciseTimeEachTick() {
-        timerModel = TimerModel(timedStepType: timedExerciseStep)
-        timerModel.prepTimeRemainingInSeconds = 0
+        timerModel = TimerModel(timedStepDefinition: timedStepData)
+        timerModel.state.prepTimeRemainingInSeconds = 0
         let exerciseTimeRemaingBeforeTick = 10.9
-        let exerciseTimeRemainingAfterTick = exerciseTimeRemaingBeforeTick - timerModel.delta
-        timerModel.exerciseTimeRemainingInSeconds = exerciseTimeRemaingBeforeTick
-        timerModel.timerStatus = .running
+        let exerciseTimeRemainingAfterTick = exerciseTimeRemaingBeforeTick - timerModel.definition.delta
+        timerModel.state.exerciseTimeRemainingInSeconds = exerciseTimeRemaingBeforeTick
+        timerModel.state.timerStatus = .running
         
         sut = TimerController(timerModel: timerModel, periodicTimer: periodicTimer, onCompletion: {})
         
         periodicTimer.onTick()
         
-        XCTAssertEqual(timerModel.exerciseTimeRemainingInSeconds, exerciseTimeRemainingAfterTick)
-        XCTAssertEqual(timerModel.prepTimeRemainingInSeconds, 0)
+        XCTAssertEqual(timerModel.state.exerciseTimeRemainingInSeconds, exerciseTimeRemainingAfterTick)
+        XCTAssertEqual(timerModel.state.prepTimeRemainingInSeconds, 0)
     }
     
     func testDecreasesOnlyPrepTimeEachTick() {
-        timerModel = TimerModel(timedStepType: timedExerciseStep)
+        timerModel = TimerModel(timedStepDefinition: timedStepData)
         let prepTimeRemainingBeforeTick = 5.7
-        let prepTimeRemainingAfterTick = prepTimeRemainingBeforeTick - timerModel.delta
-        timerModel.prepTimeRemainingInSeconds = prepTimeRemainingBeforeTick
+        let prepTimeRemainingAfterTick = prepTimeRemainingBeforeTick - timerModel.definition.delta
+        timerModel.state.prepTimeRemainingInSeconds = prepTimeRemainingBeforeTick
         let exerciseTimeRemaingBeforeTick = 10.9
-        timerModel.exerciseTimeRemainingInSeconds = exerciseTimeRemaingBeforeTick
-        timerModel.timerStatus = .running
+        timerModel.state.exerciseTimeRemainingInSeconds = exerciseTimeRemaingBeforeTick
+        timerModel.state.timerStatus = .running
         
         sut = TimerController(timerModel: timerModel, periodicTimer: periodicTimer, onCompletion: {})
         
         periodicTimer.onTick()
         
-        XCTAssertEqual(timerModel.prepTimeRemainingInSeconds, prepTimeRemainingAfterTick)
-        XCTAssertEqual(timerModel.exerciseTimeRemainingInSeconds, exerciseTimeRemaingBeforeTick)
+        XCTAssertEqual(timerModel.state.prepTimeRemainingInSeconds, prepTimeRemainingAfterTick)
+        XCTAssertEqual(timerModel.state.exerciseTimeRemainingInSeconds, exerciseTimeRemaingBeforeTick)
     }
         
     func testNothingChangesAfterReachingZeroWithOneCallbackCall() {
-        timerModel = TimerModel(timedStepType: timedExerciseStep)
-        timerModel.prepTimeRemainingInSeconds = 0.0
-        timerModel.exerciseTimeRemainingInSeconds = timerModel.delta
-        timerModel.timerStatus = .running
+        timerModel = TimerModel(timedStepDefinition: timedStepData)
+        timerModel.state.prepTimeRemainingInSeconds = 0.0
+        timerModel.state.exerciseTimeRemainingInSeconds = timerModel.definition.delta
+        timerModel.state.timerStatus = .running
         
         sut = TimerController(timerModel: timerModel, periodicTimer: periodicTimer, onCompletion: {})
         
         periodicTimer.onTick()
         periodicTimer.onTick()
 
-        XCTAssertEqual(timerModel.prepTimeRemainingInSeconds, 0.0)
-        XCTAssertEqual(timerModel.exerciseTimeRemainingInSeconds, 0.0)
-        XCTAssertEqual(timerModel.timerStatus, TimerStatus.stopped)
+        XCTAssertEqual(timerModel.state.prepTimeRemainingInSeconds, 0.0)
+        XCTAssertEqual(timerModel.state.exerciseTimeRemainingInSeconds, 0.0)
+        XCTAssertEqual(timerModel.state.timerStatus, TimerStatus.stopped)
         
         // TODO: Check that the callback is only called once.
     }

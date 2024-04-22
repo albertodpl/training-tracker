@@ -23,7 +23,7 @@ final class RoutineController: RoutineCtrl {
         // TODO: Extract to a function and share with func completeStep()
         switch routineModel.currentStep.stepType {
         case let .timed(timedStepType):
-            let timerModel = TimerModel(timedStepType: timedStepType)
+            let timerModel = TimerModel(timedStepDefinition: timedStepType.getTimedStepData())
             routineModel.currentStepTimerModel = timerModel
             self.currentStepTimerController = TimerController(timerModel: timerModel, periodicTimer: periodicTimerBuilder(), onCompletion: self.completeStep)
         case .reps(_):
@@ -42,7 +42,7 @@ final class RoutineController: RoutineCtrl {
             // TODO: Extract and share with init
             switch routineModel.currentStep.stepType {
             case let .timed(timedStepType):
-                let timerModel = TimerModel(timedStepType: timedStepType)
+                let timerModel = TimerModel(timedStepDefinition: timedStepType.getTimedStepData())
                 routineModel.currentStepTimerModel = timerModel
                 self.currentStepTimerController = TimerController(timerModel: timerModel, periodicTimer: periodicTimerBuilder(), onCompletion: self.completeStep)
             case .reps(_):

@@ -39,14 +39,14 @@ final class StepTest: XCTestCase {
     }
 
     func testBuildStepWithStepTypeRest() {
-        let stepType = StepType.timed(.rest(TimedStepData(prepTime: 8, duration: 20)))
+        let stepType = StepType.timed(.rest(TimedStepDefinition(type: .rest, prepTime: 8, duration: 20)))
         let sut = stepWithEverything.withStepType(stepType)
         
         assertSameStepType(sut, stepType)
     }
 
     func testBuildStepWithStepTypeTimedExercise() {
-        let stepType = StepType.timed(.exercise(TimedStepData(prepTime: 8, duration: 20)))
+        let stepType = StepType.timed(.exercise(TimedStepDefinition(type: .exercise, prepTime: 8, duration: 20)))
         let sut = stepWithEverything.withStepType(stepType)
         
         assertSameStepType(sut, stepType)

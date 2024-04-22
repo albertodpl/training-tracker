@@ -22,31 +22,31 @@ final class TimerController: TimerCtrl {
     }
 
     private func onTick() {
-        switch timerModel.timerStatus {
+        switch timerModel.state.timerStatus {
         case .running:
-            if timerModel.prepTimeRemainingInSeconds > 0 {
-                timerModel.prepTimeRemainingInSeconds = max(0, timerModel.prepTimeRemainingInSeconds - timerModel.delta)
-            } else if timerModel.exerciseTimeRemainingInSeconds > 0 {
-                timerModel.exerciseTimeRemainingInSeconds = max(0, timerModel.exerciseTimeRemainingInSeconds - timerModel.delta)
+            if timerModel.state.prepTimeRemainingInSeconds > 0 {
+                timerModel.state.prepTimeRemainingInSeconds = max(0, timerModel.state.prepTimeRemainingInSeconds - timerModel.definition.delta)
+            } else if timerModel.state.exerciseTimeRemainingInSeconds > 0 {
+                timerModel.state.exerciseTimeRemainingInSeconds = max(0, timerModel.state.exerciseTimeRemainingInSeconds - timerModel.definition.delta)
             } else { // Timer reached zero.
-                timerModel.timerStatus = .stopped
+                timerModel.state.timerStatus = .stopped
                 onCompletion() // Call back to whover registered to get notified.
             }
         case .stopped:
             break
         }
 
-        timerModel.isTimerInPrep = timerModel.prepTimeRemainingInSeconds > 0
+        timerModel.state.isTimerInPrep = timerModel.state.prepTimeRemainingInSeconds > 0
     }
     
     func startResume() {
-        if timerModel.exerciseTimeRemainingInSeconds > 0 {
-            timerModel.timerStatus = .running
+        if timerModel.state.exerciseTimeRemainingInSeconds > 0 {
+            timerModel.state.timerStatus = .running
         }
     }
     
     func pause() {
-        timerModel.timerStatus = .stopped
+        timerModel.state.timerStatus = .stopped
     }
     
     func registerCallback(onCompletion: @escaping () -> Void) {

@@ -39,14 +39,14 @@ final class RoutineSteps {
                     exerciseWithRestSequence.append(exerciseSequence[index])
                     if let restInBetween = exerciseGroup.restInBetween {
                         if restInBetween > 0 {
-                            exerciseWithRestSequence.append(Step(name: "Rest in between: \(restInBetween)", stepType: StepType.timed(.rest(TimedStepData(duration: restInBetween)))))
+                            exerciseWithRestSequence.append(Step(name: "Rest in between: \(restInBetween)", stepType: StepType.timed(.rest(TimedStepDefinition(type: .rest, duration: TimeInterval(restInBetween))))))
                         }
                     }
                 }
                 exerciseWithRestSequence.append(exerciseSequence[exerciseSequence.count-1])
                 if let restAtTheEnd = exerciseGroup.restAtTheEnd {
                     if restAtTheEnd > 0 {
-                        exerciseWithRestSequence.append(Step(name: "Rest at the end: \(restAtTheEnd)", stepType: StepType.timed(.rest(TimedStepData(duration: restAtTheEnd)))))
+                        exerciseWithRestSequence.append(Step(name: "Rest at the end: \(restAtTheEnd)", stepType: StepType.timed(.rest(TimedStepDefinition(type: .rest, duration: TimeInterval(restAtTheEnd))))))
                     }
                 }
                 print(exerciseWithRestSequence)
@@ -73,7 +73,7 @@ final class RoutineSteps {
             for exerciseIndex in 0..<exerciseList.count {
                 if setIndex < exerciseList[exerciseIndex].numberOfSets {
                     if let durations = exerciseList[exerciseIndex].durations {
-                        let step = Step(name: exerciseList[exerciseIndex].name, description: exerciseList[exerciseIndex].description, stepType: .timed(.exercise(TimedStepData(prepTime: exerciseList[exerciseIndex].prepTimes?[setIndex], duration: durations[setIndex]))))
+                        let step = Step(name: exerciseList[exerciseIndex].name, description: exerciseList[exerciseIndex].description, stepType: .timed(.exercise(TimedStepDefinition(type: .exercise, prepTime: toOptionalTimeInterval(exerciseList[exerciseIndex].prepTimes?[setIndex]), duration: toOptionalTimeInterval(durations[setIndex])))))
                         exercisesSequence.append(step)
                     } else if let repetitions = exerciseList[exerciseIndex].repetitions {
                         let step = Step(name: exerciseList[exerciseIndex].name, description: exerciseList[exerciseIndex].description, stepType: .reps(RepsStepData(repetitions: repetitions[setIndex])))
@@ -84,8 +84,15 @@ final class RoutineSteps {
                 }
             }
         }
-        
+                
         return exercisesSequence
     }
-
+    
+    private func toOptionalTimeInterval(_ timeInterval: Int?) -> TimeInterval? {
+        if let timeInterval = timeInterval {
+            return TimeInterval(timeInterval)
+        } else {
+            return nil
+        }
+    }
 }
