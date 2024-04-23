@@ -32,7 +32,7 @@ final class TimerControllerTest: XCTestCase {
     func testPauseUpdatesTimerStatusToStopped() {
         timedStepModel = TimedStepModel(timedStepDefinition: timedStepData)
         timedStepModel.state.timerStatus = .running
-        sut = TimerController(timedStepModel: timedStepModel, periodicTimer: periodicTimer, onCompletion: {})
+        sut = TimerController(timedStepModel: timedStepModel, periodicTimer: periodicTimer, onCompletion: {}, onStart: {})
         
         sut.pause()
         
@@ -44,7 +44,7 @@ final class TimerControllerTest: XCTestCase {
         timedStepModel.state.exerciseTimeRemainingInSeconds = 10
         timedStepModel.state.timerStatus = .stopped
         
-        sut = TimerController(timedStepModel: timedStepModel, periodicTimer: periodicTimer, onCompletion: {})
+        sut = TimerController(timedStepModel: timedStepModel, periodicTimer: periodicTimer, onCompletion: {}, onStart: {})
         
         sut.startResume()
         
@@ -57,7 +57,7 @@ final class TimerControllerTest: XCTestCase {
         timedStepModel.state.exerciseTimeRemainingInSeconds = 0
         timedStepModel.state.timerStatus = .stopped
         
-        sut = TimerController(timedStepModel: timedStepModel, periodicTimer: periodicTimer, onCompletion: {})
+        sut = TimerController(timedStepModel: timedStepModel, periodicTimer: periodicTimer, onCompletion: {}, onStart: {})
         
         sut.startResume()
         
@@ -70,7 +70,7 @@ final class TimerControllerTest: XCTestCase {
         timedStepModel.state.exerciseTimeRemainingInSeconds = 10
         timedStepModel.state.timerStatus = .stopped
         
-        sut = TimerController(timedStepModel: timedStepModel, periodicTimer: periodicTimer, onCompletion: {})
+        sut = TimerController(timedStepModel: timedStepModel, periodicTimer: periodicTimer, onCompletion: {}, onStart: {})
         
         sut.startResume()
         sut.startResume()
@@ -84,7 +84,7 @@ final class TimerControllerTest: XCTestCase {
         timedStepModel.state.exerciseTimeRemainingInSeconds = 20
         timedStepModel.state.timerStatus = .running
         
-        sut = TimerController(timedStepModel: timedStepModel, periodicTimer: periodicTimer, onCompletion: {})
+        sut = TimerController(timedStepModel: timedStepModel, periodicTimer: periodicTimer, onCompletion: {}, onStart: {})
         
         sut.pause()
         sut.pause()
@@ -100,7 +100,7 @@ final class TimerControllerTest: XCTestCase {
         timedStepModel.state.exerciseTimeRemainingInSeconds = exerciseTimeRemaingBeforeTick
         timedStepModel.state.timerStatus = .running
         
-        sut = TimerController(timedStepModel: timedStepModel, periodicTimer: periodicTimer, onCompletion: {})
+        sut = TimerController(timedStepModel: timedStepModel, periodicTimer: periodicTimer, onCompletion: {}, onStart: {})
         
         periodicTimer.onTick()
         
@@ -117,7 +117,7 @@ final class TimerControllerTest: XCTestCase {
         timedStepModel.state.exerciseTimeRemainingInSeconds = exerciseTimeRemaingBeforeTick
         timedStepModel.state.timerStatus = .running
         
-        sut = TimerController(timedStepModel: timedStepModel, periodicTimer: periodicTimer, onCompletion: {})
+        sut = TimerController(timedStepModel: timedStepModel, periodicTimer: periodicTimer, onCompletion: {}, onStart: {})
         
         periodicTimer.onTick()
         
@@ -131,7 +131,7 @@ final class TimerControllerTest: XCTestCase {
         timedStepModel.state.exerciseTimeRemainingInSeconds = timedStepModel.definition.delta
         timedStepModel.state.timerStatus = .running
         
-        sut = TimerController(timedStepModel: timedStepModel, periodicTimer: periodicTimer, onCompletion: {})
+        sut = TimerController(timedStepModel: timedStepModel, periodicTimer: periodicTimer, onCompletion: {}, onStart: {})
         
         periodicTimer.onTick()
         periodicTimer.onTick()

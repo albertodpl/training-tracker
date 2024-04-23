@@ -1,7 +1,9 @@
 import Foundation
+import AudioToolbox
 
 protocol RoutineCtrl {
-    func completeStep()
+    func onStepCompletion()
+    func onStepStart()
     func pauseStep()
     func startResumeStep()
 }
@@ -23,7 +25,7 @@ final class RoutineController: RoutineCtrl {
         // TODO: Extract to a function and share with func completeStep()
         switch routineModel.currentStep.stepType {
         case let .timed(timedStepModel):
-            self.currentStepTimerController = TimerController(timedStepModel: timedStepModel, periodicTimer: periodicTimerBuilder(), onCompletion: self.completeStep)
+            self.currentStepTimerController = TimerController(timedStepModel: timedStepModel, periodicTimer: periodicTimerBuilder(), onCompletion: self.onStepCompletion, onStart: self.onStepStart)
         case .reps(_):
             self.currentStepTimerController = nil
         }
@@ -31,7 +33,14 @@ final class RoutineController: RoutineCtrl {
         updateCurrentAndNextExercise()
     }
     
-    func completeStep() {
+    func onStepCompletion() {
+        switch routineModel.currentStep.stepType {
+        case .timed:
+            AudioServicesPlaySystemSound(1009) // ding ding on completion of a timed step (exercise or rest)
+            break
+        default:
+            break
+        }
         if routineModel.currentStepIndex < routineModel.routineSteps.count - 1 {
             routineModel.currentStepIndex += 1
             routineModel.currentStep = routineModel.routineSteps[routineModel.currentStepIndex]
@@ -39,7 +48,7 @@ final class RoutineController: RoutineCtrl {
             // TODO: Extract and share with init
             switch routineModel.currentStep.stepType {
             case let .timed(timedStepModel):
-                self.currentStepTimerController = TimerController(timedStepModel: timedStepModel, periodicTimer: periodicTimerBuilder(), onCompletion: self.completeStep)
+                self.currentStepTimerController = TimerController(timedStepModel: timedStepModel, periodicTimer: periodicTimerBuilder(), onCompletion: self.onStepCompletion, onStart: self.onStepStart)
             case .reps(_):
                 self.currentStepTimerController = nil
             }
@@ -51,6 +60,16 @@ final class RoutineController: RoutineCtrl {
         }
     }
     
+    func onStepStart() {
+        switch routineModel.currentStep.stepType {
+        case let .timed(timedStepModel) where timedStepModel.definition.type == .exercise:
+            AudioServicesPlaySystemSound(1009) // ding ding on start of a timed exercise (after prep time)
+            break
+        default:
+            break
+        }
+    }
+
     func pauseStep() {
         currentStepTimerController?.pause()
     }

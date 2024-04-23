@@ -1,5 +1,4 @@
 import SwiftUI
-import AudioToolbox
 
 struct TrainingView: View {
     let routineModel: RoutineModel
@@ -34,9 +33,6 @@ struct TrainingView: View {
             // TODO: Make it more compact, extracting commonalities.
             switch routineModel.currentStep.stepType {
             case let .timed(timedStepModel) where timedStepModel.definition.type == .rest:
-                if timedStepModel.state.exerciseTimeRemainingInSeconds == 0 {
-                    let _ = AudioServicesPlaySystemSound(1009) // ding ding
-                }
                 switch timedStepModel.state.timerStatus {
                 case .running:
                     TrainingButtonView(text: "Pause", systemImage: "pause.fill", click: {
@@ -49,7 +45,7 @@ struct TrainingView: View {
                 }
             case .reps:
                 TrainingButtonView(text: "Complete", systemImage: "checkmark", click: {
-                    routineController.completeStep()
+                    routineController.onStepCompletion()
                     switch routineModel.currentStep.stepType {
                     case let .timed(timedStepModel) where timedStepModel.definition.type == .rest:
                         routineController.startResumeStep() // Starts the rest timer (one less user click)
@@ -59,9 +55,8 @@ struct TrainingView: View {
                 })
             case let .timed(timedStepModel): // Exercise
                 if timedStepModel.state.exerciseTimeRemainingInSeconds == 0 {
-                    let _ = AudioServicesPlaySystemSound(1009) // ding ding to finish the exercise
                     TrainingButtonView(text: "Complete", systemImage: "checkmark", click: {
-                        routineController.completeStep()
+                        routineController.onStepCompletion()
                         switch routineModel.currentStep.stepType {
                         case let .timed(timedStepModel) where timedStepModel.definition.type == .rest:
                             routineController.startResumeStep() // Starts the rest timer (one less user click)
@@ -70,10 +65,6 @@ struct TrainingView: View {
                         }
                     })
                 } else {
-                    if (timedStepModel.state.exerciseTimeRemainingInSeconds == timedStepModel.definition.durationInSeconds)
-                        && (timedStepModel.state.prepTimeRemainingInSeconds == 0) {
-                        let _ = AudioServicesPlaySystemSound(1009) // ding ding to start the exercise after prep time
-                    }
                     switch timedStepModel.state.timerStatus {
                     case .running:
                         TrainingButtonView(text: "Pause", systemImage: "pause.fill", click: {
