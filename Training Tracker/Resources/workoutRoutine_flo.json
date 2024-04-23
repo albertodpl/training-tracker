@@ -18,7 +18,7 @@
                     "numberOfSets": 1
                 },
                 {
-                    "name": "Neck circles- left",
+                    "name": "Neck circles - left",
                     "repetitions": [10],
                     "numberOfSets": 1
                 },
@@ -65,12 +65,6 @@
                     "numberOfSets": 1
                 },
                 {
-                    "name": "Ape sequence",
-                    "description": "Ape reach and standing ape with arms out to the side",
-                    "repetitions": [5],
-                    "numberOfSets": 1
-                },
-                {
                     "name": "Plank",
                     "prepTimes": [5],
                     "durations": [60],
@@ -102,7 +96,7 @@
             "exercises": [
                 {
                     "name": "Handstand work",
-                    "durations": [600],
+                    "durations": [300],
                     "numberOfSets": 1
                 }
             ]
@@ -110,6 +104,20 @@
         {
             "name": "Strength work",
             "exercisesGroups": [
+                {
+                    "name": "German hang and L-sit",
+                    "restInBetween": 120,
+                    "restAtTheEnd": 60,
+                    "exercises": [
+                        {
+                            "name": "Inner thigh machine",
+                            "description": "Supinated grip on rings",
+                            "description": "Eccentrics",
+                            "repetitions": [8, 8, 8],
+                            "numberOfSets": 3
+                        }
+                    ]
+                },
                 {
                     "name": "German hang and L-sit",
                     "restInBetween": 90,
@@ -138,8 +146,8 @@
                     "exercises": [
                         {
                             "name": "Pull-ups",
-                            "description": "Eccentrics on rings",
-                            "repetitions": [6, 6, 6],
+                            "description": "Eccentrics",
+                            "repetitions": [5, 5, 5],
                             "tempo": {
                                 "eccentric": 5
                             },
@@ -147,13 +155,13 @@
                         },
                         {
                             "name": "Dips",
-                            "description": "On dip bars",
-                            "repetitions": [8, 8, 8],
+                            "description": "Eccentrics on dip bars",
+                            "repetitions": [7, 7, 7],
                             "tempo": {
-                                "eccentric": 1,
-                                "eccentricRest": 0,
+                                "eccentric": 5,
+                                "eccentricRest": 1,
                                 "concentric": -1,
-                                "concenricRest": 0
+                                "concenricRest": 1
                             },
                             "numberOfSets": 3
                         }
@@ -166,7 +174,7 @@
                     "exercises": [
                         {
                             "name": "Nordic leg curls",
-                            "description": "With push up support",
+                            "description": "Eccentric only with push up support",
                             "repetitions": [10, 10, 10],
                             "tempo": {
                                 "eccentric": 3
@@ -175,10 +183,10 @@
                         },
                         {
                             "name": "Reverse nordic leg curls",
-                            "description": "With roll support",
-                            "repetitions": [11, 11, 11],
+                            "description": "With roll and box support",
+                            "repetitions": [10, 10, 10],
                             "tempo": {
-                                "eccentric": 2,
+                                "eccentric": 4,
                                 "eccentricRest": 0,
                                 "concentric": -1,
                                 "concenricRest": 0
@@ -191,3 +199,4 @@
         }
     ]
 }
+

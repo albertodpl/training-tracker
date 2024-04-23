@@ -2,7 +2,9 @@ import SwiftUI
 
 struct RepsView: View {
     var repsStepData: RepsStepDefinition
-    let repsFontSize = CGFloat(80)
+    private let repsFontSize = CGFloat(80) // TODO: Make it dynamic/adapt to device
+    private let exerciseTimeColor = Color.green
+
     var body: some View {
         VStack(alignment: .center) {
             ZStack {
@@ -11,11 +13,11 @@ struct RepsView: View {
                     .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
                     .font(.largeTitle)
                     .fontWeight(.bold)
-                    .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
+                    .foregroundColor(exerciseTimeColor)
                 
                 Circle()
                     .stroke(lineWidth: 10)
-                    .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
+                    .foregroundColor(exerciseTimeColor)
             }
             .frame(maxWidth: 500)
         }

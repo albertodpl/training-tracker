@@ -4,8 +4,8 @@ struct TimerView: View {
     var timedStepModel: TimedStepModel
     private let timerFontSize = CGFloat(80) // TODO: Make it dynamic/adapt to device
     private let prepTimeColor = Color.orange
-    private let restTimeColor = Color.green
-    private let exerciseTimeColor = Color.blue
+    private let restTimeColor = Color.red
+    private let exerciseTimeColor = Color.green
     
     var body: some View {
         VStack(alignment: .center) {
