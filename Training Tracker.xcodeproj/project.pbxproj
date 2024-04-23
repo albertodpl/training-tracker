@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D35553A52BD7DDD0003981D0 /* workoutRoutine_flo.json in Resources */ = {isa = PBXBuildFile; fileRef = D35553A42BD7DDD0003981D0 /* workoutRoutine_flo.json */; };
+		D35553A82BD7F1D3003981D0 /* SoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35553A72BD7F1D3003981D0 /* SoundPlayer.swift */; };
 		D3B431F22BD2FD8700D24555 /* RepsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B431F12BD2FD8700D24555 /* RepsView.swift */; };
 		D3B59BB42BC41ABF007A9782 /* StartTrainingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B59BB32BC41ABF007A9782 /* StartTrainingView.swift */; };
 		D3B59BB62BC42641007A9782 /* TrainingButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B59BB52BC42641007A9782 /* TrainingButtonView.swift */; };
@@ -47,6 +48,7 @@
 
 /* Begin PBXFileReference section */
 		D35553A42BD7DDD0003981D0 /* workoutRoutine_flo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = workoutRoutine_flo.json; sourceTree = "<group>"; };
+		D35553A72BD7F1D3003981D0 /* SoundPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundPlayer.swift; sourceTree = "<group>"; };
 		D3B431F12BD2FD8700D24555 /* RepsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepsView.swift; sourceTree = "<group>"; };
 		D3B59BB32BC41ABF007A9782 /* StartTrainingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTrainingView.swift; sourceTree = "<group>"; };
 		D3B59BB52BC42641007A9782 /* TrainingButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingButtonView.swift; sourceTree = "<group>"; };
@@ -94,6 +96,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D35553A62BD7F1BA003981D0 /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				D35553A72BD7F1D3003981D0 /* SoundPlayer.swift */,
+			);
+			path = Sound;
+			sourceTree = "<group>";
+		};
 		D3B59BC22BC96E47007A9782 /* Training Tracker Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -159,6 +169,7 @@
 		D3F496442BB6D22A008FB68B /* Training Tracker */ = {
 			isa = PBXGroup;
 			children = (
+				D35553A62BD7F1BA003981D0 /* Sound */,
 				D3B59BD92BD2A60D007A9782 /* Timer */,
 				D3B59BCB2BC96F87007A9782 /* Controller */,
 				D3F496652BB85410008FB68B /* Views */,
@@ -336,6 +347,7 @@
 				D3B431F22BD2FD8700D24555 /* RepsView.swift in Sources */,
 				D3B59BB42BC41ABF007A9782 /* StartTrainingView.swift in Sources */,
 				D3F496642BB83EFF008FB68B /* RoutineModel.swift in Sources */,
+				D35553A82BD7F1D3003981D0 /* SoundPlayer.swift in Sources */,
 				D3F496622BB75B4B008FB68B /* JsonSchemas.swift in Sources */,
 				D3B59BBC2BC435FB007A9782 /* TrainingLifecycleView.swift in Sources */,
 				D3B59BD62BD1884E007A9782 /* TimerController.swift in Sources */,

@@ -25,7 +25,7 @@ struct TrainingLifecycleView: View {
     let routineSteps = RoutineSteps(jsonRoutine: jsonRoutine)
     let routineModel = RoutineModel(routineSteps: routineSteps)
     let periodicTimer = PeriodicTimerWrapper()
-    let routineController = RoutineController(routineModel: routineModel, appLifecycleController: appLifecycleController, periodicTimerBuilder: { periodicTimer })
+    let routineController = RoutineController(routineModel: routineModel, appLifecycleController: appLifecycleController, periodicTimerBuilder: { periodicTimer }, soundPlayer: SoundPlayer())
     return TrainingLifecycleView(routineModel: routineModel, routineController: routineController, appLifecycleStatus: appLifecycleModel.appLifecycleStatus, appLifecycleController: appLifecycleController)
 }
 
@@ -36,7 +36,7 @@ struct TrainingLifecycleView: View {
     let routineSteps = RoutineSteps(jsonRoutine: jsonRoutine)
     let routineModel = RoutineModel(routineSteps: routineSteps)
     let periodicTimer = PeriodicTimerWrapper()
-    let routineController = RoutineController(routineModel: routineModel, appLifecycleController: appLifecycleController, periodicTimerBuilder: { periodicTimer })
+    let routineController = RoutineController(routineModel: routineModel, appLifecycleController: appLifecycleController, periodicTimerBuilder: { periodicTimer }, soundPlayer: SoundPlayer())
     return TrainingLifecycleView(routineModel: routineModel, routineController: routineController, appLifecycleStatus: appLifecycleModel.appLifecycleStatus, appLifecycleController: appLifecycleController)
 }
 
@@ -47,6 +47,6 @@ struct TrainingLifecycleView: View {
     let routineSteps = RoutineSteps(jsonRoutine: jsonRoutine)
     let routineModel = RoutineModel(routineSteps: routineSteps)
     let periodicTimer = PeriodicTimerWrapper()
-    let routineController = RoutineController(routineModel: routineModel, appLifecycleController: appLifecycleController, periodicTimerBuilder: { periodicTimer })
+    let routineController = RoutineController(routineModel: routineModel, appLifecycleController: appLifecycleController, periodicTimerBuilder: { periodicTimer }, soundPlayer: SoundPlayer())
     return TrainingLifecycleView(routineModel: routineModel, routineController: routineController, appLifecycleStatus: appLifecycleModel.appLifecycleStatus, appLifecycleController: appLifecycleController)
 }

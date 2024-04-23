@@ -6,6 +6,7 @@ struct TrainingApp: App {
     private var routineController: RoutineCtrl
     private var appLifecycleModel: AppLifecycleModel
     private var appLifecycleController: AppLifecycleController
+    private let soundPlayer: SoundPlyr
 
     init() {
         let appLifecycleModel = AppLifecycleModel()
@@ -19,7 +20,9 @@ struct TrainingApp: App {
         let routineSteps = RoutineSteps(jsonRoutine: jsonRoutine)
         let routineModel = RoutineModel(routineSteps: routineSteps)
         self.routineModel = routineModel
-        self.routineController = RoutineController(routineModel: routineModel, appLifecycleController: appLifecycleController, periodicTimerBuilder: { PeriodicTimerWrapper() })
+        let soundPlayer = SoundPlayer()
+        self.soundPlayer = soundPlayer
+        self.routineController = RoutineController(routineModel: routineModel, appLifecycleController: appLifecycleController, periodicTimerBuilder: { PeriodicTimerWrapper() }, soundPlayer: soundPlayer)
     }
 
     var body: some Scene {

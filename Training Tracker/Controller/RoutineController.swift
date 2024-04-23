@@ -1,5 +1,4 @@
 import Foundation
-import AudioToolbox
 
 protocol RoutineCtrl {
     func onStepCompletion()
@@ -9,20 +8,19 @@ protocol RoutineCtrl {
 }
 
 final class RoutineController: RoutineCtrl {
-    let routineModel: RoutineModel
-    let appLifecycleController: AppLifecycleController
-    let periodicTimerBuilder: () -> PeriodicTimer
-    var currentStepTimerController: TimerCtrl? = nil
+    private let routineModel: RoutineModel
+    private let appLifecycleController: AppLifecycleController
+    private let periodicTimerBuilder: () -> PeriodicTimer
+    private var currentStepTimerController: TimerCtrl? = nil
+    private let soundPlayer: SoundPlyr
 
-    init(routineModel: RoutineModel, appLifecycleController: AppLifecycleController, periodicTimerBuilder: @escaping () -> PeriodicTimer) {
+    init(routineModel: RoutineModel, appLifecycleController: AppLifecycleController, periodicTimerBuilder: @escaping () -> PeriodicTimer, soundPlayer: SoundPlyr) {
         self.routineModel = routineModel
         self.appLifecycleController = appLifecycleController
         self.periodicTimerBuilder = periodicTimerBuilder
-
-        routineModel.currentStepIndex = 0
-        routineModel.currentStep = routineModel.routineSteps[routineModel.currentStepIndex]
+        self.soundPlayer = soundPlayer
         
-        // TODO: Extract to a function and share with func completeStep()
+        // TODO: Extract to a function and share with func completeStep(). Is it possible?
         switch routineModel.currentStep.stepType {
         case let .timed(timedStepModel):
             self.currentStepTimerController = TimerController(timedStepModel: timedStepModel, periodicTimer: periodicTimerBuilder(), onCompletion: self.onStepCompletion, onStart: self.onStepStart)
@@ -35,9 +33,10 @@ final class RoutineController: RoutineCtrl {
     
     func onStepCompletion() {
         switch routineModel.currentStep.stepType {
+        case let .timed(timedStepModel) where timedStepModel.definition.type == .exercise:
+            soundPlayer.endExercise()
         case .timed:
-            AudioServicesPlaySystemSound(1009) // ding ding on completion of a timed step (exercise or rest)
-            break
+            soundPlayer.endPause()
         default:
             break
         }
@@ -63,8 +62,7 @@ final class RoutineController: RoutineCtrl {
     func onStepStart() {
         switch routineModel.currentStep.stepType {
         case let .timed(timedStepModel) where timedStepModel.definition.type == .exercise:
-            AudioServicesPlaySystemSound(1009) // ding ding on start of a timed exercise (after prep time)
-            break
+            soundPlayer.startExercise()
         default:
             break
         }
