@@ -6,13 +6,6 @@
             "restAtTheEnd": 60,
             "exercises": [
                 {
-                    "name": "Skipping",
-                    "description": "Boxer step",
-                    "prepTimes": [10],
-                    "durations": [180],
-                    "numberOfSets": 1
-                },
-                {
                     "name": "Neck circles - right",
                     "repetitions": [10],
                     "numberOfSets": 1
@@ -106,27 +99,13 @@
             "exercisesGroups": [
                 {
                     "name": "German hang and L-sit",
-                    "restInBetween": 120,
-                    "restAtTheEnd": 60,
-                    "exercises": [
-                        {
-                            "name": "Inner thigh machine",
-                            "description": "Supinated grip on rings",
-                            "description": "Eccentrics",
-                            "repetitions": [8, 8, 8],
-                            "numberOfSets": 3
-                        }
-                    ]
-                },
-                {
-                    "name": "German hang and L-sit",
                     "restInBetween": 90,
                     "restAtTheEnd": 120,
                     "exercises": [
                         {
                             "name": "German hang",
                             "description": "Supinated grip on rings",
-                            "durations": [60, 60, 60],
+                            "durations": [20, 20, 20],
                             "prepTimes": [20, 20, 20],
                             "numberOfSets": 3
                         },
@@ -146,7 +125,7 @@
                     "exercises": [
                         {
                             "name": "Pull-ups",
-                            "description": "Eccentrics",
+                            "description": "With band",
                             "repetitions": [5, 5, 5],
                             "tempo": {
                                 "eccentric": 5
@@ -155,7 +134,7 @@
                         },
                         {
                             "name": "Dips",
-                            "description": "Eccentrics on dip bars",
+                            "description": "With band",
                             "repetitions": [7, 7, 7],
                             "tempo": {
                                 "eccentric": 5,
@@ -174,7 +153,7 @@
                     "exercises": [
                         {
                             "name": "Nordic leg curls",
-                            "description": "Eccentric only with push up support",
+                            "description": "With reclined support",
                             "repetitions": [10, 10, 10],
                             "tempo": {
                                 "eccentric": 3

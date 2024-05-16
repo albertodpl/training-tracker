@@ -1,7 +1,6 @@
 import Foundation
 
 protocol PeriodicTimer {
-    init(timeIntervalInSeconds interval: TimeInterval)
     func registerCallback(onTick: @escaping () -> Void)
 }
 

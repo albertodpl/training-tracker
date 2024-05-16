@@ -2,6 +2,12 @@ import XCTest
 
 @testable import Training_Tracker
 
+class MockPeriodictimer: Mock<PeriodicTimer>, PeriodicTimer {
+    func registerCallback(onTick: @escaping () -> Void) {
+        accept(checkArgs: [], actionArgs: [onTick])
+    }
+}
+
 // TODO: use a mocking library instead
 final class PeriodicTimerForUnitTesting: PeriodicTimer {
     var onTick: () -> Void = {}
@@ -22,6 +28,7 @@ final class TimerControllerTest: XCTestCase {
     let timedStepData = TimedStepDefinition(type: .exercise, prepTime: 5, duration: 20)
     
     override func setUpWithError() throws {
+        timedStepModel = TimedStepModel(timedStepDefinition: timedStepData)
         periodicTimer = PeriodicTimerForUnitTesting()
     }
     
@@ -29,8 +36,17 @@ final class TimerControllerTest: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
+    func testRegisterCallbackForTimerTicks() {
+        let periodicTimerMock = MockPeriodictimer.create()
+
+        periodicTimerMock.expect { $0.registerCallback(onTick: {}) }
+
+        sut = TimerController(timedStepModel: timedStepModel, periodicTimer: periodicTimerMock, onCompletion: {}, onStart: {})
+
+        periodicTimerMock.verify()
+    }
+    
     func testPauseUpdatesTimerStatusToStopped() {
-        timedStepModel = TimedStepModel(timedStepDefinition: timedStepData)
         timedStepModel.state.timerStatus = .running
         sut = TimerController(timedStepModel: timedStepModel, periodicTimer: periodicTimer, onCompletion: {}, onStart: {})
         
@@ -40,7 +56,6 @@ final class TimerControllerTest: XCTestCase {
     }
 
     func testStartResumeUpdatesTimerStatusToRunningIfThereIsTimeRemaining() {
-        timedStepModel = TimedStepModel(timedStepDefinition: timedStepData)
         timedStepModel.state.exerciseTimeRemainingInSeconds = 10
         timedStepModel.state.timerStatus = .stopped
         
@@ -52,7 +67,6 @@ final class TimerControllerTest: XCTestCase {
     }
         
     func testDoesNotResumeIfItAlreadyReachedZero() {
-        timedStepModel = TimedStepModel(timedStepDefinition: timedStepData)
         timedStepModel.state.prepTimeRemainingInSeconds = 0
         timedStepModel.state.exerciseTimeRemainingInSeconds = 0
         timedStepModel.state.timerStatus = .stopped
@@ -65,7 +79,6 @@ final class TimerControllerTest: XCTestCase {
     }
     
     func testKeepsRunningWhenCallingStartResumeTwice() {
-        timedStepModel = TimedStepModel(timedStepDefinition: timedStepData)
         timedStepModel.state.prepTimeRemainingInSeconds = 5
         timedStepModel.state.exerciseTimeRemainingInSeconds = 10
         timedStepModel.state.timerStatus = .stopped
@@ -79,7 +92,6 @@ final class TimerControllerTest: XCTestCase {
     }
 
     func testKeepsPausedWhenCallingPauseTwice() {
-        timedStepModel = TimedStepModel(timedStepDefinition: timedStepData)
         timedStepModel.state.prepTimeRemainingInSeconds = 5
         timedStepModel.state.exerciseTimeRemainingInSeconds = 20
         timedStepModel.state.timerStatus = .running
@@ -109,7 +121,6 @@ final class TimerControllerTest: XCTestCase {
     }
     
     func testDecreasesOnlyPrepTimeEachTick() {
-        timedStepModel = TimedStepModel(timedStepDefinition: timedStepData)
         let prepTimeRemainingBeforeTick = 5.7
         let prepTimeRemainingAfterTick = prepTimeRemainingBeforeTick - timedStepModel.definition.delta
         timedStepModel.state.prepTimeRemainingInSeconds = prepTimeRemainingBeforeTick
@@ -126,7 +137,6 @@ final class TimerControllerTest: XCTestCase {
     }
         
     func testNothingChangesAfterReachingZeroWithOneCallbackCall() {
-        timedStepModel = TimedStepModel(timedStepDefinition: timedStepData)
         timedStepModel.state.prepTimeRemainingInSeconds = 0.0
         timedStepModel.state.exerciseTimeRemainingInSeconds = timedStepModel.definition.delta
         timedStepModel.state.timerStatus = .running
@@ -147,10 +157,12 @@ final class TimerControllerTest: XCTestCase {
     // DONE Does not run if timer is 0
     // DONE Keep running if resume() when running
     // DONE Keep paused if pause() when stopped
+    // Register its own callback to get the timer ticks.
     // Prep time remaining cases/logic.
     // DONE Decreases the counters properly, i.e., it arrives to 0 and completes prep time in the corresponding number of ticks.
     // DONE No change happens after reaching 0.
     // Call callback() when it reaches 0.
     // Do not call callback() before reaching 0.
+    // Prep time callback logic.
     // Call callback() only once, i.e., successive ticks at 0 do not trigger another callback call.
 }

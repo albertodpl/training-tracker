@@ -123,7 +123,7 @@
                             "numberOfSets": 3
                         },
                         {
-                            "name": "Tuck L-Sit",
+                            "name": "L-Sit",
                             "description": "On parallettes or dip bars",
                             "durations": [20, 20, 20],
                             "prepTimes": [8, 8, 8],
@@ -134,12 +134,12 @@
                 {
                     "name": "Pull-ups and dips",
                     "restInBetween": 90,
-                    "restAtTheEnd": 90,
+                    "restAtTheEnd": 120,
                     "exercises": [
                         {
                             "name": "Pull-ups",
-                            "description": "Eccentrics on rings",
-                            "repetitions": [6, 6, 6],
+                            "description": "Eccentrics with jump on rings",
+                            "repetitions": [8, 8, 8],
                             "tempo": {
                                 "eccentric": 5
                             },
@@ -148,7 +148,7 @@
                         {
                             "name": "Dips",
                             "description": "On dip bars",
-                            "repetitions": [8, 8, 8],
+                            "repetitions": [10, 10, 10],
                             "tempo": {
                                 "eccentric": 1,
                                 "eccentricRest": 0,
@@ -176,7 +176,7 @@
                         {
                             "name": "Reverse nordic leg curls",
                             "description": "With roll support",
-                            "repetitions": [11, 11, 11],
+                            "repetitions": [12, 12, 12],
                             "tempo": {
                                 "eccentric": 2,
                                 "eccentricRest": 0,
