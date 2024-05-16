@@ -23,6 +23,10 @@ struct ExerciseView: View {
     private func formattedReps(repetitions: Int) -> String {
         return String(format: "x%d", repetitions)
     }
+    
+    private func formattedSets(setIndex: Int, numberOfSets: Int) -> String {
+        return String(format: "%d/%d", setIndex, numberOfSets)
+    }
 
     var body: some View {
         VStack {
@@ -31,10 +35,10 @@ struct ExerciseView: View {
                     if let currentExercise = currentExercise {
                         switch currentExercise.stepType {
                         case .timed(let timedStepModel):
-                            Text(formattedTime(durationInSeconds: timedStepModel.definition.durationInSeconds))
+                            Text(formattedSets(setIndex: currentExercise.setIndex, numberOfSets: currentExercise.numberOfSets) + " " + formattedTime(durationInSeconds: timedStepModel.definition.durationInSeconds))
                                 .font(.title)
                         case .reps(let repsStepDefinition):
-                            Text(formattedReps(repetitions: repsStepDefinition.repetitions))
+                            Text(formattedSets(setIndex: currentExercise.setIndex, numberOfSets: currentExercise.numberOfSets) + " " + formattedReps(repetitions: repsStepDefinition.repetitions))
                                 .font(.title)
                         }
                         Text(currentExercise.name)
@@ -63,19 +67,19 @@ struct ExerciseView: View {
 }
 
 #Preview ("Long") {
-    let currentExercise: Step? = Step(name: "Current exercise super long, longer, and longer, what a long exercise", description: "Description of the current exercise", stepType: .reps(RepsStepDefinition(repetitions: 8)))
-    let nextExercise: Step? = Step(name: "Next exercise", description: "Description of the next exercise", stepType: .reps(RepsStepDefinition(repetitions: 12)))
+    let currentExercise: Step? = Step(name: "Current exercise super long, longer, and longer, what a long exercise", description: "Description of the current exercise", stepType: .reps(RepsStepDefinition(repetitions: 8)), numberOfSets: 3, setIndex: 2)
+    let nextExercise: Step? = Step(name: "Next exercise", description: "Description of the next exercise", stepType: .reps(RepsStepDefinition(repetitions: 12)), numberOfSets: 4, setIndex: 1)
     return ExerciseView(currentExercise: currentExercise, nextExercise: nextExercise)
 }
 
 #Preview ("Short") {
-    let currentExercise: Step? = Step(name: "Current exercise", description: "Description of the current exercise", stepType: .reps(RepsStepDefinition(repetitions: 8)))
-    let nextExercise: Step? = Step(name: "Next exercise", description: "Description of the next exercise", stepType: .reps(RepsStepDefinition(repetitions: 12)))
+    let currentExercise: Step? = Step(name: "Current exercise", description: "Description of the current exercise", stepType: .reps(RepsStepDefinition(repetitions: 8)), numberOfSets: 5, setIndex: 2)
+    let nextExercise: Step? = Step(name: "Next exercise", description: "Description of the next exercise", stepType: .reps(RepsStepDefinition(repetitions: 12)), numberOfSets:6, setIndex: 1)
     return ExerciseView(currentExercise: currentExercise, nextExercise: nextExercise)
 }
 
 #Preview ("Short, dim true") {
-    let currentExercise: Step? = Step(name: "Current exercise", description: "Description of the current exercise", stepType: .reps(RepsStepDefinition(repetitions: 8)))
-    let nextExercise: Step? = Step(name: "Next exercise", description: "Description of the next exercise", stepType: .reps(RepsStepDefinition(repetitions: 12)))
+    let currentExercise: Step? = Step(name: "Current exercise", description: "Description of the current exercise", stepType: .reps(RepsStepDefinition(repetitions: 8)), numberOfSets: 2, setIndex: 2)
+    let nextExercise: Step? = Step(name: "Next exercise", description: "Description of the next exercise", stepType: .reps(RepsStepDefinition(repetitions: 12)), numberOfSets: 3, setIndex: 1)
     return ExerciseView(currentExercise: currentExercise, nextExercise: nextExercise, dim: true)
 }

@@ -6,7 +6,9 @@ final class StepTest: XCTestCase {
     let stepWithEverything = Step(
         name: "Step with everything name",
         description: "Step with everything description",
-        stepType: StepType.reps(RepsStepDefinition(repetitions: 3))
+        stepType: StepType.reps(RepsStepDefinition(repetitions: 3)),
+        numberOfSets: 3,
+        setIndex: 2
     )
     
     func testBuildStepWithName() {

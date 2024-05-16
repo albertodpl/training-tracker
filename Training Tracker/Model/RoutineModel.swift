@@ -44,14 +44,14 @@ final class RoutineSteps {
                     exerciseWithRestSequence.append(exerciseSequence[index])
                     if let restInBetween = exerciseGroup.restInBetween {
                         if restInBetween > 0 {
-                            exerciseWithRestSequence.append(Step(name: "Rest in between: \(restInBetween)", stepType: StepType.timed(TimedStepModel(timedStepDefinition: TimedStepDefinition(type: .rest, duration: TimeInterval(restInBetween))))))
+                            exerciseWithRestSequence.append(Step(name: "Rest in between: \(restInBetween)", stepType: StepType.timed(TimedStepModel(timedStepDefinition: TimedStepDefinition(type: .rest, duration: TimeInterval(restInBetween)))), numberOfSets: 0, setIndex: 0))
                         }
                     }
                 }
                 exerciseWithRestSequence.append(exerciseSequence[exerciseSequence.count-1])
                 if let restAtTheEnd = exerciseGroup.restAtTheEnd {
                     if restAtTheEnd > 0 {
-                        exerciseWithRestSequence.append(Step(name: "Rest at the end: \(restAtTheEnd)", stepType: StepType.timed(TimedStepModel(timedStepDefinition: TimedStepDefinition(type: .rest, duration: TimeInterval(restAtTheEnd))))))
+                        exerciseWithRestSequence.append(Step(name: "Rest at the end: \(restAtTheEnd)", stepType: StepType.timed(TimedStepModel(timedStepDefinition: TimedStepDefinition(type: .rest, duration: TimeInterval(restAtTheEnd)))), numberOfSets: 0, setIndex: 0))
                     }
                 }
                 print(exerciseWithRestSequence)
@@ -78,10 +78,10 @@ final class RoutineSteps {
             for exerciseIndex in 0..<exerciseList.count {
                 if setIndex < exerciseList[exerciseIndex].numberOfSets {
                     if let durations = exerciseList[exerciseIndex].durations {
-                        let step = Step(name: exerciseList[exerciseIndex].name, description: exerciseList[exerciseIndex].description, stepType: .timed(TimedStepModel(timedStepDefinition: TimedStepDefinition(type: .exercise, prepTime: toOptionalTimeInterval(exerciseList[exerciseIndex].prepTimes?[setIndex]), duration: toOptionalTimeInterval(durations[setIndex])))))
+                        let step = Step(name: exerciseList[exerciseIndex].name, description: exerciseList[exerciseIndex].description, stepType: .timed(TimedStepModel(timedStepDefinition: TimedStepDefinition(type: .exercise, prepTime: toOptionalTimeInterval(exerciseList[exerciseIndex].prepTimes?[setIndex]), duration: toOptionalTimeInterval(durations[setIndex])))), numberOfSets: exerciseList[exerciseIndex].numberOfSets, setIndex: setIndex + 1)
                         exercisesSequence.append(step)
                     } else if let repetitions = exerciseList[exerciseIndex].repetitions {
-                        let step = Step(name: exerciseList[exerciseIndex].name, description: exerciseList[exerciseIndex].description, stepType: .reps(RepsStepDefinition(repetitions: repetitions[setIndex])))
+                        let step = Step(name: exerciseList[exerciseIndex].name, description: exerciseList[exerciseIndex].description, stepType: .reps(RepsStepDefinition(repetitions: repetitions[setIndex])), numberOfSets: exerciseList[exerciseIndex].numberOfSets, setIndex: setIndex + 1)
                         exercisesSequence.append(step)
                     } else {
                         fatalError("No duration and no repetitions for exercise \(exerciseList[exerciseIndex].name). The exercise is not defined.")
