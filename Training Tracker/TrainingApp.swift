@@ -13,8 +13,8 @@ struct TrainingApp: App {
         self.appLifecycleModel = appLifecycleModel
         let appLifecycleController = AppLifecycleController(appLifecycleModel: appLifecycleModel)
         self.appLifecycleController = appLifecycleController
-//        let workoutRoutine = "workoutRoutine.json"
-        let workoutRoutine = "workoutRoutine_real.json"
+        let workoutRoutine = "workoutRoutine.json"
+//        let workoutRoutine = "workoutRoutine_real.json"
 //        let workoutRoutine = "workoutRoutine_flo.json"
         let jsonRoutine: JsonRoutine = JsonRoutine.load(workoutRoutine)
         let routineSteps = RoutineSteps(jsonRoutine: jsonRoutine)
