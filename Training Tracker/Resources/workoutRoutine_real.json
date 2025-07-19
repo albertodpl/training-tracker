@@ -71,7 +71,7 @@
                     "numberOfSets": 1
                 },
                 {
-                    "name": "Plank",
+                    "name": "Pseudo-planche",
                     "prepTimes": [5],
                     "durations": [60],
                     "numberOfSets": 1
@@ -98,7 +98,7 @@
         },
         {
             "name": "Skill work",
-            "restAtTheEnd": 90,
+            "restAtTheEnd": 120,
             "exercises": [
                 {
                     "name": "Handstand work",
@@ -111,35 +111,33 @@
             "name": "Strength work",
             "exercisesGroups": [
                 {
-                    "name": "German hang and L-sit",
+                    "name": "Skin the cat progression and HeSPU",
                     "restInBetween": 90,
-                    "restAtTheEnd": 120,
+                    "restAtTheEnd": 180,
                     "exercises": [
                         {
-                            "name": "German hang",
+                            "name": "Skin the cat progression",
                             "description": "Supinated grip on rings",
-                            "durations": [60, 60, 60],
-                            "prepTimes": [20, 20, 20],
+                            "repetitions": [8, 8, 8],
                             "numberOfSets": 3
                         },
                         {
-                            "name": "L-Sit",
-                            "description": "On parallettes or dip bars",
-                            "durations": [20, 20, 20],
-                            "prepTimes": [8, 8, 8],
+                            "name": "HeSPU",
+                            "description": "On rings",
+                            "repetitions": [8, 8, 8],
                             "numberOfSets": 3
                         }
                     ]
                 },
                 {
                     "name": "Pull-ups and dips",
-                    "restInBetween": 90,
+                    "restInBetween": 120,
                     "restAtTheEnd": 120,
                     "exercises": [
                         {
                             "name": "Pull-ups",
                             "description": "Eccentrics with jump on rings",
-                            "repetitions": [8, 8, 8],
+                            "repetitions": [10, 10, 10],
                             "tempo": {
                                 "eccentric": 5
                             },
@@ -147,10 +145,10 @@
                         },
                         {
                             "name": "Dips",
-                            "description": "On dip bars",
-                            "repetitions": [10, 10, 10],
+                            "description": "On dip bars - 4 kg",
+                            "repetitions": [12, 12, 12],
                             "tempo": {
-                                "eccentric": 1,
+                                "eccentric": 2,
                                 "eccentricRest": 0,
                                 "concentric": -1,
                                 "concenricRest": 0
@@ -167,7 +165,7 @@
                         {
                             "name": "Nordic leg curls",
                             "description": "With push up support",
-                            "repetitions": [10, 10, 10],
+                            "repetitions": [15, 15, 15],
                             "tempo": {
                                 "eccentric": 3
                             },
@@ -176,7 +174,7 @@
                         {
                             "name": "Reverse nordic leg curls",
                             "description": "With roll support",
-                            "repetitions": [12, 12, 12],
+                            "repetitions": [15, 15, 15],
                             "tempo": {
                                 "eccentric": 2,
                                 "eccentricRest": 0,
@@ -188,6 +186,48 @@
                     ]
                 }
             ]
-        }
+        },
+        {
+            "name": "Stretching and injury prevention",
+            "restAtTheEnd": 0,
+            "exercises": [
+                {
+                    "name": "Hip flexors stretch",
+                    "repetitions": [2],
+                    "numberOfSets": 1
+                },
+                {
+                    "name": "Abductors stretch",
+                    "repetitions": [2],
+                    "numberOfSets": 1
+                },
+                {
+                    "name": "Adductors stretch",
+                    "repetitions": [2],
+                    "numberOfSets": 1
+                },
+                {
+                    "name": "Biceps femoris stretch",
+                    "repetitions": [2],
+                    "numberOfSets": 1
+                },
+                {
+                    "name": "Calves stretch",
+                    "repetitions": [2],
+                    "numberOfSets": 1
+                },
+                {
+                    "name": "Soleus stretch",
+                    "repetitions": [2],
+                    "numberOfSets": 1
+                },
+                {
+                    "name": "Back arch with hands on wall",
+                    "repetitions": [2],
+                    "numberOfSets": 1
+                }
+            ]
+        },
+
     ]
 }
